@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include<time.h>
 //#include<SDL_ttf>
 #define TAM 30
@@ -34,27 +35,27 @@ SDL_Color colores[] =
 };
 
 const int simon[ORDEN][ORDEN] = {
-    {T,T,T,T,T,T,T,T,N,N,N,N,N,T,T,T,T,T,T,T,T},
-    {T,T,T,T,T,T,T,T,N,V,N,R,N,T,T,T,T,T,T,T,T},
-    {T,T,T,T,T,T,T,N,V,V,N,R,R,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,N,N,N,N,N,T,T,T,T,T,T,T},
     {T,T,T,T,T,T,N,V,V,V,N,R,R,R,N,T,T,T,T,T,T},
     {T,T,T,T,T,N,V,V,V,V,N,R,R,R,R,N,T,T,T,T,T},
     {T,T,T,T,N,V,V,V,V,V,N,R,R,R,R,R,N,T,T,T,T},
     {T,T,T,N,V,V,V,V,V,V,N,R,R,R,R,R,R,N,T,T,T},
     {T,T,N,V,V,V,V,V,V,V,N,R,R,R,R,R,R,R,N,T,T},
-    {T,N,V,V,V,V,V,V,N,N,N,N,N,R,R,R,R,R,R,N,T},
-    {N,V,V,V,V,V,V,N,N,N,N,N,N,N,R,R,R,R,R,R,N},
+    {T,N,V,V,V,V,V,V,V,V,N,R,R,R,R,R,R,R,R,N,T},
+    {N,V,V,V,V,V,V,V,V,V,N,R,R,R,R,R,R,R,R,R,N},
+    {N,V,V,V,V,V,V,V,V,N,N,N,R,R,R,R,R,R,R,R,N},
+    {N,V,V,V,V,V,V,V,N,N,N,N,N,R,R,R,R,R,R,R,N},
     {N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N},
-    {N,A,A,A,A,A,A,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,N},
-    {T,N,A,A,A,A,A,A,N,N,N,N,N,Z,Z,Z,Z,Z,Z,N,T},
+    {N,A,A,A,A,A,A,A,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,N},
+    {N,A,A,A,A,A,A,A,A,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,N},
+    {N,A,A,A,A,A,A,A,A,A,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N},
+    {T,N,A,A,A,A,A,A,A,A,N,Z,Z,Z,Z,Z,Z,Z,Z,N,T},
     {T,T,N,A,A,A,A,A,A,A,N,Z,Z,Z,Z,Z,Z,Z,N,T,T},
     {T,T,T,N,A,A,A,A,A,A,N,Z,Z,Z,Z,Z,Z,N,T,T,T},
     {T,T,T,T,N,A,A,A,A,A,N,Z,Z,Z,Z,Z,N,T,T,T,T},
     {T,T,T,T,T,N,A,A,A,A,N,Z,Z,Z,Z,N,T,T,T,T,T},
     {T,T,T,T,T,T,N,A,A,A,N,Z,Z,Z,N,T,T,T,T,T,T},
-    {T,T,T,T,T,T,T,N,A,A,N,Z,Z,N,T,T,T,T,T,T,T},
-    {T,T,T,T,T,T,T,T,N,A,N,Z,N,T,T,T,T,T,T,T,T},
-    {T,T,T,T,T,T,T,T,N,N,N,N,N,T,T,T,T,T,T,T,T}
+    {T,T,T,T,T,T,T,N,N,N,N,N,N,N,T,T,T,T,T,T,T}
 };
 
 void dibujar(SDL_Renderer *renderer, const int m[][ORDEN], int filas, int columnas, int origenX, int origenY);
@@ -65,19 +66,22 @@ void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
 
 int main(int argc, char* argv[])
 {
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO); // inicia los subsistemas de audio y video
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    Mix_Chunk *sonido_click;
+    // Cargar el archivo de sonido
+    sonido_click = Mix_LoadWAV("C:/Users/botta/Documents/GitHub/Prueba/snd/do.wav");
 
-
-    SDL_Window *ventana = SDL_CreateWindow("Ventanita",
+    SDL_Window *ventana  = SDL_CreateWindow("Ventanita",
                                            SDL_WINDOWPOS_CENTERED,
                                            SDL_WINDOWPOS_CENTERED,
                                            1000,
                                            1000,
-                                           SDL_WINDOW_SHOWN);//el dos es igual a
+                                           SDL_WINDOW_SHOWN);//declara la ventana del juego
 
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED);
-    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_Renderer *renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED); // crea el render
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); // establece su opacidad
 
 
 
@@ -95,11 +99,7 @@ int main(int argc, char* argv[])
     SDL_RenderClear(renderer);    // Limpia toda la pantalla con ese color
     SDL_RenderPresent(renderer); //actualiza la ventana
 
-    int x;
-    int y;
-    int deteccion;
-    int sector;
-
+    int x, y, deteccion, sector;
 
     dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
     SDL_Delay(300);
@@ -112,25 +112,20 @@ int main(int argc, char* argv[])
     int registroDetecciones[15];
     registroDetecciones[0]=sector;
 
-
-    int contador=1;
-    int contAux;
-    int acierto=1;
-
+    int contador=1, contAux, acierto=1;
 
     while(ejecutando)
     {
-
         SDL_Delay(150);
         dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
 
-
         //recorre el registro de detecciones iluminando cada zona
-        for(int i=0;i<contador;i++)
+        for(int i = 0; i < contador; i++)
         {
             SDL_Delay(300);
             iluminarZona(registroDetecciones[i],simon,ORDEN,inicioX,inicioY,colores,renderer,B);
-            SDL_Delay(300);
+            Mix_PlayChannel(-1, sonido_click, 0);
+            SDL_Delay(300 -(i+1));
             dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
         }
 
@@ -147,18 +142,22 @@ int main(int argc, char* argv[])
                     y=evento.button.y;
                     deteccion=detectarClic(x,y,simon,ORDEN,inicioX,inicioY); //veo en el sector en el que se ejecutó el clic
                     iluminarZona(deteccion,simon,ORDEN,inicioX,inicioY,colores,renderer,N);
+                    Mix_PlayChannel(-1, sonido_click, 0);
                     SDL_Delay(150);
                     dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
-                    //si el sector en el que se ejecutó el clic es igual a la posisicon conAux del vector que contiene toda la secuencia aumenta el contAux, porque es un ACIERTO
-                    if(deteccion==registroDetecciones[contAux])
+                    if(deteccion != -1)
                     {
-                        contAux++;
-                    }
-                    else //Caso contrario el clic fue en otro sector
-                    {
-                        printf("Ha perdido!\n");
-                        acierto=0;
-                        ejecutando=0;
+                        //si el sector en el que se ejecutó el clic es igual a la posisicon conAux del vector que contiene toda la secuencia aumenta el contAux, porque es un ACIERTO
+                        if(deteccion==registroDetecciones[contAux])
+                        {
+                            contAux++;
+                        }
+                        else //Caso contrario el clic fue en otro sector
+                        {
+                            printf("Ha perdido!\n");
+                            acierto=0;
+                            ejecutando=0;
+                        }
                     }
                 }
             }
@@ -180,11 +179,6 @@ int main(int argc, char* argv[])
     SDL_Quit();
     return 0;
 }
-
-
-
-
-
 
 void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden)
 {
