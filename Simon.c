@@ -8,17 +8,31 @@
 #include "Dibujo.h"
 #include "Vector.h"
 #include "Funciones.h"
-
+#include "sonido.h"
 
 
 void simon4(SDL_Renderer* renderer,const int simon[][ORDEN])
 {
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
-    Mix_Chunk *sonido_click;
+    //Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+    //Mix_Chunk *sonido_click;
     // Cargar el archivo de sonido
-    sonido_click = Mix_LoadWAV("C:/Users/milag/Desktop/Ingeniería/Topicos/Prueba/Prueba/snd/do.wav");
+    //sonido_click = Mix_LoadWAV("C:/Users/milag/Desktop/Ingeniería/Topicos/Prueba/Prueba/snd/do.wav");
     //C:/Users/milag/Desktop/Ingeniería/Topicos/Prueba/Prueba/snd/do.wav
     //C:/Users/botta/Documents/GitHub/Prueba/snd/do.wav
+
+    if (!sonido_ini())
+    {
+        return;
+    }
+
+
+    Sonido* notas[6];
+    notas[0] = sonido_carga("snd/do.mp3");
+    notas[1] = sonido_carga("snd/re.mp3");
+    notas[2] = sonido_carga("snd/mi.mp3");
+    notas[3] = sonido_carga("snd/fa.mp3");
+    notas[4] = sonido_carga("snd/sol.mp3");
+    notas[5] = sonido_carga("snd/la.mp3");
 
 
     SDL_Event evento;
@@ -66,7 +80,8 @@ void simon4(SDL_Renderer* renderer,const int simon[][ORDEN])
             SDL_Delay(300);
             //iluminarZona(registroDetecciones[i],simon,ORDEN,inicioX,inicioY,renderer,B);
             iluminarZona(vectorDevolverValor(&vDetecciones,i),simon,ORDEN,inicioX,inicioY,renderer,B);
-            Mix_PlayChannel(-1, sonido_click, 0);
+//            Mix_PlayChannel(-1, sonido_click, 0);
+            sonido_play(notas[i]);
             SDL_Delay(300 -(i+1));
             dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
         }
@@ -84,7 +99,8 @@ void simon4(SDL_Renderer* renderer,const int simon[][ORDEN])
                     y=evento.button.y;
                     deteccion=detectarClic(x,y,simon,ORDEN,inicioX,inicioY); //veo en el sector en el que se ejecutó el clic
                     iluminarZona(deteccion,simon,ORDEN,inicioX,inicioY,renderer,N);
-                    Mix_PlayChannel(-1, sonido_click, 0);
+//                    Mix_PlayChannel(-1, sonido_click, 0);
+                    sonido_play(notas[contAux]);
                     SDL_Delay(150);
                     dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
                     if(deteccion != -1 && deteccion!=N && deteccion!=T)
@@ -116,6 +132,12 @@ void simon4(SDL_Renderer* renderer,const int simon[][ORDEN])
     }
 
 
+    // Liberar memoria
+    for (int i = 0; i < 6; i++)
+    {
+        sound_free(notas[i]);
+    }
+    sound_quit();
 
 }
 
