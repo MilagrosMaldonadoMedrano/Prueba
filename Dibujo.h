@@ -1,14 +1,9 @@
 #ifndef DIBUJO_H
 #define DIBUJO_H
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
-
-
 #define TAM_PIXEL 30
 #define ORDEN 21
-
-
 #define Z 0
 #define A 1
 #define R 2

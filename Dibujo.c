@@ -1,9 +1,6 @@
 #include<time.h>
 #include<stdlib.h>
 #include<stdio.h>
-
-
-#include "Dibujo.h"
 #include "funciones.h"
 
 SDL_Color colores[] =

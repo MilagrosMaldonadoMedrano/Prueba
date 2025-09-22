@@ -1,18 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
-#include <SDL_ttf.h>
 #include<time.h>
-
-#define SCREEN_W 1366
-#define SCREEN_H 768
-
-
 #include "Dibujo.h"
 #include "Simon.h"
 #include "sonido.h"
 #include "menu.h"
+#define SCREEN_W 1366
+#define SCREEN_H 768
+
 
 const int simon4Colores[ORDEN][ORDEN] = {
     {T,T,T,T,T,T,T,N,N,N,N,N,N,N,T,T,T,T,T,T,T},

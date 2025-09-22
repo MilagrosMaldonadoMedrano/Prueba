@@ -4,7 +4,7 @@
 
 #include<stdbool.h>
 #include<stddef.h>
-//si es bool el 0 es aml uy el 1 bien, si hay mas opciones el cero esta bien y el resto de numeros no
+//si es bool el 0 es mal y el 1 bien, si hay mas opciones el cero esta bien y el resto de numeros no
 #define TODO_OK 0
 #define LLENO 1
 #define DUPLICADO 2
@@ -28,9 +28,6 @@ bool validarPos(int* pos,int ce);
 void vectorDestruir(Vector* vec);
 int vectorDevolverValor(Vector* vec,int posicion);
 int vectorInsertarAlFinal(Vector* vec,int elem);
-
-
-
 
 
 #endif // VECTOR_H

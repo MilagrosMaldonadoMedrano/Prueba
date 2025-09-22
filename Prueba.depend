@@ -447,12 +447,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758429885 source:c:\users\botta\documents\github\prueba\main.c
-	<stdio.h>
-	<stdlib.h>
-	<SDL2/SDL.h>
-	<SDL2/SDL_mixer.h>
+1758509761 source:c:\users\botta\documents\github\prueba\main.c
 	<time.h>
+	"Dibujo.h"
+	"Simon.h"
+	"sonido.h"
+	"menu.h"
 
 1758404805 c:\users\botta\documents\github\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -896,14 +896,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758429967 source:c:\users\botta\documents\github\prueba\funciones.c
-
-1758429603 c:\users\botta\documents\github\prueba\funciones.h
+1758508261 source:c:\users\botta\documents\github\prueba\funciones.c
 	<stdio.h>
-	<stdlib.h>
+	"funciones.h"
+
+1758509685 c:\users\botta\documents\github\prueba\funciones.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
-	<time.h>
+	"Dibujo.h"
 
 1758404805 c:\users\botta\documents\github\prueba\lib\sdl2_mixer-devel-2.8.1-mingw\sdl2_mixer-2.8.1\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
 	"SDL_stdinc.h"
@@ -1950,4 +1950,58 @@
 
 1758498145 source:c:\users\kevin\downloads\prueba-main\prueba-main\menu.c
 	"menu.h"
+
+1758509761 source:c:\users\botta\documents\github\prueba\dibujo.c
+	<time.h>
+	<stdlib.h>
+	<stdio.h>
+	"funciones.h"
+
+1758509761 c:\users\botta\documents\github\prueba\dibujo.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+
+1758508262 c:\users\botta\documents\github\prueba\lib\sdl2_ttf-2.24.0\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1758509460 c:\users\botta\documents\github\prueba\simon.h
+	<stdio.h>
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<time.h>
+
+1758508262 c:\users\botta\documents\github\prueba\sonido.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+
+1758508262 c:\users\botta\documents\github\prueba\menu.h
+	<SDL2/SDL.h>
+	<SDL_ttf.h>
+
+1758508262 source:c:\users\botta\documents\github\prueba\menu.c
+	"menu.h"
+
+1758510666 source:c:\users\botta\documents\github\prueba\simon.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Dibujo.h"
+	"Vector.h"
+	"Funciones.h"
+	"sonido.h"
+
+1758509761 c:\users\botta\documents\github\prueba\vector.h
+	<stdbool.h>
+	<stddef.h>
+
+1758508262 source:c:\users\botta\documents\github\prueba\sonido.c
+	"sonido.h"
+
+1758509761 source:c:\users\botta\documents\github\prueba\vector.c
+	"Vector.h"
+	<stdio.h>
+	<stdlib.h>
 

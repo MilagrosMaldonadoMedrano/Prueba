@@ -1,7 +1,5 @@
 #ifndef FUNCIONES_H
 #define FUNCIONES_H
-
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include "Dibujo.h"

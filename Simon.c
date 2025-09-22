@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_mixer.h>
 #include<time.h>
-
-
 #include "Dibujo.h"
 #include "Vector.h"
 #include "Funciones.h"
@@ -80,15 +76,14 @@ void simon4(SDL_Renderer* renderer,const int simon[][ORDEN])
             SDL_Delay(300);
             //iluminarZona(registroDetecciones[i],simon,ORDEN,inicioX,inicioY,renderer,B);
             iluminarZona(vectorDevolverValor(&vDetecciones,i),simon,ORDEN,inicioX,inicioY,renderer,B);
-//            Mix_PlayChannel(-1, sonido_click, 0);
-            sonido_play(notas[i]);
+            sonido_play(notas[vectorDevolverValor(&vDetecciones,i)]);
             SDL_Delay(300 -(i+1));
             dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
         }
 
         contAux=0;
         //aca analizo cada secuencia de clics que ejecuta el usuario
-        while(contAux<contador && acierto==1)
+        while(contAux<contador && acierto == 1)
         {
             while(SDL_PollEvent(&evento))//detecta los eventos
             {
@@ -98,13 +93,12 @@ void simon4(SDL_Renderer* renderer,const int simon[][ORDEN])
                     x=evento.button.x;
                     y=evento.button.y;
                     deteccion=detectarClic(x,y,simon,ORDEN,inicioX,inicioY); //veo en el sector en el que se ejecutó el clic
-                    iluminarZona(deteccion,simon,ORDEN,inicioX,inicioY,renderer,N);
-//                    Mix_PlayChannel(-1, sonido_click, 0);
-                    sonido_play(notas[contAux]);
-                    SDL_Delay(150);
-                    dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
                     if(deteccion != -1 && deteccion!=N && deteccion!=T)
                     {
+                        iluminarZona(deteccion,simon,ORDEN,inicioX,inicioY,renderer,N);
+                        sonido_play(notas[deteccion]);
+                        SDL_Delay(150);
+                        dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
                         //si el sector en el que se ejecutó el clic es igual a la posisicon conAux del vector que contiene toda la secuencia aumenta el contAux, porque es un ACIERTO
                         if(deteccion==vectorDevolverValor(&vDetecciones,contAux)) //if(deteccion==registroDetecciones[contAux])
                         {
