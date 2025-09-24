@@ -61,8 +61,7 @@ void botones_menu(Boton* botones, int cantidad, int screen_w, int screen_h)
 }
 
 
-void boton_carga(Boton* b, int x, int y, int w, int h, char* texto,
-                 SDL_Color normal, SDL_Color encima, SDL_Color presionado)
+void boton_carga(Boton* b, int x, int y, int w, int h, char* texto, SDL_Color normal, SDL_Color encima, SDL_Color presionado)
 {
     b->rect.x = x;
     b->rect.y = y;
@@ -79,8 +78,10 @@ void boton_carga(Boton* b, int x, int y, int w, int h, char* texto,
 void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente)
 {
     SDL_Color c = b->color;
-    if (b->presionado) c = b->presionado_color;
-    else if (b->encima) c = b->encima_color;
+    if (b->presionado)
+        c = b->presionado_color;
+    else if
+        (b->encima) c = b->encima_color;
 
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderFillRect(renderer, &b->rect);
