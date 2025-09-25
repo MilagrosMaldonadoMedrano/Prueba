@@ -7,11 +7,9 @@
 #include<time.h>
 
 
-void simon4(SDL_Renderer* renderer,const int simon[][ORDEN]);
+
 //Juego basico
 void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
-void simon8(SDL_Renderer* renderer,const int simon[][ORDEN]);
-void simon3(SDL_Renderer* renderer,const int simon[][ORDEN]);
 void simon(SDL_Renderer* renderer,const int simon[][ORDEN],int cantidad);
 
 

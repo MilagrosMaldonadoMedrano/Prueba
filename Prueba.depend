@@ -1,9 +1,10 @@
 # depslib dependency file v1.0
-1758335355 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
-	<stdio.h>
-	<stdlib.h>
-	<SDL2/SDL.h>
+1758841010 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
 	<time.h>
+	"Dibujo.h"
+	"Simon.h"
+	"sonido.h"
+	"menu.h"
 
 1748917206 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -2018,4 +2019,76 @@
 
 1758731676 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.c
 	"sonido.h"
+
+1758841355 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\dibujo.c
+	<time.h>
+	<stdlib.h>
+	<stdio.h>
+	"funciones.h"
+
+1758828781 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\funciones.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	"Dibujo.h"
+
+1738973080 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\lib\sdl2_mixer-devel-2.8.1-mingw\sdl2_mixer-2.8.1\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
+	"begin_code.h"
+	"close_code.h"
+
+1758841355 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\dibujo.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+
+1758828781 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\funciones.c
+	<stdio.h>
+	"funciones.h"
+
+1758828782 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
+	"menu.h"
+
+1758828782 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.h
+	<SDL2/SDL.h>
+	<SDL_ttf.h>
+
+1758828782 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\lib\sdl2_ttf-2.24.0\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
+	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1758839480 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Dibujo.h"
+	"Vector.h"
+	"Funciones.h"
+	"sonido.h"
+
+1758828781 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.h
+	<stdbool.h>
+	<stddef.h>
+
+1758828782 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+
+1758828782 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.c
+	"sonido.h"
+
+1758828781 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.c
+	"Vector.h"
+	<stdio.h>
+	<stdlib.h>
+
+1758839479 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.h
+	<stdio.h>
+	<stdlib.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<time.h>
 

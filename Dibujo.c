@@ -10,8 +10,10 @@ SDL_Color colores[] =
     {204,  24,  24, 255}, // R[2] - Rojo
     {  0, 150,  60, 255}, // V[3] - Verde
     {255, 128,   0, 255}, //Naranja[4]
-    { 63, 133, 212, 255}, //Celeste[5]
-    {156,  55, 176, 255}, //Violeta[6]
+    {156,  55, 176, 255}, //Violeta[5]
+    { 63, 133, 212, 255}, //Celeste[6]
+
+
     {219,  37, 133, 255}, //Rosa[7]
     {255, 255, 255, 255}, // B[8] - Blanco
     {138, 149, 151, 255}, // T[9] - Transparente AL FONDO
@@ -125,34 +127,4 @@ void dibujarEnMenu(SDL_Renderer *renderer, const int m[][ORDENMENU], int filas, 
     SDL_RenderPresent(renderer);
 }
 
-
-
-/*
-void dibujar8(SDL_Renderer *renderer, const int m[][60], int filas, int columnas, int origenX, int origenY)
-{
-    int indiceColor;
-    for (int y = 0; y < filas; y++)
-    {
-        for (int x = 0; x < columnas; x++)
-        {
-            indiceColor=m[y][x];
-
-            SDL_Color color = colores[indiceColor];
-
-            SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
-
-            SDL_Rect pixel = {
-                origenX + x * TAM_PIXEL,
-                origenY + y * TAM_PIXEL,
-                TAM_PIXEL,
-                TAM_PIXEL
-            };
-
-            SDL_RenderFillRect(renderer, &pixel);
-        }
-    }
-
-    SDL_RenderPresent(renderer);
-}
-*/
 
