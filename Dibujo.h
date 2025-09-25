@@ -13,8 +13,8 @@
 #define A 1 //AMARILLO
 #define R 2 //ROJO
 #define V 3 //VERDE
-#define C 4 //CELESTE
-#define O 5 //NARANJA
+#define O 4 //NARANJA
+#define C 5 //CELESTE
 #define W 6 //VIOLETA
 #define P 7//Rosa
 #define B 8  //BLANCO

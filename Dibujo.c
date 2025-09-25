@@ -9,8 +9,8 @@ SDL_Color colores[] =
     {255, 255,   0, 255}, // Y[1] - Amarillo
     {204,  24,  24, 255}, // R[2] - Rojo
     {  0, 150,  60, 255}, // V[3] - Verde
-    { 63, 133, 212, 255}, //Celeste[4]
-    {255, 128,   0, 255}, //Naranja[5]
+    {255, 128,   0, 255}, //Naranja[4]
+    { 63, 133, 212, 255}, //Celeste[5]
     {156,  55, 176, 255}, //Violeta[6]
     {219,  37, 133, 255}, //Rosa[7]
     {255, 255, 255, 255}, // B[8] - Blanco
@@ -125,6 +125,9 @@ void dibujarEnMenu(SDL_Renderer *renderer, const int m[][ORDENMENU], int filas, 
     SDL_RenderPresent(renderer);
 }
 
+
+
+/*
 void dibujar8(SDL_Renderer *renderer, const int m[][60], int filas, int columnas, int origenX, int origenY)
 {
     int indiceColor;
@@ -151,5 +154,5 @@ void dibujar8(SDL_Renderer *renderer, const int m[][60], int filas, int columnas
 
     SDL_RenderPresent(renderer);
 }
-
+*/
 
