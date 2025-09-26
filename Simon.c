@@ -181,7 +181,8 @@ void simon(SDL_Renderer* renderer,const int simon[][60],int cantidad)
             SDL_Delay(300);
             //iluminarZona(registroDetecciones[i],simon,ORDEN,inicioX,inicioY,renderer,B);
             iluminarZona(vectorDevolverValor(&vDetecciones,i),simon,ORDEN,inicioX,inicioY,renderer,B);
-            sonido_play(notas[vectorDevolverValor(&vDetecciones,i)]);
+            sonido_play(crearTonoAleatorio());
+            //sonido_play(notas[vectorDevolverValor(&vDetecciones,i)]);
             SDL_Delay(300 -(i+1));
             dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
         }
@@ -201,7 +202,8 @@ void simon(SDL_Renderer* renderer,const int simon[][60],int cantidad)
                     if(deteccion != -1 && deteccion!=N && deteccion!=T)
                     {
                         iluminarZona(deteccion,simon,ORDEN,inicioX,inicioY,renderer,N);
-                        sonido_play(notas[deteccion]);
+                        sonido_play(crearTonoAleatorio());
+                        //sonido_play(notas[deteccion]);
                         SDL_Delay(150);
                         dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
                         //si el sector en el que se ejecutó el clic es igual a la posisicon conAux del vector que contiene toda la secuencia aumenta el contAux, porque es un ACIERTO
