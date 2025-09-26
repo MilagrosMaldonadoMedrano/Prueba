@@ -3,6 +3,8 @@
 #include "Simon.h"
 #include "sonido.h"
 #include "menu.h"
+#include "string.h"
+
 #define SCREEN_W 1366
 #define SCREEN_H 768
 
@@ -527,7 +529,11 @@ int main(int argc, char* argv[])
     SDL_RenderPresent(renderer);
 
 
+    Jugador jugador;
 
+    strcpy(jugador.nombre, "KEVIN");
+    jugador.nivel = 0;
+    jugador.puntaje = 0;
 
 
     int ejecutando=1;
@@ -549,15 +555,17 @@ int main(int argc, char* argv[])
                     SDL_Log("Boton %s presionado", menu_botones[i].texto);
                     if(i == 0)
                     {
-                        simon(renderer,simon4Colores,4);
+                        //simon1(renderer,simon4Colores,4);
+                        simon(renderer, simon4Colores, 4, &jugador);
                     }
                     if(i == 1)
                     {
+                        simon(renderer, simon3Colores, 3, &jugador);
                         //simon(renderer,simon8Colores,8);
                         //simon(renderer,simon5Colores,5);
                         //simon(renderer,simon3Colores,3);
                         //simon(renderer,simon6Colores,6);
-                        simon(renderer,simon7Colores,7);
+                        //simon1(renderer,simon7Colores,7);
                     }
                     if(i == 2)
                     {
@@ -579,6 +587,8 @@ int main(int argc, char* argv[])
 
         SDL_RenderPresent(renderer);
     }
+
+    printf("El jugador %s termino con %d puntos en el nivel %d\n", jugador.nombre, jugador.puntaje, jugador.nivel);
 
 
 
