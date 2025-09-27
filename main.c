@@ -560,8 +560,8 @@ int main(int argc, char* argv[])
                     }
                     if(i == 1)
                     {
-                        simon(renderer, simon3Colores, 3, &jugador);
-                        //simon(renderer,simon8Colores,8);
+                        //simon(renderer, simon3Colores, 3, &jugador);
+                        simon(renderer,simon8Colores,8,&jugador);
                         //simon(renderer,simon5Colores,5);
                         //simon(renderer,simon3Colores,3);
                         //simon(renderer,simon6Colores,6);

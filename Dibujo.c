@@ -27,16 +27,6 @@ SDL_Color colores[] =
     {111,  62, 163, 255}  //VIOLETA3[15]
 };
 
-/*SDL_Color coloresMenu[]=
-{
-    {255, 74, 12, 255}, //VIOLETA1[0]
-    {255, 69, 21, 255}, //VIOLETA2[1]
-    {255, 69, 21, 255}, //VIOLETA2[2]
-    {70, 30, 130, 255}, //VIOLETA3[3]
-    {95, 55, 158, 255}  //VIOLERA4[4]
-
-};*/
-
 
 
 

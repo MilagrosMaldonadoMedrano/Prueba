@@ -37,10 +37,10 @@ void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
 void simon1(SDL_Renderer* renderer,const int simon[][ORDEN],int cantidad);
 
 
-void simon(SDL_Renderer* renderer, const int simon[][60], int cantidad, Jugador* jugador);
+void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador);
 Simon* simonCrear(int cantidad);
-void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][60], int iniX, int iniY, Sonido* notas[]);
-int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][60], int iniX, int iniY, SDL_Renderer* renderer, Sonido* notas[]);
+void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][ORDEN], int iniX, int iniY, Sonido* notas[],float duracion);
+int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido* notas[],int cantidad,float duracion);
 
 
 #endif // SIMON_H

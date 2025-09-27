@@ -915,12 +915,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758816304 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\main.c
+1758940253 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
 	"sonido.h"
 	"menu.h"
+	"string.h"
 
 1758478807 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -1373,13 +1374,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758814644 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.c
+1758941207 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.c
 	<time.h>
 	<stdlib.h>
 	<stdio.h>
 	"funciones.h"
 
-1758814644 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.h
+1758937951 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
@@ -1401,21 +1402,21 @@
 	<stdio.h>
 	<stdlib.h>
 
-1758805672 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.c
+1758945888 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.c
+	"Simon.h"
+
+1758943692 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<SDL_ttf.h>
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
+	"Vector.h"
+	"sonido.h"
 	"Dibujo.h"
 	"Vector.h"
 	"Funciones.h"
-	"sonido.h"
-
-1758800125 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.h
-	<stdio.h>
-	<stdlib.h>
-	<SDL2/SDL.h>
-	<SDL2/SDL_mixer.h>
-	<time.h>
 
 1758496675 source:c:\users\kevin\downloads\prueba-main\prueba-main\dibujo.c
 	<time.h>
@@ -2001,11 +2002,11 @@
 	<stdio.h>
 	<stdlib.h>
 
-1758731676 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.h
+1758945888 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1758731676 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.h
+1758939792 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 
@@ -2014,11 +2015,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758731676 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.c
+1758939792 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.c
 	"menu.h"
 
-1758731676 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.c
+1758945860 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.c
 	"sonido.h"
+	"math.h"
 
 1758841355 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\dibujo.c
 	<time.h>

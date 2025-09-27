@@ -76,10 +76,11 @@ Sonido* crearTonoAleatorio()
     return crearTono(freq, 0.3f);// 0.3 segundos
 }
 
-void sonido_play(Sonido* s)
+void sonido_play(Sonido* s,float duracion)
 {
     if (s && s->chunk)
-        Mix_PlayChannel(-1, s->chunk, 0); // -1 = cualquier canal libre
+        Mix_PlayChannelTimed(-1, s->chunk, 0, duracion);
+        //Mix_PlayChannel(-1, s->chunk, 0); // -1 = cualquier canal libre
 }
 
 void sound_free(Sonido* s)
@@ -95,3 +96,10 @@ void sound_quit()
 {
     Mix_CloseAudio();
 }
+
+
+/*Sonido* modificarTiempoSonido(float duracion,Sonido *s)
+{
+    Mix_PlayChannelTimed(-1, s->chunk, 0, duracion);
+}
+*/
