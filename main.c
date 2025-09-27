@@ -501,6 +501,7 @@ int main(int argc, char* argv[])
 
     Configuracion usuario;
     Boton menu_botones[4];
+    Jugador jugador;
 
     //inicializa ttf
     if (TTF_Init() == -1)
@@ -523,6 +524,10 @@ int main(int argc, char* argv[])
     SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
+
+    strcpy(jugador.nombre, "KEVIN");
+    jugador.nivel = 0;
+    jugador.puntaje = 0;
 
     Log_in(&usuario, renderer, fuente);
 
