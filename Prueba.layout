@@ -2,36 +2,18 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="sonido.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Vector.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="581" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="menu.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2992" topLine="0" />
+			<Cursor1 position="227" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="3" />
-			<Collapse line="64" />
-			<Collapse line="78" />
-			<Collapse line="116" />
+			<Collapse line="8" />
+			<Collapse line="34" />
+			<Collapse line="45" />
+			<Collapse line="54" />
+			<Collapse line="59" />
+			<Collapse line="75" />
 		</Folding>
-	</File>
-	<File name="funciones.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="menu.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="312" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Simon.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1294" topLine="15" />
-		</Cursor>
 	</File>
 	<File name="funciones.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -40,6 +22,16 @@
 		<Folding>
 			<Collapse line="5" />
 		</Folding>
+	</File>
+	<File name="Dibujo.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="321" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="menu.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="312" topLine="0" />
+		</Cursor>
 	</File>
 	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
@@ -56,18 +48,23 @@
 			<Collapse line="459" />
 		</Folding>
 	</File>
-	<File name="Simon.c" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Simon.c" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4215" topLine="120" />
+			<Cursor1 position="2172" topLine="0" />
 		</Cursor>
 		<Folding>
-			<Collapse line="205" />
-			<Collapse line="265" />
+			<Collapse line="120" />
+			<Collapse line="154" />
 		</Folding>
 	</File>
-	<File name="Dibujo.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Simon.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="321" topLine="0" />
+			<Cursor1 position="1144" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="funciones.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Dibujo.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -80,14 +77,39 @@
 			<Collapse line="88" />
 		</Folding>
 	</File>
-	<File name="sonido.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="sonido.c" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2424" topLine="26" />
+			<Cursor1 position="4193" topLine="31" />
 		</Cursor>
 		<Folding>
 			<Collapse line="4" />
+			<Collapse line="14" />
 			<Collapse line="27" />
+			<Collapse line="69" />
+			<Collapse line="79" />
 			<Collapse line="86" />
+			<Collapse line="95" />
 		</Folding>
+	</File>
+	<File name="menu.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2992" topLine="0" />
+		</Cursor>
+		<Folding>
+			<Collapse line="3" />
+			<Collapse line="64" />
+			<Collapse line="78" />
+			<Collapse line="116" />
+		</Folding>
+	</File>
+	<File name="sonido.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="678" topLine="7" />
+		</Cursor>
+	</File>
+	<File name="Vector.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="415" topLine="5" />
+		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

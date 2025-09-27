@@ -83,18 +83,84 @@ void sonido_play(Sonido* s,float duracion)
         //Mix_PlayChannel(-1, s->chunk, 0); // -1 = cualquier canal libre
 }
 
-void sound_free(Sonido* s)
+void sound_free(Sonido** s)
 {
     if (s)
     {
-        if (s->chunk) Mix_FreeChunk(s->chunk);
-        free(s);
+        if ((*s)->chunk) Mix_FreeChunk((*s)->chunk);
+        free(*s);
     }
 }
 
 void sound_quit()
 {
     Mix_CloseAudio();
+}
+
+
+void cargarSonidos(int cantidad,Sonido** vSimon)
+{
+
+    if(cantidad==3)
+    {
+        vSimon[0]=sonido_carga("snd/do.mp3");
+        vSimon[1]=sonido_carga("snd/mi.mp3");
+        vSimon[2]=sonido_carga("snd/sol.mp3");
+    }
+
+    if(cantidad==4)
+    {
+        vSimon[0]=sonido_carga("snd/do.mp3");
+        vSimon[1]=sonido_carga("snd/mi.mp3");
+        vSimon[2]=sonido_carga("snd/sol.mp3");
+        vSimon[3]=sonido_carga("snd/la.mp3");
+    }
+
+    if(cantidad==5)
+    {
+        vSimon[0]=sonido_carga("snd/do.mp3");
+        vSimon[1]=sonido_carga("snd/re.mp3");
+        vSimon[2]=sonido_carga("snd/mi.mp3");
+        vSimon[3]=sonido_carga("snd/sol.mp3");
+        vSimon[4]=sonido_carga("snd/la.mp3");
+    }
+
+    if(cantidad==6)
+    {
+        vSimon[0]=sonido_carga("snd/do.mp3");
+        vSimon[1]=sonido_carga("snd/re.mp3");
+        vSimon[2]=sonido_carga("snd/mi.mp3");
+        vSimon[3]=sonido_carga("snd/sol.mp3"); //CAMBIAR
+        vSimon[4]=sonido_carga("snd/la.mp3");  //CAMBIAR
+        vSimon[5]=sonido_carga("snd/la.mp3"); //CAMBIAR
+
+    }
+
+    if(cantidad==7)
+    {
+
+        vSimon[0]=sonido_carga("snd/do.mp3");
+        vSimon[1]=sonido_carga("snd/re.mp3");
+        vSimon[2]=sonido_carga("snd/mi.mp3");
+        vSimon[3]=sonido_carga("snd/sol.mp3"); //CAMBIAR
+        vSimon[4]=sonido_carga("snd/la.mp3");  //CAMBIAR
+        vSimon[5]=sonido_carga("snd/la.mp3");  //CAMBIAR
+        vSimon[6]=sonido_carga("snd/do.mp3"); //CAMBIAR
+
+    }
+
+    if(cantidad==8)
+    {
+
+        vSimon[0]=sonido_carga("snd/do.mp3");
+        vSimon[1]=sonido_carga("snd/re.mp3");
+        vSimon[2]=sonido_carga("snd/mi.mp3");
+        vSimon[3]=sonido_carga("snd/fa.mp3"); //CAMBIAR
+        vSimon[4]=sonido_carga("snd/sol.mp3");  //CAMBIAR
+        vSimon[5]=sonido_carga("snd/la.mp3");  //CAMBIAR
+        vSimon[6]=sonido_carga("snd/si.mp3");  //CAMBIAR
+        vSimon[7]=sonido_carga("snd/do_2.mp3");  //CAMBIAR
+    }
 }
 
 

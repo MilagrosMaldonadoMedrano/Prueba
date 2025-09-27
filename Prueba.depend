@@ -1402,10 +1402,10 @@
 	<stdio.h>
 	<stdlib.h>
 
-1758945888 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.c
+1758999208 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.c
 	"Simon.h"
 
-1758943692 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.h
+1758999101 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>
@@ -2002,7 +2002,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1758945888 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.h
+1758980269 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
@@ -2018,7 +2018,7 @@
 1758939792 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.c
 	"menu.h"
 
-1758945860 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.c
+1758998223 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.c
 	"sonido.h"
 	"math.h"
 
