@@ -69,8 +69,8 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
             vectorInsertarAlFinal(&juego->secuencia, rand () % cantidad);
             juego->tam++;
         }
-        duracion=(duracion -(duracion*3)/100);
-        tiempoDelay=(tiempoDelay-(tiempoDelay*3)/100);
+        duracion=(duracion -(duracion*10)/100);
+        tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
     }
 
     printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
@@ -110,7 +110,6 @@ void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][OR
         sonido_play(notas[boton],duracion);
         //sonido_play(crearTonoAleatorio());
         SDL_Delay(tiempoDelay);
-        tiempoDelay=tiempoDelay-(tiempoDelay*30)/100;
         dibujar(renderer, simon, ORDEN, ORDEN, iniX, iniY);
         //SDL_Delay()
         SDL_Delay(300 - (i + 1));
