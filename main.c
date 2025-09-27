@@ -497,10 +497,8 @@ int main(int argc, char* argv[])
     SDL_Renderer *renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED); // crea el render
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); // establece su opacidad
 
-
-
+    Configuracion usuario;
     Boton menu_botones[4];
-    botones_menu(menu_botones, 4, SCREEN_W, SCREEN_H);//cargo los botones
 
     //inicializa ttf
     if (TTF_Init() == -1)
@@ -520,28 +518,23 @@ int main(int argc, char* argv[])
     }
 
 
-
-
     SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
+    Log_in(&usuario, renderer, fuente);
 
-
-
+    botones_menu(menu_botones, 4, SCREEN_W, SCREEN_H);//cargo los botones
 
     int ejecutando=1;
 
     SDL_Event e;
     while (ejecutando)
     {
-
         while (SDL_PollEvent(&e))
         {
-
             if (e.type == SDL_QUIT)
                 ejecutando = 0;
-
             for (int i = 0; i < 4; i++)//Prueba el evento en cada boton
             {
                 if (boton_manejo_evento(&menu_botones[i], &e))
@@ -561,16 +554,13 @@ int main(int argc, char* argv[])
                     }
                     if(i == 2)
                     {
-
                     }
                     if (i == 3)
                     {
                         ejecutando = 0; // SALIR
                     }
-
                 }
             }
-
         }
 
 
