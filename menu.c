@@ -77,40 +77,28 @@ void boton_carga(Boton* b, int x, int y, int w, int h, char* texto, SDL_Color no
 
 void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente)
 {
+    // Elige color segï¿½n estado del botï¿½n
     SDL_Color c = b->color;
     if (b->presionado)
         c = b->presionado_color;
     else if
         (b->encima) c = b->encima_color;
 
+    // Dibuja el fondo
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderFillRect(renderer, &b->rect);
-
+    // Dibujar borde negro
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderDrawRect(renderer, &b->rect);
 
+    // Primero generamos el rect centrado
+    int texW, texH;
+    TTF_SizeText(fuente, b->texto, &texW, &texH);
 
-    // --- Renderizar texto ---
-    SDL_Surface* surface = TTF_RenderText_Blended(fuente, b->texto, (SDL_Color)
-    {
-        255,255,255,255
-    });
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-
-    int texW = 0, texH = 0;
-    SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-
-    // Centrar el texto dentro del botón
-    SDL_Rect dst;
-    dst.x = b->rect.x + (b->rect.w - texW) / 2;
-    dst.y = b->rect.y + (b->rect.h - texH) / 2;
-    dst.w = texW;
-    dst.h = texH;
-
-    SDL_RenderCopy(renderer, texture, NULL, &dst);
-
-    SDL_FreeSurface(surface);
-    SDL_DestroyTexture(texture);
+    int x = b->rect.x + (b->rect.w - texW) / 2;
+    int y = b->rect.y + (b->rect.h - texH) / 2;
+    //--- Renderizar texto ---
+    mostrarTexto(renderer, fuente, b->texto, x, y, (SDL_Color){255,255,255,255});
 }
 
 int boton_manejo_evento(Boton* b, SDL_Event* e)
@@ -124,7 +112,7 @@ int boton_manejo_evento(Boton* b, SDL_Event* e)
     else if (e->type == SDL_MOUSEBUTTONDOWN && b->encima)
     {
         b->presionado = 1;
-        return 1; // Botón activado
+        return 1; // BotÃ³n activado
     }
     else if (e->type == SDL_MOUSEBUTTONUP)
     {

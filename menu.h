@@ -2,6 +2,7 @@
 #define MENU_H_INCLUDED
 #include <SDL2/SDL.h>
 #include <SDL_ttf.h>
+#include "texto.h"
 
 typedef struct
 {

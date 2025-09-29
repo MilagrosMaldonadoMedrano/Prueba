@@ -1,5 +1,5 @@
 #include "Simon.h"
-
+#include "texto.h"
 
 
 
@@ -39,6 +39,9 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
     srand(time(0));
 
 
+    textIni();
+    TTF_Font* fuente = cargarFnt(PATH_FNT_ARIAL, TAM_FNT_MENU);
+
     SDL_Event evento;
 
     float duracion=2000;
@@ -47,7 +50,11 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
     while(juego->enJuego)
     {
         SDL_Delay(300);
+        SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255); //Color turquesa
+        SDL_RenderClear(renderer);    // Limpia toda la pantalla con ese color
         dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
+        mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
+        SDL_RenderPresent(renderer);
         mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
 
         juego->indiceJugador = 0;

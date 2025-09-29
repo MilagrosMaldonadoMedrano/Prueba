@@ -18,6 +18,9 @@
 #include "Vector.h"
 #include "Funciones.h"
 
+#define PATH_FNT_ARIAL "fnt/arial.ttf"
+#define TAM_FNT_MENU 22
+
 typedef struct {
 Vector secuencia; //guarda la secuencia de botones
 int tam; // longitud actual de la secuencia

@@ -504,22 +504,8 @@ int main(int argc, char* argv[])
     Boton menu_botones[4];
     botones_menu(menu_botones, 4, SCREEN_W, SCREEN_H);//cargo los botones
 
-    //inicializa ttf
-    if (TTF_Init() == -1)
-    {
-        SDL_Log("Error al inicializar SDL_ttf: %s", TTF_GetError());
-        exit(1);
-        //return 1;
-    }
-
-    // Cargar fuente
-    TTF_Font* fuente = TTF_OpenFont("fnt/arial.ttf", 24);
-    if (!fuente)
-    {
-        SDL_Log("No se pudo cargar fuente: %s", TTF_GetError());
-        exit(1);
-        //return 1;
-    }
+    textIni();//inicia ttf
+    TTF_Font* fuente = cargarFnt(PATH_FNT_ARIAL, TAM_FNT_MENU);// Cargar fuente
 
 
 
