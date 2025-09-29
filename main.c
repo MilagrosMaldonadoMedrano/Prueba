@@ -516,11 +516,8 @@ int main(int argc, char* argv[])
 
 
     Jugador jugador;
-
-    strcpy(jugador.nombre, "KEVIN");
-    jugador.nivel = 0;
     jugador.puntaje = 0;
-
+    jugador.nivel = 1;
 
     int ejecutando=1;
 
@@ -541,7 +538,7 @@ int main(int argc, char* argv[])
                     SDL_Log("Boton %s presionado", menu_botones[i].texto);
                     if(i == 0)
                     {
-                        //simon1(renderer,simon4Colores,4);
+                        ingresarNombre(renderer, fuente, &jugador);
                         simon(renderer, simon4Colores, 4, &jugador);
                     }
                     if(i == 1)
@@ -555,7 +552,6 @@ int main(int argc, char* argv[])
                     }
                     if(i == 2)
                     {
-
                     }
                     if (i == 3)
                     {

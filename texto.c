@@ -28,8 +28,23 @@ TTF_Font* cargarFnt(const char* path, int tamFnt)
 
 void mostrarTexto(SDL_Renderer* renderer, TTF_Font* fnt, const char* texto, int x, int y, SDL_Color color)
 {
+    if(!renderer || !fnt || !texto || texto[0] == '\0')
+        return;//no dibuja nada si no hay texto
+
     SDL_Surface* superficie = TTF_RenderText_Solid(fnt, texto, color);
+    if(!superficie)
+    {
+        SDL_Log("Error al crear surface de texto: %s", TTF_GetError());
+        return;
+    }
     SDL_Texture* textura = SDL_CreateTextureFromSurface(renderer, superficie);
+    if(!textura)
+    {
+        SDL_Log("Error al crear textura de texto: %s", SDL_GetError());
+        SDL_FreeSurface(superficie);
+        return;
+    }
+
 
     SDL_Rect rect = {x, y, superficie->w, superficie->h};
     SDL_RenderCopy(renderer, textura, NULL, &rect);
@@ -52,4 +67,56 @@ void mostrarEstadisticaSimon(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jug
 
     snprintf(buffer, sizeof(buffer), "Nivel: %d", nivelSimon);
     mostrarTexto(renderer, fnt, buffer, 20, 100, blanco);
+}
+
+
+
+void ingresarNombre(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jugador)
+{
+    SDL_Event e;
+    int ingresando = 1;
+
+    jugador->nombre[0] = '\0'; //me aseguro de que arranque vacio
+
+
+    SDL_StartTextInput();
+
+    while(ingresando)
+    {
+        while(SDL_PollEvent(&e))
+        {
+            if(e.type == SDL_QUIT)
+            {
+                ingresando = 0;
+            }
+            else if(e.type == SDL_TEXTINPUT)
+            {
+                if(strlen(jugador->nombre) + strlen(e.text.text) < sizeof(jugador->nombre) - 1)
+                {
+                    strcat(jugador->nombre, e.text.text);
+                }
+            }
+            else if(e.type == SDL_KEYDOWN)
+            {
+                if(e.key.keysym.sym == SDLK_BACKSPACE && strlen(jugador->nombre) > 0)//detecta el espacio
+                {
+                    jugador->nombre[strlen(jugador->nombre) - 1] = '\0';//detecta enter
+                }
+                else if(e.key.keysym.sym == SDLK_RETURN)
+                {
+                    ingresando = 0;// confirma y sale
+                }
+            }
+
+        }
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+
+        mostrarTexto(renderer, fnt, "Ingrese su nombre ", 100, 150, (SDL_Color){255, 255, 255, 255});
+        mostrarTexto(renderer, fnt, jugador->nombre, 100, 200, (SDL_Color){255, 255, 255, 255});
+
+        SDL_RenderPresent(renderer);
+    }
+    SDL_StopTextInput();
 }
