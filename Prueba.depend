@@ -448,12 +448,14 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758509761 source:c:\users\botta\documents\github\prueba\main.c
+1759521223 source:c:\users\botta\documents\github\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
 	"sonido.h"
 	"menu.h"
+	"string.h"
+	"texto.h"
 
 1758404805 c:\users\botta\documents\github\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -1948,13 +1950,13 @@
 1758498145 source:c:\users\kevin\downloads\prueba-main\prueba-main\menu.c
 	"menu.h"
 
-1758509761 source:c:\users\botta\documents\github\prueba\dibujo.c
+1759520848 source:c:\users\botta\documents\github\prueba\dibujo.c
 	<time.h>
 	<stdlib.h>
 	<stdio.h>
 	"funciones.h"
 
-1758509761 c:\users\botta\documents\github\prueba\dibujo.h
+1758842438 c:\users\botta\documents\github\prueba\dibujo.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
@@ -1963,39 +1965,42 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758509460 c:\users\botta\documents\github\prueba\simon.h
-	<stdio.h>
-	<stdlib.h>
+1759520848 c:\users\botta\documents\github\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
-	<time.h>
-
-1758508262 c:\users\botta\documents\github\prueba\sonido.h
-	<SDL2/SDL.h>
-	<SDL2/SDL_mixer.h>
-
-1758508262 c:\users\botta\documents\github\prueba\menu.h
-	<SDL2/SDL.h>
 	<SDL_ttf.h>
-
-1758508262 source:c:\users\botta\documents\github\prueba\menu.c
-	"menu.h"
-
-1758510666 source:c:\users\botta\documents\github\prueba\simon.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
+	"Vector.h"
+	"sonido.h"
 	"Dibujo.h"
 	"Vector.h"
 	"Funciones.h"
-	"sonido.h"
+
+1759520849 c:\users\botta\documents\github\prueba\sonido.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+
+1759520848 c:\users\botta\documents\github\prueba\menu.h
+	<SDL2/SDL.h>
+	<SDL_ttf.h>
+	"texto.h"
+
+1759520848 source:c:\users\botta\documents\github\prueba\menu.c
+	"menu.h"
+
+1759520848 source:c:\users\botta\documents\github\prueba\simon.c
+	"Simon.h"
+	"texto.h"
 
 1758509761 c:\users\botta\documents\github\prueba\vector.h
 	<stdbool.h>
 	<stddef.h>
 
-1758508262 source:c:\users\botta\documents\github\prueba\sonido.c
+1759520848 source:c:\users\botta\documents\github\prueba\sonido.c
 	"sonido.h"
+	"math.h"
 
 1758509761 source:c:\users\botta\documents\github\prueba\vector.c
 	"Vector.h"
@@ -2093,4 +2098,14 @@
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<time.h>
+
+1759521117 c:\users\botta\documents\github\prueba\texto.h
+	<stdio.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<SDL_ttf.h>
+	"Simon.h"
+
+1759521046 source:c:\users\botta\documents\github\prueba\texto.c
+	"texto.h"
 

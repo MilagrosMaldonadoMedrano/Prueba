@@ -4,6 +4,7 @@
 #include "sonido.h"
 #include "menu.h"
 #include "string.h"
+#include "texto.h"
 
 #define SCREEN_W 1366
 #define SCREEN_H 768

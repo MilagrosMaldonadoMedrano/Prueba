@@ -24,8 +24,6 @@ TTF_Font* cargarFnt(const char* path, int tamFnt)
     return fuente;
 }
 
-
-
 void mostrarTexto(SDL_Renderer* renderer, TTF_Font* fnt, const char* texto, int x, int y, SDL_Color color)
 {
     if(!renderer || !fnt || !texto || texto[0] == '\0')
