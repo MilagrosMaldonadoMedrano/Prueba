@@ -448,12 +448,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758912425 source:c:\users\botta\documents\github\prueba\main.c
+1759534337 source:c:\users\botta\documents\github\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
 	"sonido.h"
 	"menu.h"
+	"string.h"
 
 1758404805 c:\users\botta\documents\github\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -1947,7 +1948,7 @@
 1758498145 source:c:\users\kevin\downloads\prueba-main\prueba-main\menu.c
 	"menu.h"
 
-1758842438 source:c:\users\botta\documents\github\prueba\dibujo.c
+1759534337 source:c:\users\botta\documents\github\prueba\dibujo.c
 	<time.h>
 	<stdlib.h>
 	<stdio.h>
@@ -1962,7 +1963,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758935269 c:\users\botta\documents\github\prueba\simon.h
+1759534337 c:\users\botta\documents\github\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>
@@ -1975,20 +1976,20 @@
 	"Vector.h"
 	"Funciones.h"
 
-1758906921 c:\users\botta\documents\github\prueba\sonido.h
+1759534338 c:\users\botta\documents\github\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1758935059 c:\users\botta\documents\github\prueba\menu.h
+1759534337 c:\users\botta\documents\github\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 	<stdbool.h>
 	<stdio.h>
 
-1758935142 source:c:\users\botta\documents\github\prueba\menu.c
+1759534337 source:c:\users\botta\documents\github\prueba\menu.c
 	"menu.h"
 
-1758935269 source:c:\users\botta\documents\github\prueba\simon.c
+1759534337 source:c:\users\botta\documents\github\prueba\simon.c
 	"Simon.h"
 
 1758509761 c:\users\botta\documents\github\prueba\vector.h
