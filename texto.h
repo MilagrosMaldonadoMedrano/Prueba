@@ -6,7 +6,6 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL_ttf.h>
 #include "Simon.h"
-
 int textIni();
 TTF_Font* cargarFnt(const char* path, int tamFnt);
 void mostrarTexto(SDL_Renderer* renderer, TTF_Font* fnt, const char* texto, int x, int y, SDL_Color color);

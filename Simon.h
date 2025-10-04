@@ -29,9 +29,12 @@ int enJuego; //flag de estado
 }Simon;
 
 typedef struct{
-char nombre[10]; //nombre del jugador
+char nombre[31]; //nombre del jugador
 int nivel; // nivel actual o maximo de rondas que supero
 int puntaje; //puntos acumulados
+int velocidad;
+int modo;
+int colores;
 }Jugador;
 
 

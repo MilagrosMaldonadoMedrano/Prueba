@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "string.h"
 #include "texto.h"
+#include "funciones.h"
 
 #define SCREEN_W 1366
 #define SCREEN_H 768
@@ -500,32 +501,33 @@ int main(int argc, char* argv[])
     SDL_Renderer *renderer = SDL_CreateRenderer(ventana, -1, SDL_RENDERER_ACCELERATED); // crea el render
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND); // establece su opacidad
 
-
-
+    Configuracion usuario;
     Boton menu_botones[4];
-    botones_menu(menu_botones, 4, SCREEN_W, SCREEN_H);//cargo los botones
+    Jugador jugador;
 
-    textIni();//inicia ttf
-    TTF_Font* fuente = cargarFnt(PATH_FNT_ARIAL, TAM_FNT_MENU);// Cargar fuente
+    //inicializa ttf
+    TTF_Init();
 
-
-
+    // Cargar fuente
+    TTF_Font* fuente = TTF_OpenFont("fnt/arial.ttf", 24);
 
     SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
 
+    Log_in(&usuario, renderer, fuente);
 
-    Jugador jugador;
-    jugador.puntaje = 0;
-    jugador.nivel = 1;
+    botones_menu(menu_botones, 4, SCREEN_W, SCREEN_H);//cargo los botones
+
+    configuracionJugador(&usuario, &jugador);
 
     int ejecutando=1;
 
     SDL_Event e;
     while (ejecutando)
     {
-
+        jugador.puntaje = 0;
+        jugador.nivel = 1;
         while (SDL_PollEvent(&e))
         {
 
@@ -539,7 +541,6 @@ int main(int argc, char* argv[])
                     SDL_Log("Boton %s presionado", menu_botones[i].texto);
                     if(i == 0)
                     {
-                        ingresarNombre(renderer, fuente, &jugador);
                         simon(renderer, simon4Colores, 4, &jugador);
                     }
                     if(i == 1)
