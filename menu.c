@@ -120,3 +120,58 @@ int boton_manejo_evento(Boton* b, SDL_Event* e)
     }
     return 0;
 }
+void botones_configuracion(Boton* botones, int cantidad, int screen_w, int screen_h)
+{
+    int start_y = screen_h / 2 - (cantidad * 50 + (cantidad - 1) * 20) / 2;
+
+    // Boton 0: JUGAR
+    boton_carga(&botones[0], screen_w/2 - 100, start_y, 200, 50,
+                "SIMON 3",
+                (SDL_Color){50,150,50,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    // Boton 1: CONFIGURAR
+    boton_carga(&botones[1], screen_w/2 - 100, start_y + 60, 200, 50,
+                "SIMON 4",
+                (SDL_Color){50,50,150,255},
+                (SDL_Color){80,80,200,255},
+                (SDL_Color){30,30,100,255});
+
+    // Boton 2: ESTADISTICAS
+    boton_carga(&botones[2], screen_w/2 - 100, start_y + 120, 200, 50,
+                "SIMON 5",
+                (SDL_Color){150,150,50,255},
+                (SDL_Color){200,200,80,255},
+                (SDL_Color){100,100,30,255});
+
+    // Boton 3: SALIR
+    boton_carga(&botones[3], screen_w/2 - 100, start_y + 180, 200, 50,
+                "SIMON 6",
+                (SDL_Color){50,150,50,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+
+    boton_carga(&botones[4], screen_w/2 - 100, start_y + 240, 200, 50,
+                "SIMON 7",
+                (SDL_Color){50,50,150,255},
+                (SDL_Color){80,80,200,255},
+                (SDL_Color){30,30,100,255});
+
+    boton_carga(&botones[5], screen_w/2 - 100, start_y + 300, 200, 50,
+                "SIMON 8",
+                (SDL_Color){150,150,50,255},
+                (SDL_Color){200,200,80,255},
+                (SDL_Color){100,100,30,255});
+    boton_carga(&botones[6], screen_w/2 - 100, start_y + 360, 200, 50,
+                "ATRAS",
+                (SDL_Color){150,50,50,255},
+                (SDL_Color){200,80,80,255},
+                (SDL_Color){100,30,30,255});
+}
+
+
+
+
+

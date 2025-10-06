@@ -22,6 +22,7 @@ void boton_carga(Boton* b, int x, int y, int w, int h, char* texto,
 void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente);
 int boton_manejo_evento(Boton* b, SDL_Event* e);
 void botones_menu(Boton* botones, int cantidad, int screen_w, int screen_h);
+void botones_configuracion(Boton* botones, int cantidad, int screen_w, int screen_h);
 
 
 #endif // MENU_H_INCLUDED

@@ -4,6 +4,7 @@
 #include "sonido.h"
 #include "menu.h"
 #include "string.h"
+#include "texto.h"
 
 #define SCREEN_W 1366
 #define SCREEN_H 768
@@ -483,7 +484,6 @@ const int fondo[21][21]=
 
 
 
-
 int main(int argc, char* argv[])
 {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO); // inicia los subsistemas de audio y video
@@ -504,6 +504,9 @@ int main(int argc, char* argv[])
     Boton menu_botones[4];
     botones_menu(menu_botones, 4, SCREEN_W, SCREEN_H);//cargo los botones
 
+    Boton conf_botones[7];
+    botones_configuracion(conf_botones,7,SCREEN_W, SCREEN_H);
+
     textIni();//inicia ttf
     TTF_Font* fuente = cargarFnt(PATH_FNT_ARIAL, TAM_FNT_MENU);// Cargar fuente
 
@@ -516,10 +519,19 @@ int main(int argc, char* argv[])
 
 
     Jugador jugador;
+
+    strcpy(jugador.nombre, "KEVIN");
+    jugador.nivel = 0;
     jugador.puntaje = 0;
-    jugador.nivel = 1;
+
 
     int ejecutando=1;
+
+    int estadoPantalla=1;   //EstadoPantalla en 0==Nombre
+                           //EstadoPantalla en 1==Menu
+                          //EstadoPantalla en 2==CONF
+
+
 
     SDL_Event e;
     while (ejecutando)
@@ -531,41 +543,100 @@ int main(int argc, char* argv[])
             if (e.type == SDL_QUIT)
                 ejecutando = 0;
 
-            for (int i = 0; i < 4; i++)//Prueba el evento en cada boton
+            if (estadoPantalla == 0) // Pedir nombre
             {
-                if (boton_manejo_evento(&menu_botones[i], &e))
-                {
-                    SDL_Log("Boton %s presionado", menu_botones[i].texto);
-                    if(i == 0)
-                    {
-                        ingresarNombre(renderer, fuente, &jugador);
-                        simon(renderer, simon4Colores, 4, &jugador);
-                    }
-                    if(i == 1)
-                    {
-                        //simon(renderer, simon3Colores, 3, &jugador);
-                        simon(renderer,simon8Colores,8,&jugador);
-                        //simon(renderer,simon5Colores,5);
-                        //simon(renderer,simon3Colores,3);
-                        //simon(renderer,simon6Colores,6);
-                        //simon1(renderer,simon7Colores,7);
-                    }
-                    if(i == 2)
-                    {
-                    }
-                    if (i == 3)
-                    {
-                        ejecutando = 0; // SALIR
-                    }
+                //if(e.type==SDL_TEXTINPUT)
+                   // strcat(Jugador->nombre, e.text.text);
+            }
 
+
+            if(estadoPantalla==1)
+            {
+                for (int i = 0; i < 4; i++)//Prueba el evento en cada boton
+                {
+                    if (boton_manejo_evento(&menu_botones[i], &e))
+                    {
+                        SDL_Log("Boton %s presionado", menu_botones[i].texto);
+                        if(i == 0)
+                        {
+                            simon(renderer, simon4Colores, 4, &jugador);
+                        }
+                        if(i == 1) //Configuracion
+                        {
+                            SDL_Log("Boton %s presionado", menu_botones[i].texto);
+                            estadoPantalla=2;
+                        }
+                        if(i == 2)
+                        {
+                            SDL_Log("Boton %s presionado", menu_botones[i].texto);
+                            estadoPantalla=2;
+                        }
+                        if (i == 3)
+                        {
+                            ejecutando = 0; // SALIR
+                        }
+
+                    }
+                }
+
+            }
+            if(estadoPantalla==2) //configuraciones
+            {
+                //campo_evento(&campo, &e);
+                for(int j=0; j<7;j++)
+                {
+                   if (boton_manejo_evento(&conf_botones[j], &e))
+                    {
+                        SDL_Log("Boton %s presionado", conf_botones[j].texto);
+
+                        if(j==0)
+                        {
+                            ingresarNombre(renderer, fuente, &jugador);
+                            simon(renderer, simon3Colores, 3, &jugador);
+                        }
+                        if(j==1)
+                            simon(renderer, simon4Colores, 4, &jugador);
+                        if(j==2)
+                            simon(renderer, simon5Colores, 5, &jugador);
+                        if(j==3)
+                            simon(renderer, simon6Colores, 6, &jugador);
+                        if(j==4)
+                            simon(renderer, simon7Colores, 7, &jugador);
+                        if(j==5)
+                            simon(renderer, simon8Colores, 8, &jugador);
+                        if(j==6)
+                            estadoPantalla=1;
+
+                    }
                 }
             }
+        }
+
+        if(estadoPantalla==3)
+        {
 
         }
 
 
-        for (int i = 0; i < 4; i++)
-            boton_render(renderer, &menu_botones[i], fuente);
+        SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+        SDL_RenderClear(renderer);
+
+
+
+        if(estadoPantalla==1)
+        {
+            for (int i = 0; i < 4; i++)
+                boton_render(renderer, &menu_botones[i], fuente);
+        }
+
+
+        if(estadoPantalla==2)
+        {
+            for (int i = 0; i < 7; i++)
+                boton_render(renderer, &conf_botones[i], fuente);
+             //if (campo.activo)
+                //campo_render(renderer, &campo);
+        }
 
         SDL_RenderPresent(renderer);
     }

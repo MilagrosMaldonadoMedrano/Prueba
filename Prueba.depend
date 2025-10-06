@@ -2564,13 +2564,14 @@
 	<stdio.h>
 	"funciones.h"
 
-1759779885 source:c:\users\milag\desktop\prueba\main.c
+1759781057 source:c:\users\milag\desktop\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
 	"sonido.h"
 	"menu.h"
 	"string.h"
+	"texto.h"
 
 1759779885 c:\users\milag\desktop\prueba\simon.h
 	<SDL2/SDL.h>
@@ -2598,7 +2599,7 @@
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1759779885 c:\users\milag\desktop\prueba\menu.h
+1759781178 c:\users\milag\desktop\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 	"texto.h"
@@ -2610,7 +2611,7 @@
 	<SDL_ttf.h>
 	"Simon.h"
 
-1759779885 source:c:\users\milag\desktop\prueba\menu.c
+1759781140 source:c:\users\milag\desktop\prueba\menu.c
 	"menu.h"
 
 1759779885 source:c:\users\milag\desktop\prueba\simon.c
