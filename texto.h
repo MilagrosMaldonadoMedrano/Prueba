@@ -13,4 +13,9 @@ void mostrarTexto(SDL_Renderer* renderer, TTF_Font* fnt, const char* texto, int 
 void mostrarEstadisticaSimon(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jugador, int nivelSimon);
 
 
+
+
+
+
+
 #endif // TEXTO_H_INCLUDED

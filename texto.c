@@ -53,3 +53,8 @@ void mostrarEstadisticaSimon(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jug
     snprintf(buffer, sizeof(buffer), "Nivel: %d", nivelSimon);
     mostrarTexto(renderer, fnt, buffer, 20, 100, blanco);
 }
+
+
+
+
+
