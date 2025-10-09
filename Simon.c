@@ -3,27 +3,22 @@
 
 
 
-
-void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador)
+void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN])
 {
     if (!sonido_ini())
         return;
 
-    /*Sonido* notas[8];
-    notas[0] = sonido_carga("snd/do.mp3");
-    notas[1] = sonido_carga("snd/re.mp3");
-    notas[2] = sonido_carga("snd/mi.mp3");
-    notas[3] = sonido_carga("snd/fa.mp3");
-    notas[4] = sonido_carga("snd/sol.mp3");
-    notas[5] = sonido_carga("snd/la.mp3");
-    notas[6] = sonido_carga("snd/sol.mp3");//acomodar estas dos ultimas notas
-    notas[7] = sonido_carga("snd/la.mp3");*/
+
 
     Sonido* notas[8];
     cargarSonidos(cantidad,notas);//Array to pointer decay
 
-
     Simon* juego = simonCrear(cantidad);
+    if(juego->cheat==true)
+    {
+        cargarSimon(simon,simonRotable);
+    }
+
 
     //Para posicionar la matriz en el centro de la ventana
     int inicioX=(SCREEN_W/2)-(ORDEN*TAM_PIXEL/2);
@@ -46,16 +41,29 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
 
     float duracion=2000;
     int tiempoDelay=300;
+    int simonAux[ORDEN][ORDEN];
 
     while(juego->enJuego)
     {
         SDL_Delay(300);
         SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255); //Color turquesa
         SDL_RenderClear(renderer);    // Limpia toda la pantalla con ese color
-        dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
-        mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
-        SDL_RenderPresent(renderer);
-        mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
+        if(juego->cheat==true)
+        {
+            dibujar(renderer,simonRotable,ORDEN,ORDEN,inicioX,inicioY);
+            mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
+            SDL_RenderPresent(renderer);
+            mostrarSecuencia(juego, renderer, simonRotable, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
+        }
+        else
+        {
+            dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
+            mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
+            SDL_RenderPresent(renderer);
+            mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
+
+
+        }
 
         juego->indiceJugador = 0;
 
@@ -64,8 +72,12 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
         {
             while(SDL_PollEvent(&evento))
             {
-                rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,cantidad,duracion);
+                if(juego->cheat==true)
+                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,cantidad,duracion);
+                else
+                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,cantidad,duracion);
             }
+
         }
 
         if(juego->enJuego)
@@ -78,6 +90,12 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
         }
         duracion=(duracion -(duracion*10)/100);
         tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
+        if(juego->cheat==true)
+        {
+            cargarSimon(simonRotable,simonAux);
+            rotarSimon(simonAux,simonRotable);
+        }
+
     }
 
     printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
@@ -92,9 +110,6 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
 
     free(juego);
 }
-
-
-
 Simon* simonCrear(int cantidad)
 {
     Simon* juego = malloc(sizeof(Simon));
@@ -103,6 +118,7 @@ Simon* simonCrear(int cantidad)
     juego->tam = 1;
     juego->indiceJugador = 0;
     juego->enJuego = 1;
+    juego->cheat=true;
 
     return juego;
 }
@@ -121,8 +137,10 @@ void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][OR
         //SDL_Delay()
         SDL_Delay(300 - (i + 1));
     }
+    //LIMPIA EL BUFFER DE EVENTOS PARA NO DETECTAR NINGUN CLIC DURANTE LA SECUENCIA
+    SDL_PumpEvents();
+    SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
 }
-
 int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion)
 {
     if(e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
@@ -154,9 +172,6 @@ int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int in
     }
     return 0;
 }
-
-
-
 void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden)
 {
     SDL_Event evento;
@@ -221,3 +236,24 @@ void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden)
 
 }
 
+void rotarSimon(int simon[][ORDEN],int simonRotable[][ORDEN])
+{
+    for(int i=0;i<ORDEN;i++)
+    {
+        for(int j=0;j<ORDEN;j++)
+        {
+            simonRotable[i][j]=simon[ORDEN-1-j][i];
+        }
+    }
+}
+
+void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN])
+{
+    for(int i=0;i<ORDEN;i++)
+    {
+        for(int j=0;j<ORDEN;j++)
+        {
+            simonRotable[i][j]=simon[i][j];
+        }
+    }
+}

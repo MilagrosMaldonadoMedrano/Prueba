@@ -26,27 +26,28 @@ Vector secuencia; //guarda la secuencia de botones
 int tam; // longitud actual de la secuencia
 int indiceJugador; //en que paso esta el jugador
 int enJuego; //flag de estado
+bool cheat;
 }Simon;
-
-typedef struct{
-char nombre[31]; //nombre del jugador
-int nivel; // nivel actual o maximo de rondas que supero
-int puntaje; //puntos acumulados
-int velocidad;
-int modo;
-int colores;
-}Jugador;
-
+typedef struct {
+    char nombre[10];
+    int nivel;
+    int puntaje;
+    int colores;
+    int modo;
+    int velocidad;
+} Jugador;
 
 //Juego basico
 void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
 void simon1(SDL_Renderer* renderer,const int simon[][ORDEN],int cantidad);
 
-
-void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador);
+void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN]);
 Simon* simonCrear(int cantidad);
 void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][ORDEN], int iniX, int iniY, Sonido** notas,float duracion,int tiempoDelay);
 int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion);
+void rotarSimon(int simon[][ORDEN],int simonAux[][ORDEN]);
+
+void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN]);
 
 
 #endif // SIMON_H

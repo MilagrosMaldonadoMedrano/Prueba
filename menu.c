@@ -132,7 +132,7 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
     Input input;
 
     boton_carga(&boton, SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
-                "Iniciar sesion",
+                "Ingresar",
                 (SDL_Color){50,150,50,255},
                 (SDL_Color){80,200,80,255},
                 (SDL_Color){30,100,30,255});
@@ -155,7 +155,7 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
         }
         SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
         SDL_RenderClear(renderer);
-        mostrarTexto(renderer, fuente, "Usuario:", 420, 300, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, "Nombre:", 420, 300, (SDL_Color){255, 255, 255, 0});
 
         boton_render(renderer, &boton, fuente);
         input_render(renderer, &input, fuente);

@@ -484,7 +484,7 @@ const int fondo[21][21]=
 };
 
 
-
+int simonRotable[ORDEN][ORDEN];
 
 int main(int argc, char* argv[])
 {
@@ -541,12 +541,13 @@ int main(int argc, char* argv[])
                     SDL_Log("Boton %s presionado", menu_botones[i].texto);
                     if(i == 0)
                     {
-                        simon(renderer, simon4Colores, 4, &jugador);
+                        simon(renderer, simon7Colores, 7, &jugador,simonRotable);
+                        //simon(renderer, simon4Colores, 4, &jugador,simonRotable);
                     }
                     if(i == 1)
                     {
                         //simon(renderer, simon3Colores, 3, &jugador);
-                        simon(renderer,simon8Colores,8,&jugador);
+                        simon(renderer,simon8Colores,8,&jugador,simonRotable);
                         //simon(renderer,simon5Colores,5);
                         //simon(renderer,simon3Colores,3);
                         //simon(renderer,simon6Colores,6);
