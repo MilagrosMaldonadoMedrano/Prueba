@@ -127,76 +127,38 @@ int input_manejo_evento(Input *i, SDL_Event *e)
 
 void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
 {
-    int band = 0;
-    SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
     SDL_StartTextInput();
-    Boton boton[2];
-    Input input[2], *campo_activo;
+    Boton boton;
+    Input input;
 
-    boton_carga(&boton[1], SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
+    boton_carga(&boton, SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
                 "Iniciar sesion",
                 (SDL_Color){50,150,50,255},
                 (SDL_Color){80,200,80,255},
                 (SDL_Color){30,100,30,255});
 
-    boton_carga(&boton[0], SCREEN_W/2 - 140, SCREEN_H/2, 280, 45,
-                "No tengo cuenta",
-                (SDL_Color){150,50,50,255},
-                (SDL_Color){200,0,80,255},
-                (SDL_Color){100,30,30,255});
-    input_carga(&input[0], SCREEN_W/2 - 150, SCREEN_H/2 - 150, 300, 50, "",(SDL_Color){255,255,255,0});
-    input_carga(&input[1], SCREEN_W/2 - 150, SCREEN_H/2 - 77, 300, 50, "",(SDL_Color){255,255,255,0});
+    input_carga(&input, SCREEN_W/2 - 150, SCREEN_H/2 - 100, 300, 50, "",(SDL_Color){255,255,255,0});
 
     SDL_Event evento;
 
-    while(boton[0].presionado == 0 && boton[1].presionado == 0)
+    while(boton.presionado == 0)
     {
-        campo_activo = NULL;
-        if (input[0].activo)
-        {
-            campo_activo = &input[0];
-        }
-        else if (input[1].activo) campo_activo = &input[1];
-
         while(SDL_PollEvent(&evento))
         {
-            for(int i = 0; i < 2; i++)
+            if(boton_manejo_evento(&boton, &evento))
             {
-                if(boton_manejo_evento(&boton[i], &evento))
-                {
-                    if(i == 1)
-                    {//Presionó inicio de sesion
-                        if(!CorroborarUsuario(input[0].texto, input[1].texto, usuario))
-                        {
-                            band = 1;
-                            boton[1].presionado = 0;
-                        }
-                    }
-                    else
-                    {//Presionó que no tiene cuenta
-                        CrearCuenta(usuario, renderer, fuente);
-                    }
-                }
-                input_manejo_evento(&input[i], &evento);
+                if(!CorroborarUsuario(input.texto, usuario))
+                    printf("Problemas al abrir el archivo.\n");
             }
-            EscribirPalabra(&evento, campo_activo);
-
+            input_manejo_evento(&input, &evento);
+            EscribirPalabra(&evento, &input);
         }
         SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
         SDL_RenderClear(renderer);
-        mostrarTexto(renderer, fuente, input[0].texto, 550, 245, (SDL_Color){0, 0, 0, 255});
-        mostrarTexto(renderer, fuente, input[1].texto, 550, 315, (SDL_Color){0, 0, 0, 255});
-        mostrarTexto(renderer, fuente, "Usuario:", 420, 245, (SDL_Color){255, 255, 255, 0});
-        mostrarTexto(renderer, fuente, "Clave:", 395, 315, (SDL_Color){255, 255, 255, 0});
-        if(band)
-            mostrarTexto(renderer, fuente, "Cuenta no valida", 600, 200, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, "Usuario:", 420, 300, (SDL_Color){255, 255, 255, 0});
 
-        boton_render(renderer, &boton[0], fuente);
-        boton_render(renderer, &boton[1], fuente);
-        input_render(renderer, &input[0], fuente);
-        input_render(renderer, &input[1], fuente);
+        boton_render(renderer, &boton, fuente);
+        input_render(renderer, &input, fuente);
         SDL_RenderPresent(renderer);
     }
 
@@ -204,113 +166,8 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
     SDL_RenderClear(renderer);
 }
 
-void CrearCuenta(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
-{
-    int band = 0;
-    SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
-    SDL_RenderClear(renderer);
-    SDL_RenderPresent(renderer);
-    Boton boton[2];
-    Input input[2], *campo_activo;
 
-    boton_carga(&boton[1], SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
-                "Crear Cuenta", (SDL_Color){50,150,50,255}, (SDL_Color){80,200,80,255}, (SDL_Color){30,100,30,255});
-
-    boton_carga(&boton[0], SCREEN_W/2 - 140, SCREEN_H/2, 280, 45,
-                "Ya tengo cuenta", (SDL_Color){150,50,50,255}, (SDL_Color){200,0,80,255}, (SDL_Color){100,30,30,255});
-    input_carga(&input[0], SCREEN_W/2 - 150, SCREEN_H/2 - 150, 300, 50, "",(SDL_Color){255,255,255,0});
-    input_carga(&input[1], SCREEN_W/2 - 150, SCREEN_H/2 - 77, 300, 50, "",(SDL_Color){255,255,255,0});
-
-    SDL_Event evento;
-
-    while(boton[0].presionado == 0 && boton[1].presionado == 0)
-    {
-        campo_activo = NULL;
-        if (input[0].activo)
-        {
-            campo_activo = &input[0];
-        }
-        else if (input[1].activo) campo_activo = &input[1];
-
-        while(SDL_PollEvent(&evento))
-        {
-            for(int i = 0; i < 2; i++)
-            {
-                if(boton_manejo_evento(&boton[i], &evento))
-                {
-                    if(i == 1)
-                    {//Presionó Crear Cuenta
-                        if(strlen(input[0].texto) > 0 && strlen(input[1].texto) > 0)
-                        {
-                            if(!CorroborarNuevoUsuario(input[0].texto, input[1].texto, usuario))
-                            {
-                                band = 1;
-                                boton[1].presionado = 0;
-                            }
-                        }
-                        else
-                        {
-                            band = 2;
-                            boton[1].presionado = 0;
-                        }
-                    }
-                    else
-                    {//Presionó que ya tiene cuenta
-                        Log_in(usuario, renderer, fuente);
-                    }
-                }
-                input_manejo_evento(&input[i], &evento);
-            }
-            EscribirPalabra(&evento, campo_activo);
-        }
-
-        SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
-        SDL_RenderClear(renderer);
-        mostrarTexto(renderer, fuente, input[0].texto, 550, 245, (SDL_Color){0, 0, 0, 255});
-        mostrarTexto(renderer, fuente, input[1].texto, 550, 315, (SDL_Color){0, 0, 0, 255});
-        mostrarTexto(renderer, fuente, "Usuario:", 420, 245, (SDL_Color){255, 255, 255, 0});
-        mostrarTexto(renderer, fuente, "Clave:", 395, 315, (SDL_Color){255, 255, 255, 0});
-        if(band == 1)
-            mostrarTexto(renderer, fuente, "Usuario ya existente", 580, 200, (SDL_Color){255, 255, 255, 0});
-        else if(band == 2)
-            mostrarTexto(renderer, fuente, "Completar ambos casilleros", 550, 200, (SDL_Color){255, 255, 255, 0});
-
-        boton_render(renderer, &boton[0], fuente);
-        boton_render(renderer, &boton[1], fuente);
-        input_render(renderer, &input[0], fuente);
-        input_render(renderer, &input[1], fuente);
-        SDL_RenderPresent(renderer);
-    }
-}
-
-bool CorroborarUsuario(char* usu,char* cont,Configuracion *usuario)
-{
-    FILE *pf = fopen("Usuarios.bin", "r+b");
-    Configuracion lect;
-    if(!pf)
-    {
-        printf("Error al abrir el archivo.\n");
-        return false;
-    }
-    fread(&lect, sizeof(Configuracion), 1, pf);
-    while(!feof(pf))
-    {
-        if(!strcmp(lect.usuario, usu) && !strcmp(lect.contra, cont))
-        {
-            usuario->colores = lect.colores;
-            usuario->modo = lect.modo;
-            usuario->velocidad = lect.velocidad;
-            strcpy(usuario->contra, cont);
-            strcpy(usuario->usuario, usu);
-            return true;
-        }
-        fread(&lect, sizeof(Configuracion), 1, pf);
-    }
-    fclose(pf);
-    return false;
-}
-
-bool CorroborarNuevoUsuario(char* usu,char* cont,Configuracion *usuario)
+bool CorroborarUsuario(char* usu, Configuracion *usuario)
 {
     FILE *pf = fopen("Usuarios.bin", "r+b");
     Configuracion lect;
@@ -324,16 +181,19 @@ bool CorroborarNuevoUsuario(char* usu,char* cont,Configuracion *usuario)
     {
         if(!strcmp(lect.usuario, usu))
         {
-            return false;
+            usuario->colores = lect.colores;
+            usuario->modo = lect.modo;
+            usuario->velocidad = lect.velocidad;
+            strcpy(usuario->usuario, usu);
+            return true;
         }
         fread(&lect, sizeof(Configuracion), 1, pf);
     }
+    fseek(pf, 0, 2);
     usuario->colores = 4;
     usuario->modo = 0;
     usuario->velocidad = 2000;
-    strcpy(usuario->contra, cont);
     strcpy(usuario->usuario, usu);
-    fseek(pf,0,2);
     fwrite(usuario, sizeof(Configuracion), 1, pf);
     fclose(pf);
     return true;
@@ -416,3 +276,29 @@ void configuracionJugador(Configuracion *usu, Jugador* jug)
     jug->velocidad = usu->velocidad;
 }
 
+void GuardarModo(Jugador * jugador)
+{
+    Configuracion usuario;
+    FILE *pf = fopen("Usuarios.bin", "r+b");
+    if(!pf)
+    {
+        printf("Error al abrir el archivo.\n");
+    }
+    fread(&usuario, sizeof(Configuracion), 1, pf);
+    while(!feof(pf))
+    {
+        if(!strcmp(usuario.usuario, jugador->nombre))
+        {
+            printf("Lo hizo");
+            usuario.colores = jugador->colores;
+            usuario.modo = jugador->modo;
+            usuario.velocidad = jugador->velocidad;
+            fseek(pf, -(int)(sizeof(Configuracion)), 1);
+            fwrite(&usuario, sizeof(Configuracion), 1, pf);
+            fclose(pf);
+            return;
+        }
+        fread(&usuario, sizeof(Configuracion), 1, pf);
+    }
+
+}

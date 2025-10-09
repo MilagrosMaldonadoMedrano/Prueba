@@ -557,6 +557,7 @@ int main(int argc, char* argv[])
                     }
                     if (i == 3)
                     {
+                        GuardarModo(&jugador);
                         ejecutando = 0; // SALIR
                     }
 

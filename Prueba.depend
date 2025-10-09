@@ -448,7 +448,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1759552315 source:c:\users\botta\documents\github\prueba\main.c
+1759970483 source:c:\users\botta\documents\github\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
@@ -900,7 +900,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1759552437 source:c:\users\botta\documents\github\prueba\funciones.c
+1759552746 source:c:\users\botta\documents\github\prueba\funciones.c
 	<stdio.h>
 	"funciones.h"
 	<string.h>
@@ -1984,14 +1984,14 @@
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1759552746 c:\users\botta\documents\github\prueba\menu.h
+1759970483 c:\users\botta\documents\github\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 	<stdbool.h>
 	<stdio.h>
 	"Simon.h"
 
-1759552156 source:c:\users\botta\documents\github\prueba\menu.c
+1759969396 source:c:\users\botta\documents\github\prueba\menu.c
 	"menu.h"
 	"texto.h"
 

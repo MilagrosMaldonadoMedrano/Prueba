@@ -32,7 +32,6 @@ typedef struct
 typedef struct
 {
     char usuario[31];
-    char contra[31];
     int velocidad;
     int modo;
     int colores;
@@ -48,10 +47,9 @@ void input_carga(Input*, int x, int y, int w, int h, char* texto, SDL_Color norm
 void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente);
 int input_manejo_evento(Input *i, SDL_Event *e);
 void EscribirPalabra(SDL_Event *evento, Input * campo);
-bool CorroborarUsuario(char* usu,char* cont,Configuracion *usuario);
-void CrearCuenta(Configuracion *usuario , SDL_Renderer *renderer, TTF_Font* fuente);
-bool CorroborarNuevoUsuario(char* usu,char* cont,Configuracion *usuario);
+bool CorroborarUsuario(char* usu, Configuracion *usuario);
 void configuracionJugador(Configuracion *usu, Jugador *jug);
+void GuardarModo(Jugador * jugador);
 
 
 #endif // MENU_H_INCLUDED
