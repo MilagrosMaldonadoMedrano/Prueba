@@ -35,19 +35,21 @@ typedef struct {
     int colores;
     int modo;
     int velocidad;
+    bool cheat;
 } Jugador;
 
 //Juego basico
 void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
 void simon1(SDL_Renderer* renderer,const int simon[][ORDEN],int cantidad);
 
-void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN]);
+void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador);
 Simon* simonCrear(int cantidad);
 void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][ORDEN], int iniX, int iniY, Sonido** notas,float duracion,int tiempoDelay);
 int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion);
 void rotarSimon(int simon[][ORDEN],int simonAux[][ORDEN]);
-
+void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer);
 void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN]);
+void CopiarSimon(int origen[][ORDEN], int destino[][ORDEN]);
 
 
 #endif // SIMON_H

@@ -1,20 +1,493 @@
 #include "Simon.h"
 #include "texto.h"
 
+int simon3Colores[ORDEN][ORDEN]=
+{
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,R,R,R,R,N,A,A,A,A,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+
+};
+
+int simon4Colores[ORDEN][ORDEN]={
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T},
+    {T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T},
+    {T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T},
+    {T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T},
+    {T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N},
+    {N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T},
+    {T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T},
+    {T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T},
+    {T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T},
+    {T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T}
+};
+
+int simon5Colores[ORDEN][ORDEN]=
+{
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,V,V,V,V,N,O,O,O,O,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,R,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,R,R,R,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,R,R,R,R,R,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,V,V,N,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,V,N,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,V,N,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,V,N,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,V,V,V,N,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+};
+
+int simon6Colores[ORDEN][ORDEN]={
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,N,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,N,N,W,W,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T,T},
+    {T,T,T,T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T,T},
+    {T,T,T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T,T},
+    {T,T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T,T},
+    {T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,T},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,V,V,V,V,V,V,V,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N},
+    {N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N},
+    {N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N},
+    {T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T},
+    {T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T},
+    {T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T},
+    {T,T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T},
+    {T,T,T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,O,O,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,N,O,O,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,O,O,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,O,O,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T}
+};
+
+int simon7Colores[ORDEN][ORDEN]=
+{
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,O,O,O,O,O,O,O,O,O,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T,T},
+    {T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T},
+    {T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T},
+    {T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,O,O,O,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T},
+    {T,T,T,T,T,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,T,T,T,T},
+    {T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T},
+    {T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,N,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,N,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,N,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,R,N,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T},
+    {T,T,T,T,T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,R,R,N,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T},
+    {T,T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,W,W,W,W,W,W,W,W,W,W,W,N,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,W,W,W,W,W,W,W,W,W,N,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,A,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,W,W,W,W,W,W,W,W,N,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,A,A,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,W,W,W,W,W,W,N,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,W,W,W,W,W,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,A,A,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,W,W,W,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,A,A,A,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,R,R,R,R,R,R,R,R,N,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,R,R,R,R,N,Z,Z,Z,Z,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T}
+
+};
+
+int simon8Colores[ORDEN][ORDEN]={
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,N,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,N,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,W,W,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,N,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,N,N,W,W,W,W,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,N,N,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,N,N,T,T,T,T,T},
+    {T,T,T,T,N,N,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,N,N,T,T,T,T},
+    {T,T,T,N,N,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,N,N,T,T,T},
+    {T,T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T,T},
+    {T,N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,T},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,R,N,N,Z,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,R,N,N,Z,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,R,R,R,N,N,Z,Z,Z,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,W,N,N,N,N,N,N,N,N,N,N,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,A,N,N},
+    {N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N},
+    {N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,N,N,N,N,N,N,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,N,N,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,N,N,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,N,N,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,N,N,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N},
+    {T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T},
+    {T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T},
+    {T,T,T,N,N,O,O,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,V,V,N,N,T,T,T},
+    {T,T,T,T,N,N,O,O,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,V,V,N,N,T,T,T,T},
+    {T,T,T,T,T,N,N,O,O,O,O,O,O,O,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,V,V,V,V,V,V,V,N,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,N,O,O,O,O,O,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,V,V,V,V,V,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,O,O,O,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,V,V,V,N,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,N,O,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,V,N,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,C,C,C,C,C,C,C,C,C,C,N,N,P,P,P,P,P,P,P,P,P,P,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T}
+};
+
+const int circulo[ORDEN][ORDEN]=
+{
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,T,T,T,T,T,T,T,T,T,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T},
+    {T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T},
+    {T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T},
+    {T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T},
+    {T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,T,T,T,T,T,T,T,T,T,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T},
+    {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T}
+
+};
+const int fondo[21][21]=
+{
+    {V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0},
+    {V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0},
+    {V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0},
+    {V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0},
+    {V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0},
+    {V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0,V0},
+    {V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1},
+    {V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1},
+    {V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1},
+    {V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1},
+    {V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1,V1},
+    {V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2},
+    {V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2},
+    {V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2},
+    {V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2},
+    {V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2,V2},
+    {V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3},
+    {V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3},
+    {V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3},
+    {V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3},
+    {V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3,V3}
+};
 
 
-void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN])
+
+
+void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
 {
     if (!sonido_ini())
         return;
 
 
-
+    int simonRotable[ORDEN][ORDEN];
     Sonido* notas[8];
-    cargarSonidos(cantidad,notas);//Array to pointer decay
+    cargarSonidos(jugador->colores,notas);//Array to pointer decay
 
-    Simon* juego = simonCrear(cantidad);
-    if(juego->cheat==true)
+    Simon* juego = simonCrear(jugador->colores);
+    if(jugador->cheat==true)
     {
         cargarSimon(simon,simonRotable);
     }
@@ -39,7 +512,6 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
 
     SDL_Event evento;
 
-    float duracion=2000;
     int tiempoDelay=300;
     int simonAux[ORDEN][ORDEN];
 
@@ -48,21 +520,19 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
         SDL_Delay(300);
         SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255); //Color turquesa
         SDL_RenderClear(renderer);    // Limpia toda la pantalla con ese color
-        if(juego->cheat==true)
+        if(jugador->cheat==true)
         {
             dibujar(renderer,simonRotable,ORDEN,ORDEN,inicioX,inicioY);
             mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
             SDL_RenderPresent(renderer);
-            mostrarSecuencia(juego, renderer, simonRotable, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
+            mostrarSecuencia(juego, renderer, simonRotable, inicioX, inicioY, notas,jugador->velocidad,tiempoDelay); //agregar la frecuencia
         }
         else
         {
             dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
             mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
             SDL_RenderPresent(renderer);
-            mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
-
-
+            mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,jugador->velocidad,tiempoDelay); //agregar la frecuencia
         }
 
         juego->indiceJugador = 0;
@@ -72,10 +542,10 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
         {
             while(SDL_PollEvent(&evento))
             {
-                if(juego->cheat==true)
-                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,cantidad,duracion);
+                if(jugador->cheat==true)
+                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,jugador->colores,jugador->velocidad);
                 else
-                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,cantidad,duracion);
+                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,jugador->colores,jugador->velocidad);
             }
 
         }
@@ -85,10 +555,10 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
             jugador->nivel++;
             jugador->puntaje += 10 * jugador->nivel; // sistema de puntuacion
 
-            vectorInsertarAlFinal(&juego->secuencia, rand () % cantidad);
+            vectorInsertarAlFinal(&juego->secuencia, rand () % jugador->colores);
             juego->tam++;
         }
-        duracion=(duracion -(duracion*10)/100);
+        jugador->velocidad=(jugador->velocidad -(jugador->velocidad*10)/100);
         tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
         if(juego->cheat==true)
         {
@@ -102,7 +572,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
 
     vectorDestruir(&juego->secuencia);
 
-    for (int i = 0; i < cantidad; i++)
+    for (int i = 0; i < jugador->colores; i++)
     {
         sound_free(&notas[i]); //como espera un puntero doble de la estructura Sonido le paso &notas[i]
     }
@@ -255,5 +725,72 @@ void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN])
         {
             simonRotable[i][j]=simon[i][j];
         }
+    }
+}
+void CopiarSimon(int origen[][ORDEN], int destino[][ORDEN])
+{
+    int i, j;
+
+    for(i = 0; i < ORDEN; i++)
+    {
+        for(j = 0; j < ORDEN; j++)
+            destino[i][j] = origen[i][j];
+    }
+}
+void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer)
+{
+    int sim[ORDEN][ORDEN];
+
+    switch(jug->colores)
+    {
+        case 3:
+            {
+                CopiarSimon(simon3Colores, sim);
+                break;
+            }
+        case 4:
+            {
+                CopiarSimon(simon4Colores, sim);
+                break;
+            }
+        case 5:
+            {
+                CopiarSimon(simon5Colores, sim);
+                break;
+            }
+        case 6:
+            {
+                CopiarSimon(simon6Colores, sim);
+                break;
+            }
+        case 7:
+            {
+                CopiarSimon(simon7Colores, sim);
+                break;
+            }
+        case 8:
+            {
+                CopiarSimon(simon8Colores, sim);
+                break;
+            }
+    }
+    switch(jug->modo)
+    {
+        case 0:
+            {
+                simon(renderer, sim, jug);
+                break;
+            }
+        case 1:
+            {
+                //mozart(renderer, simon, jug, cheat[ORDEN][ORDEN]);
+                break;
+            }
+        case 2:
+            {
+                //desafio(renderer, simon, jug, cheat[ORDEN][ORDEN]);
+                break;
+            }
+
     }
 }

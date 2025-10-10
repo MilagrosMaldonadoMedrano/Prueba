@@ -32,9 +32,10 @@ typedef struct
 typedef struct
 {
     char usuario[31];
-    int velocidad;
+    float velocidad;
     int modo;
     int colores;
+    bool cheat;
 } Configuracion;
 
 void boton_carga(Boton* b, int x, int y, int w, int h, char* texto,

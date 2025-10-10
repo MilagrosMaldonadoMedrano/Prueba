@@ -451,7 +451,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1759970483 source:c:\users\botta\documents\github\prueba\main.c
+1760121017 source:c:\users\botta\documents\github\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
@@ -1970,7 +1970,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1759551607 c:\users\botta\documents\github\prueba\simon.h
+1760124424 c:\users\botta\documents\github\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>
@@ -1987,18 +1987,18 @@
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1759970483 c:\users\botta\documents\github\prueba\menu.h
+1760124424 c:\users\botta\documents\github\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 	<stdbool.h>
 	<stdio.h>
 	"Simon.h"
 
-1759969396 source:c:\users\botta\documents\github\prueba\menu.c
+1760120878 source:c:\users\botta\documents\github\prueba\menu.c
 	"menu.h"
 	"texto.h"
 
-1759538235 source:c:\users\botta\documents\github\prueba\simon.c
+1760054920 source:c:\users\botta\documents\github\prueba\simon.c
 	"Simon.h"
 	"texto.h"
 
@@ -2010,7 +2010,7 @@
 	"sonido.h"
 	"math.h"
 
-1758509761 source:c:\users\botta\documents\github\prueba\vector.c
+1760120878 source:c:\users\botta\documents\github\prueba\vector.c
 	"Vector.h"
 	<stdio.h>
 	<stdlib.h>

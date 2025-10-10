@@ -184,6 +184,7 @@ bool CorroborarUsuario(char* usu, Configuracion *usuario)
             usuario->colores = lect.colores;
             usuario->modo = lect.modo;
             usuario->velocidad = lect.velocidad;
+            usuario->cheat = lect.cheat;
             strcpy(usuario->usuario, usu);
             return true;
         }
@@ -193,6 +194,7 @@ bool CorroborarUsuario(char* usu, Configuracion *usuario)
     usuario->colores = 4;
     usuario->modo = 0;
     usuario->velocidad = 2000;
+    usuario->cheat = false;
     strcpy(usuario->usuario, usu);
     fwrite(usuario, sizeof(Configuracion), 1, pf);
     fclose(pf);
@@ -274,6 +276,7 @@ void configuracionJugador(Configuracion *usu, Jugador* jug)
     jug->colores = usu->colores;
     jug->modo = usu->modo;
     jug->velocidad = usu->velocidad;
+    jug->cheat = usu->cheat;
 }
 
 void GuardarModo(Jugador * jugador)
@@ -289,10 +292,10 @@ void GuardarModo(Jugador * jugador)
     {
         if(!strcmp(usuario.usuario, jugador->nombre))
         {
-            printf("Lo hizo");
             usuario.colores = jugador->colores;
             usuario.modo = jugador->modo;
             usuario.velocidad = jugador->velocidad;
+            usuario.cheat = jugador->cheat;
             fseek(pf, -(int)(sizeof(Configuracion)), 1);
             fwrite(&usuario, sizeof(Configuracion), 1, pf);
             fclose(pf);
