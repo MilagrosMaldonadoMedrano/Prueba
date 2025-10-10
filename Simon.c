@@ -1,5 +1,10 @@
 #include "Simon.h"
 #include "texto.h"
+#include "menu.h"
+//int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion,Boton b,TTF_Font* fuente);
+
+int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido** notas, int cantidad, float duracion,Boton *b,TTF_Font* fuente);
+
 
 
 
@@ -11,7 +16,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
     Sonido* notas[8];
     cargarSonidos(cantidad,notas);//Array to pointer decay
 
-    Simon* juego = simonCrear(cantidad);
+    Simon* juego = simonCrear(cantidad,"Schomberg");
     if(juego->cheat==true)
     {
         cargarSimon(simon,simonRotable);
@@ -108,11 +113,13 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugad
 
     free(juego);
 }
-Simon* simonCrear(int cantidad)
+Simon* simonCrear(int cantidad,const char* modoJuego)
 {
     Simon* juego = malloc(sizeof(Simon));
     vectorCrear(&juego->secuencia);
-    //vectorInsertarAlFinal(&juego->secuencia, rand() % cantidad);// 1er boton
+
+    if(!strcmp(modoJuego,"Schomberg"))
+        vectorInsertarAlFinal(&juego->secuencia, rand() % cantidad);// 1er boton
     juego->tam = 1;
     juego->indiceJugador = 0;
     juego->enJuego = 1;
@@ -257,20 +264,17 @@ void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN])
     }
 }
 
-void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],char* nombreArchivo)
+void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],const char* nombreArchivo)
 {
-
-    //recordar  ue en crear simon comente una linea importante para que funcione el modo mozart
-
-
-
     if (!sonido_ini())
         return;
 
     Sonido* notas[8];
-    cargarSonidos(cantidad,notas);//Array to pointer decay
+    cargarSonidos(cantidad,notas);
 
-    Simon* juego = simonCrear(cantidad);
+
+
+    Simon* juego = simonCrear(cantidad,"Mozart");
     if(juego->cheat==true)
     {
         cargarSimon(simon,simonRotable);
@@ -309,13 +313,14 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
 
     int patron;
 
-    fscanf(pArch,"%d",&patron);
+    fscanf(pArch,"%d;",&patron);
+
 
     while(!feof(pArch))
     {
         printf("%d\n",patron);
         vectorInsertarAlFinal(&juego->secuencia,patron);
-        fscanf(pArch,"%d",&patron);
+        fscanf(pArch,"%d;",&patron);
 
     }
 
@@ -375,7 +380,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
         }
 
     }
-    if(juego->tam==vectorDevolverCantidad(&juego->secuencia))
+    if(juego->tam-1==vectorDevolverCantidad(&juego->secuencia))
         printf("Ha ganado! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
     else
         printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
@@ -391,7 +396,119 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
     free(juego);
 }
 
+/*
+int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion,Boton b,TTF_Font* fuente)
+{
+    if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT) {
+        int x = e->button.x, y = e->button.y;
+        int deteccion = detectarClic(x, y, simon, ORDEN, iniX, iniY);
+
+        if (deteccion >= 0 && deteccion < cantidad) {
+            iluminarZona(deteccion, simon, ORDEN, iniX, iniY, renderer, N);
+            sonido_play(notas[deteccion], duracion);
+            SDL_Delay(150);
+            dibujar(renderer, simon, ORDEN, ORDEN, iniX, iniY);
+            return deteccion;
+        }
+    }
+    return -1;
+}*/
+
+
+int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido** notas, int cantidad, float duracion,Boton *b,TTF_Font* fuente)
+{
+    if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
+    {
+        int x = e->button.x, y = e->button.y;
+        int deteccion = detectarClic(x, y, simon, ORDEN, iniX, iniY);
+
+        if (deteccion >= 0 && deteccion < cantidad)
+        {
+            printf("%d", deteccion);
+            iluminarZona(deteccion, simon, ORDEN, iniX, iniY, renderer, N);
+            //boton_render(renderer, b, fuente);
+            sonido_play(notas[deteccion], duracion);
+            SDL_Delay(150);
+
+            //dibujar(renderer, simon, ORDEN, ORDEN, iniX, iniY);
+
+            return deteccion;
+        }
+    }
+    return -1;
+}
+
+
+void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador, const char* nombreArch)
+{
+    FILE* pArch = fopen(nombreArch, "wt");
+    if (!pArch)
+    {
+        printf("Error en la apertura del archivo %s.\n", nombreArch);
+        exit(1);
+    }
+
+    textIni();
+    TTF_Font* fuente = cargarFnt(PATH_FNT_ARIAL, TAM_FNT_MENU);
+
+    if (!sonido_ini())
+        return;
+
+    Sonido* notas[8];
+    cargarSonidos(cantidad, notas);
+
+    Simon* juego = simonCrear(cantidad, "modoDesafio");
+
+    int inicioX = (SCREEN_W / 2) - (ORDEN * TAM_PIXEL / 2);
+    int inicioY = (SCREEN_H / 2) - (ORDEN * TAM_PIXEL / 2);
+
+    Boton b;
+    boton_carga(&b, 1156, 10, 200, 50,"Finalizar",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+
+    SDL_Event evento;
+    int deteccion;
 
 
 
+
+
+    while (juego->enJuego)
+    {
+
+
+        while (SDL_PollEvent(&evento))
+        {
+            deteccion = validarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas, cantidad, 2000.0,&b,fuente);
+            if (deteccion >= 0 && deteccion < cantidad)
+            {
+                fprintf(pArch, "%d;", deteccion);
+            }
+            if (boton_manejo_evento(&b, &evento))
+            {
+                juego->enJuego = 0;
+            }
+
+        }
+
+
+        SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255);
+        SDL_RenderClear(renderer);
+        boton_render(renderer, &b, fuente);
+        dibujar(renderer, simon, ORDEN, ORDEN, inicioX, inicioY);
+        SDL_RenderPresent(renderer);
+    }
+
+    printf("Ha terminado!\n");
+
+    fclose(pArch);
+    vectorDestruir(&juego->secuencia);
+
+    for (int i = 0; i < cantidad; i++)
+    {
+        sound_free(&notas[i]);
+    }
+
+    sound_quit();
+    free(juego);
+}
 

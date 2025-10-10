@@ -11,12 +11,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include<time.h>
+#include<string.h>
+
 
 #include "Vector.h"
 #include "sonido.h"
 #include "Dibujo.h"
 #include "Vector.h"
 #include "Funciones.h"
+
 
 #define PATH_FNT_ARIAL "fnt/arial.ttf"
 #define TAM_FNT_MENU 22
@@ -42,12 +45,13 @@ void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
 void simon1(SDL_Renderer* renderer,const int simon[][ORDEN],int cantidad);
 
 void simon(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN]);
-Simon* simonCrear(int cantidad);
+Simon* simonCrear(int cantidad,const char* modoJuego);
 void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][ORDEN], int iniX, int iniY, Sonido** notas,float duracion,int tiempoDelay);
 int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion);
 void rotarSimon(int simon[][ORDEN],int simonAux[][ORDEN]);
 
 void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN]);
-void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],char* nombreArchivo);
+void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],const char* nombreArchivo);
+void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,const char* nombreArch);
 
 #endif // SIMON_H

@@ -64,8 +64,6 @@ Sonido* crearTono(float frecuencia, float duracionSegundos)
     return tono;
 }
 
-
-
 Sonido* crearTonoAleatorio()
 {
     float freq;

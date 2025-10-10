@@ -49,7 +49,7 @@ int input_manejo_evento(Input *i, SDL_Event *e);
 void EscribirPalabra(SDL_Event *evento, Input * campo);
 bool CorroborarUsuario(char* usu, Configuracion *usuario);
 void configuracionJugador(Configuracion *usu, Jugador *jug);
-void GuardarModo(Jugador * jugador);
+void GuardarModo(Jugador* jugador);
 
 
 #endif // MENU_H_INCLUDED

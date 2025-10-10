@@ -541,7 +541,10 @@ int main(int argc, char* argv[])
                     SDL_Log("Boton %s presionado", menu_botones[i].texto);
                     if(i == 0)
                     {
-                        mozart(renderer,simon4Colores,4,&jugador,simonRotable,"Secuencias/Secuencia4Notas.txt");
+                        mozart(renderer,simon6Colores,6,&jugador,simonRotable,"Secuencias/ModoDesafio6.txt");
+                        //mozart(renderer,simon4Colores,4,&jugador,simonRotable,"Secuencias/Secuencia4Notas.txt");
+                        //desafio(renderer,simon4Colores,4,&jugador,"Secuencias/ModoDesafio4.txt");
+                        //desafio(renderer,simon6Colores,6,&jugador,"Secuencias/ModoDesafio6.txt");
                         //simon(renderer, simon7Colores, 7, &jugador,simonRotable);
                         //simon(renderer, simon4Colores, 4, &jugador,simonRotable);
                     }
