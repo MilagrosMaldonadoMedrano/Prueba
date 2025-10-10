@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1760037044 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
+1760060321 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
@@ -2080,11 +2080,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1760040194 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
+1760064772 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
 	"Simon.h"
 	"texto.h"
 
-1758828781 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.h
+1760058761 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.h
 	<stdbool.h>
 	<stddef.h>
 
@@ -2096,12 +2096,12 @@
 	"sonido.h"
 	"math.h"
 
-1758828781 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.c
+1760059760 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.c
 	"Vector.h"
 	<stdio.h>
 	<stdlib.h>
 
-1760036601 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.h
+1760050397 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>

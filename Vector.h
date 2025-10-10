@@ -28,6 +28,7 @@ bool validarPos(int* pos,int ce);
 void vectorDestruir(Vector* vec);
 int vectorDevolverValor(Vector* vec,int posicion);
 int vectorInsertarAlFinal(Vector* vec,int elem);
+int vectorDevolverCantidad(Vector* vec);
 
 
 #endif // VECTOR_H

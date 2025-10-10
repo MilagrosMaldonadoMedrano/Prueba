@@ -48,6 +48,6 @@ int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int in
 void rotarSimon(int simon[][ORDEN],int simonAux[][ORDEN]);
 
 void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN]);
-
+void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],char* nombreArchivo);
 
 #endif // SIMON_H
