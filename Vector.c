@@ -29,8 +29,6 @@ bool redimensionarVector(Vector* vector, float factor)
     return true;
 }
 
-
-
 bool vectorCrear(Vector* vector)
 {
     vector->ce=0;
@@ -80,7 +78,10 @@ void vectorDestruir(Vector* vec)
     free(vec->vec);
     vec->vec=NULL;
 }
-
+int vectorDevolverCantidad(Vector* vec)
+{
+    return vec->ce;
+}
 
 
 

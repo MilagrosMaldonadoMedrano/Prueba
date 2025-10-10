@@ -51,5 +51,7 @@ void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer);
 void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN]);
 void CopiarSimon(int origen[][ORDEN], int destino[][ORDEN]);
 
+void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],char* nombreArchivo);
+void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,const char* nombreArch);
 
 #endif // SIMON_H
