@@ -563,7 +563,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
         }
         jugador->velocidad=(jugador->velocidad -(jugador->velocidad*10)/100);
         tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
-        if(juego->cheat==true)
+        if(jugador->cheat==true)
         {
             cargarSimon(simonRotable,simonAux);
             rotarSimon(simonAux,simonRotable);
@@ -997,11 +997,6 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
 
     SDL_Event evento;
     int deteccion;
-
-
-
-
-
     while (juego->enJuego)
     {
 

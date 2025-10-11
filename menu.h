@@ -55,7 +55,7 @@ void GuardarModo(Jugador * jugador);
 void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente);
 int cargarEstadisticas(Jugador** vec);
 void guardarEstadistica(const Jugador* e);
-int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente, int limpiarFonfo);
+int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente);
 int compararPuntajes(const void* a, const void* b);
 
 #endif // MENU_H_INCLUDED

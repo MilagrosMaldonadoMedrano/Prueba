@@ -390,8 +390,12 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
 
     SDL_RenderPresent(renderer);
     // Botón Volver
-    botonVolver(renderer, fuente, 0);
+    if(botonVolver(renderer, fuente))
+    {
         free(lista);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+    }
 }
 
 
@@ -438,7 +442,7 @@ int compararPuntajes(const void* a, const void* b)
 }
 
 
-int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente, int limpiarFonfo)
+int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente)
 {
     Boton volver;
     boton_carga(&volver, 580, 650, 200, 50, "< Volver",
@@ -449,13 +453,6 @@ int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente, int limpiarFonfo)
 
     while (!salir)
         {
-        // Fondo
-        if(limpiarFonfo == 1)
-        {
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            SDL_RenderClear(renderer);
-        }
-
         // Dibujar el botón
         boton_render(renderer, &volver, fuente);
         SDL_RenderPresent(renderer);
@@ -473,4 +470,125 @@ int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente, int limpiarFonfo)
         SDL_Delay(10);
     }
     return 1;
+}
+
+void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
+{
+    SDL_StartTextInput();
+    Boton volver, guardar, mozart, desafio, schonberg, mas, menos, cheat;
+    Jugador aux;
+    aux.colores = 4;
+    char modo[10], cant[2];
+    aux.cheat = false;
+
+    boton_carga(&volver, SCREEN_W/2 - 275, SCREEN_H/2 + 200, 200, 50,
+                "Volver",
+                (SDL_Color){215,0,0,255},
+                (SDL_Color){215,0,15,200},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&guardar, SCREEN_W/2 +75, SCREEN_H/2 + 200, 200, 50,
+                "Guardar",
+                (SDL_Color){0,200,10,255},
+                (SDL_Color){80,200,80,200},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&schonberg, SCREEN_W/2 -300, SCREEN_H/2 -250, 150, 50,
+                "Schonberg",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&mozart, SCREEN_W/2 - 100, SCREEN_H/2 -250, 150, 50,
+                "Mozart",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&desafio, SCREEN_W/2 + 100, SCREEN_H/2 -250, 150, 50,
+                "Desafio",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&mas, SCREEN_W/2 + 50, SCREEN_H/2 -150, 50, 50,
+                "+",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&menos, SCREEN_W/2 - 150, SCREEN_H/2 -150, 50, 50,
+                "-",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){215,0,15,200},
+                (SDL_Color){215,0,15,150});
+
+    boton_carga(&cheat, SCREEN_W/2 - 300, SCREEN_H/2 -50, 75, 50,
+                "",
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50});
+
+
+    SDL_Event evento;
+
+    while(volver.presionado == 0 && guardar.presionado == 0)
+    {
+        while(SDL_PollEvent(&evento))
+        {
+            boton_manejo_evento(&volver, &evento);
+            if(boton_manejo_evento(&schonberg, &evento))
+            {
+                aux.modo = 0;
+                strcpy(modo, "Schonberg");
+            }
+            if(boton_manejo_evento(&mozart, &evento))
+            {
+                aux.modo = 1;
+                strcpy(modo, "Mozart");
+            }
+            if(boton_manejo_evento(&desafio, &evento))
+            {
+                aux.modo = 2;
+                strcpy(modo, "Desafio");
+            }
+            if(boton_manejo_evento(&mas, &evento) && aux.colores < 8)
+            {
+                aux.colores++;
+            }
+            if(boton_manejo_evento(&menos, &evento) && aux.colores > 3)
+            {
+                aux.colores--;
+            }
+            if(boton_manejo_evento(&cheat, &evento))
+            {
+                aux.cheat = !aux.cheat;
+            }
+
+        }
+        SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+        SDL_RenderClear(renderer);
+        mostrarTexto(renderer, fuente, "Modo de juego:", 200, 145, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, "Cantidad de colores:", 200, 245, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, "Cheat Mode:", 200, 345, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, modo, 1000, 200, (SDL_Color){255, 255, 0, 0});
+        mostrarTexto(renderer, fuente, itoa(aux.colores, cant, 10), 650, 245, (SDL_Color){255, 255, 0, 0});
+        if(aux.cheat)
+            mostrarTexto(renderer, fuente, "ON", 400, 345, (SDL_Color){0, 255, 0, 0});
+        else
+            mostrarTexto(renderer, fuente, "OFF", 400, 345, (SDL_Color){255, 0, 0, 0});
+
+        boton_render(renderer, &volver, fuente);
+        boton_render(renderer, &guardar, fuente);
+        boton_render(renderer, &schonberg, fuente);
+        boton_render(renderer, &mozart, fuente);
+        boton_render(renderer, &desafio, fuente);
+        boton_render(renderer, &mas, fuente);
+        boton_render(renderer, &menos, fuente);
+        boton_render(renderer, &cheat, fuente);
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_StopTextInput();
+    SDL_RenderClear(renderer);
 }

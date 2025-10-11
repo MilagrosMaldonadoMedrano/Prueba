@@ -63,22 +63,15 @@ int main(int argc, char* argv[])
                 if (boton_manejo_evento(&menu_botones[i], &e))
                 {
                     SDL_Log("Boton %s presionado", menu_botones[i].texto);
-                    if(i == 0)
+                    if(i == 0) // Jugar
                     {
                         DeterminarJuego(&jugador, renderer);
-
-
                     }
-                    if(i == 1)
+                    if(i == 1) // Configuracion
                     {
-                        //simon(renderer, simon3Colores, 3, &jugador);
-                        //simon(renderer,simon8Colores,8,&jugador,simonRotable);
-                        //simon(renderer,simon5Colores,5);
-                        //simon(renderer,simon3Colores,3);
-                        //simon(renderer,simon6Colores,6);
-                        //simon1(renderer,simon7Colores,7);
+                        MenuConfiguracion(&jugador, renderer, fuente);
                     }
-                    if(i == 2)
+                    if(i == 2) // Estadisiticas
                     {
                         pantallaEstadisticas(renderer, fuente);
                     }
