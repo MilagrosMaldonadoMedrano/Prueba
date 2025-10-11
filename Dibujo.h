@@ -29,6 +29,9 @@
 #define V3 15
 
 
+//extern es para poder acceder a esta variable desde cualquier lado
+extern const SDL_Color colores[];
+
 void dibujar(SDL_Renderer *renderer, const int m[][ORDEN], int filas, int columnas, int origenX, int origenY);
 void imprimirDeteccion(int deteccion);
 void iluminarZona(const int zona,const int m[][ORDEN],const int orden,int origx,int origy,SDL_Renderer *renderer,int zonaMod);

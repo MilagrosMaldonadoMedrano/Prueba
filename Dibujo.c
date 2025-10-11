@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include "funciones.h"
 
-SDL_Color colores[] =
+const SDL_Color colores[] =
 {
     {  0,   0, 255, 255}, //AZUL[0]
     {255, 255,   0, 255}, // Y[1] - Amarillo

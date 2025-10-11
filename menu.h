@@ -52,6 +52,11 @@ bool CorroborarUsuario(char* usu, Configuracion *usuario);
 void configuracionJugador(Configuracion *usu, Jugador *jug);
 void GuardarModo(Jugador * jugador);
 
+void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente);
+int cargarEstadisticas(Jugador** vec);
+void guardarEstadistica(const Jugador* e);
+int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente, int limpiarFonfo);
+int compararPuntajes(const void* a, const void* b);
 
 #endif // MENU_H_INCLUDED
 

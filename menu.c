@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "texto.h"
+#include "Dibujo.h"
 
 void botones_menu(Boton* botones, int cantidad, int screen_w, int screen_h)
 {
@@ -304,4 +305,172 @@ void GuardarModo(Jugador * jugador)
         fread(&usuario, sizeof(Configuracion), 1, pf);
     }
 
+}
+
+
+
+
+// Muestra las estadisticas ordenadas (max 10 registros)
+void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
+{
+    Jugador* lista = NULL;
+    int cantidad = cargarEstadisticas(&lista);
+
+    SDL_Color blanco = colores[8];
+    SDL_Color amarillo = colores[1];
+    SDL_Color gris = colores[10];
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+
+    //  Fondo translucido tipo panel
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 20, 20, 20, 180);  // gris oscuro con transparencia
+    SDL_Rect panel = {280, 120, 800, 500};
+    SDL_RenderFillRect(renderer, &panel);
+
+    // Borde del panel
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 80);
+    SDL_RenderDrawRect(renderer, &panel);
+
+
+
+    mostrarTexto(renderer, fuente, "RANKING DE JUGADORES", 540, 90, amarillo);
+
+    if (cantidad == 0) {
+        mostrarTexto(renderer, fuente, "No hay registros guardados.", 540, 130, blanco);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(1500);
+        return;
+    }
+
+    // Ordenar por puntaje descendente
+    if(cantidad > 0)
+    {
+        qsort(lista, cantidad, sizeof(Jugador), compararPuntajes);// cambiar a funcion propia
+    }
+
+
+
+    mostrarTexto(renderer, fuente, "NOMBRE", 400, 200, gris);
+    mostrarTexto(renderer, fuente, "SIMON", 700, 200, gris);
+    mostrarTexto(renderer, fuente, "MODO", 820, 200, gris);
+    mostrarTexto(renderer, fuente, "PUNTAJE", 950, 200, gris);
+
+
+
+    int y = 240;
+    char buffer[128];
+    const char* modos[] = {"Mozart", "Schönberg", "Cheat"};
+
+    // Mostrar hasta los 10 mejores
+    for (int i = 0; i < cantidad && i < 10; i++) {
+        // fondo alternado por color tipo Simon
+        SDL_SetRenderDrawColor(renderer,
+            colores[i % 8].r, colores[i % 8].g,
+            colores[i % 8].b, colores[i % 8].a);
+        SDL_Rect filaRect = {panel.x + 20, y - 8, panel.w - 40, 36};
+        SDL_RenderFillRect(renderer, &filaRect);
+
+        snprintf(buffer, sizeof(buffer), "%d. %s", i + 1, lista[i].nombre);
+        mostrarTexto(renderer, fuente, buffer, 380, y, blanco);
+
+        snprintf(buffer, sizeof(buffer), "%d", lista[i].colores);
+        mostrarTexto(renderer, fuente, buffer, 720, y, blanco);
+
+        snprintf(buffer, sizeof(buffer), "%s", modos[lista[i].modo]);
+        mostrarTexto(renderer, fuente, buffer, 820, y, blanco);
+
+        snprintf(buffer, sizeof(buffer), "%d", lista[i].puntaje);
+        mostrarTexto(renderer, fuente, buffer, 950, y, blanco);
+
+        y += 40;
+    }
+
+    SDL_RenderPresent(renderer);
+    // Botón Volver
+    botonVolver(renderer, fuente, 0);
+        free(lista);
+}
+
+
+void guardarEstadistica(const Jugador* j)
+{
+    FILE* f = fopen("estadisticas.dat", "ab");
+    if (!f) {
+        printf("Error al abrir archivo de estadisticas");
+        return;
+    }
+    fwrite(j, sizeof(Jugador), 1, f);
+    fclose(f);
+}
+
+
+int cargarEstadisticas(Jugador** vec)
+ {
+    FILE* f = fopen("estadisticas.dat", "rb");
+    if (!f)
+        return 0;
+
+    fseek(f, 0, SEEK_END);
+    int cant = ftell(f) / sizeof(Jugador);
+    rewind(f);
+
+    *vec = malloc(cant * sizeof(Jugador));
+    if (!*vec)
+    {
+        fclose(f);
+        return 0;
+    }
+
+    fread(*vec, sizeof(Jugador), cant, f);
+    fclose(f);
+    return cant;
+}
+
+// Función para comparar puntajes (descendente)
+int compararPuntajes(const void* a, const void* b)
+{
+    const Jugador* ea = (const Jugador*)a;
+    const Jugador* eb = (const Jugador*)b;
+    return eb->puntaje - ea->puntaje;
+}
+
+
+int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente, int limpiarFonfo)
+{
+    Boton volver;
+    boton_carga(&volver, 580, 650, 200, 50, "< Volver",
+                colores[2], colores[8], colores[8]);
+
+    SDL_Event evento;
+    int salir = 0;
+
+    while (!salir)
+        {
+        // Fondo
+        if(limpiarFonfo == 1)
+        {
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderClear(renderer);
+        }
+
+        // Dibujar el botón
+        boton_render(renderer, &volver, fuente);
+        SDL_RenderPresent(renderer);
+
+        while (SDL_PollEvent(&evento))
+            {
+            if (evento.type == SDL_QUIT)
+            {
+                salir = 1;
+            } else if (boton_manejo_evento(&volver, &evento) == 1)
+            {
+                salir = 1;
+            }
+        }
+        SDL_Delay(10);
+    }
+    return 1;
 }

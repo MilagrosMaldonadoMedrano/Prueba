@@ -572,6 +572,10 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
     }
 
     printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
+    //jugador->colores = cantidad;
+    //jugador->modo =
+    guardarEstadistica(jugador);
+
 
     vectorDestruir(&juego->secuencia);
 
@@ -926,6 +930,10 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
     else
         printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
 
+    //guardo datos estadisticas
+    //jugador->colores = cantidad;
+    //jugador->modo =
+    guardarEstadistica(jugador);
     vectorDestruir(&juego->secuencia);
 
     for (int i = 0; i < jugador->colores; i++)
@@ -1021,6 +1029,11 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
     }
 
     printf("Ha terminado!\n");
+    //guardo datos estadisticas
+    //jugador->colores = cantidad;
+    //jugador->modo =
+    guardarEstadistica(jugador);
+
 
     fclose(pArch);
     vectorDestruir(&juego->secuencia);

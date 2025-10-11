@@ -80,6 +80,7 @@ int main(int argc, char* argv[])
                     }
                     if(i == 2)
                     {
+                        pantallaEstadisticas(renderer, fuente);
                     }
                     if (i == 3)
                     {
