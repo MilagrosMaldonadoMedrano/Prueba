@@ -5,6 +5,7 @@
 #include "Dibujo.h"
 
 
+
 void imprimirDeteccion(int deteccion);
 int detectarClic(int x, int y,const int m[][ORDEN],int orden,int xMat,int yMat);
 

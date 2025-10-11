@@ -1,4 +1,6 @@
 #include "menu.h"
+#include "texto.h"
+#include "Dibujo.h"
 
 void botones_menu(Boton* botones, int cantidad, int screen_w, int screen_h)
 {
@@ -73,7 +75,7 @@ void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente)
     int texW = 0, texH = 0;
     SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 
-    // Centrar el texto dentro del botÛn
+    // Centrar el texto dentro del bot√≥n
     SDL_Rect dst;
     dst.x = b->rect.x + (b->rect.w - texW) / 2;
     dst.y = b->rect.y + (b->rect.h - texH) / 2;
@@ -97,7 +99,7 @@ int boton_manejo_evento(Boton* b, SDL_Event* e)
     else if (e->type == SDL_MOUSEBUTTONDOWN && b->encima)
     {
         b->presionado = 1;
-        return 1; // BotÛn activado
+        return 1; // Bot√≥n activado
     }
     else if (e->type == SDL_MOUSEBUTTONUP)
     {
@@ -117,7 +119,7 @@ int input_manejo_evento(Input *i, SDL_Event *e)
     if (e->type == SDL_MOUSEBUTTONDOWN && pos)
     {
         i->activo = 1;
-        return 1; // BotÛn activado
+        return 1; // Bot√≥n activado
     }
     else if (e->type == SDL_MOUSEBUTTONDOWN && !pos)
         i->activo = 0;
@@ -127,63 +129,37 @@ int input_manejo_evento(Input *i, SDL_Event *e)
 void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
 {
     SDL_StartTextInput();
-    Boton boton[2];
-    Input input[2], *campo_activo;
+    Boton boton;
+    Input input;
 
-    boton_carga(&boton[1], SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
-                "Iniciar sesion",
+    boton_carga(&boton, SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
+                "Ingresar",
                 (SDL_Color){50,150,50,255},
                 (SDL_Color){80,200,80,255},
                 (SDL_Color){30,100,30,255});
 
-    boton_carga(&boton[0], SCREEN_W/2 - 140, SCREEN_H/2, 280, 45,
-                "No tengo cuenta",
-                (SDL_Color){150,50,50,255},
-                (SDL_Color){200,0,80,255},
-                (SDL_Color){100,30,30,255});
-    input_carga(&input[0], SCREEN_W/2 - 150, SCREEN_H/2 - 150, 300, 50, "",(SDL_Color){255,255,255,200});
-    input_carga(&input[1], SCREEN_W/2 - 150, SCREEN_H/2 - 77, 300, 50, "",(SDL_Color){255,255,255,200});
+    input_carga(&input, SCREEN_W/2 - 150, SCREEN_H/2 - 100, 300, 50, "",(SDL_Color){255,255,255,0});
 
     SDL_Event evento;
 
-    while(boton[0].presionado == 0 && boton[1].presionado == 0)
+    while(boton.presionado == 0)
     {
-        campo_activo = NULL;
-        if (input[0].activo)
-        {
-            campo_activo = &input[0];
-        }
-        else if (input[1].activo) campo_activo = &input[1];
-
         while(SDL_PollEvent(&evento))
         {
-            for(int i = 0; i < 2; i++)
+            if(boton_manejo_evento(&boton, &evento))
             {
-                if(boton_manejo_evento(&boton[i], &evento))
-                {
-                    if(i == 1)
-                    {//PresionÛ inicio de sesion
-                        printf("%s, %s", input[0].texto, input[1].texto);
-                        if(!CorroborarUsuario(input[0].texto, input[1].texto, usuario))
-                        {
-                            printf("Cuenta no valida\n");
-                            boton[1].presionado = 0;
-                        }
-                    }
-                    else
-                    {//PresionÛ que no tiene cuenta
-                        CrearCuenta(usuario, renderer, fuente);
-                    }
-                }
-                input_manejo_evento(&input[i], &evento);
+                if(!CorroborarUsuario(input.texto, usuario))
+                    printf("Problemas al abrir el archivo.\n");
             }
-            EscribirPalabra(&evento, campo_activo);
+            input_manejo_evento(&input, &evento);
+            EscribirPalabra(&evento, &input);
         }
+        SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+        SDL_RenderClear(renderer);
+        mostrarTexto(renderer, fuente, "Nombre:", 420, 300, (SDL_Color){255, 255, 255, 0});
 
-        boton_render(renderer, &boton[0], fuente);
-        boton_render(renderer, &boton[1], fuente);
-        input_render(renderer, &input[0], fuente);
-        input_render(renderer, &input[1], fuente);
+        boton_render(renderer, &boton, fuente);
+        input_render(renderer, &input, fuente);
         SDL_RenderPresent(renderer);
     }
 
@@ -191,91 +167,8 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
     SDL_RenderClear(renderer);
 }
 
-void CrearCuenta(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
-{
-    Boton boton[2];
-    Input input[2], *campo_activo;
 
-    boton_carga(&boton[1], SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
-                "Crear Cuenta", (SDL_Color){50,150,50,255}, (SDL_Color){80,200,80,255}, (SDL_Color){30,100,30,255});
-
-    boton_carga(&boton[0], SCREEN_W/2 - 140, SCREEN_H/2, 280, 45,
-                "Ya tengo cuenta", (SDL_Color){150,50,50,255}, (SDL_Color){200,0,80,255}, (SDL_Color){100,30,30,255});
-    input_carga(&input[0], SCREEN_W/2 - 150, SCREEN_H/2 - 150, 300, 50, "",(SDL_Color){255,255,255,200});
-    input_carga(&input[1], SCREEN_W/2 - 150, SCREEN_H/2 - 77, 300, 50, "",(SDL_Color){255,255,255,200});
-
-    SDL_Event evento;
-
-    while(boton[0].presionado == 0 && boton[1].presionado == 0)
-    {
-        campo_activo = NULL;
-        if (input[0].activo)
-        {
-            campo_activo = &input[0];
-        }
-        else if (input[1].activo) campo_activo = &input[1];
-
-        while(SDL_PollEvent(&evento))
-        {
-            for(int i = 0; i < 2; i++)
-            {
-                if(boton_manejo_evento(&boton[i], &evento))
-                {
-                    if(i == 1)
-                    {//PresionÛ Crear Cuenta
-                        printf("%s, %s", input[0].texto, input[1].texto);
-                        if(!CorroborarNuevoUsuario(input[0].texto, input[1].texto, usuario))
-                        {
-                            printf("Cuenta ya existente\n");
-                            boton[1].presionado = 0;
-                        }
-                    }
-                    else
-                    {//PresionÛ que ya tiene cuenta
-                        Log_in(usuario, renderer, fuente);
-                    }
-                }
-                input_manejo_evento(&input[i], &evento);
-            }
-            EscribirPalabra(&evento, campo_activo);
-        }
-
-        boton_render(renderer, &boton[0], fuente);
-        boton_render(renderer, &boton[1], fuente);
-        input_render(renderer, &input[0], fuente);
-        input_render(renderer, &input[1], fuente);
-        SDL_RenderPresent(renderer);
-    }
-}
-
-bool CorroborarUsuario(char* usu,char* cont,Configuracion *usuario)
-{
-    FILE *pf = fopen("Usuarios.bin", "r+b");
-    Configuracion lect;
-    if(!pf)
-    {
-        printf("Error al abrir el archivo.\n");
-        return false;
-    }
-    fread(&lect, sizeof(Configuracion), 1, pf);
-    while(!feof(pf))
-    {
-        if(!strcmp(lect.usuario, usu) && !strcmp(lect.contra, cont))
-        {
-            usuario->colores = lect.colores;
-            usuario->modo = lect.modo;
-            usuario->velocidad = lect.velocidad;
-            strcpy(usuario->contra, cont);
-            strcpy(usuario->usuario, usu);
-            return true;
-        }
-        fread(&lect, sizeof(Configuracion), 1, pf);
-    }
-    fclose(pf);
-    return false;
-}
-
-bool CorroborarNuevoUsuario(char* usu,char* cont,Configuracion *usuario)
+bool CorroborarUsuario(char* usu, Configuracion *usuario)
 {
     FILE *pf = fopen("Usuarios.bin", "r+b");
     Configuracion lect;
@@ -289,16 +182,21 @@ bool CorroborarNuevoUsuario(char* usu,char* cont,Configuracion *usuario)
     {
         if(!strcmp(lect.usuario, usu))
         {
-            return false;
+            usuario->colores = lect.colores;
+            usuario->modo = lect.modo;
+            usuario->velocidad = lect.velocidad;
+            usuario->cheat = lect.cheat;
+            strcpy(usuario->usuario, usu);
+            return true;
         }
         fread(&lect, sizeof(Configuracion), 1, pf);
     }
+    fseek(pf, 0, 2);
     usuario->colores = 4;
     usuario->modo = 0;
     usuario->velocidad = 2000;
-    strcpy(usuario->contra, cont);
+    usuario->cheat = false;
     strcpy(usuario->usuario, usu);
-    fseek(pf,0,2);
     fwrite(usuario, sizeof(Configuracion), 1, pf);
     fclose(pf);
     return true;
@@ -310,7 +208,7 @@ void EscribirPalabra(SDL_Event *evento, Input * campo)
     {
         if (evento->type == SDL_TEXTINPUT)
         {
-        // Verifica longitud m·xima
+        // Verifica longitud m√°xima
             if (strlen(campo->texto) + strlen(evento->text.text) < MAX_LENGTH)
             {
                 strcat(campo->texto, evento->text.text);
@@ -321,7 +219,7 @@ void EscribirPalabra(SDL_Event *evento, Input * campo)
         // Manejo de Backspace
             if (evento->key.keysym.sym == SDLK_BACKSPACE && strlen(campo->texto) > 0)
             {
-                campo->texto[strlen(campo->texto) - 1] = '\0'; // Eliminar ˙ltimo car·cter
+                campo->texto[strlen(campo->texto) - 1] = '\0'; // Eliminar √∫ltimo car√°cter
             }
         }
     }
@@ -360,7 +258,7 @@ void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente)
     int texW = 0, texH = 0;
     SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 
-    // Centrar el texto dentro del botÛn
+    // Centrar el texto dentro del bot√≥n
     SDL_Rect dst;
     dst.x = i->rect.x + 10;
     dst.y = i->rect.y + (i->rect.h - texH) / 2;
@@ -371,4 +269,381 @@ void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente)
 
     SDL_FreeSurface(surface);
     SDL_DestroyTexture(texture);
+}
+
+void configuracionJugador(Configuracion *usu, Jugador* jug)
+{
+    strcpy(jug->nombre, usu->usuario);
+    jug->colores = usu->colores;
+    jug->modo = usu->modo;
+    jug->velocidad = usu->velocidad;
+    jug->cheat = usu->cheat;
+}
+
+void GuardarModo(Jugador * jugador)
+{
+    Configuracion usuario;
+    FILE *pf = fopen("Usuarios.bin", "r+b");
+    if(!pf)
+    {
+        printf("Error al abrir el archivo.\n");
+    }
+    fread(&usuario, sizeof(Configuracion), 1, pf);
+    while(!feof(pf))
+    {
+        if(!strcmp(usuario.usuario, jugador->nombre))
+        {
+            usuario.colores = jugador->colores;
+            usuario.modo = jugador->modo;
+            usuario.velocidad = jugador->velocidad;
+            usuario.cheat = jugador->cheat;
+            fseek(pf, -(int)(sizeof(Configuracion)), 1);
+            fwrite(&usuario, sizeof(Configuracion), 1, pf);
+            fclose(pf);
+            return;
+        }
+        fread(&usuario, sizeof(Configuracion), 1, pf);
+    }
+
+}
+
+
+
+
+// Muestra las estadisticas ordenadas (max 10 registros)
+void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
+{
+    Jugador* lista = NULL;
+    int cantidad = cargarEstadisticas(&lista);
+
+    SDL_Color blanco = colores[8];
+    SDL_Color amarillo = colores[1];
+    SDL_Color gris = colores[10];
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+
+    //  Fondo translucido tipo panel
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 20, 20, 20, 180);  // gris oscuro con transparencia
+    SDL_Rect panel = {280, 120, 800, 500};
+    SDL_RenderFillRect(renderer, &panel);
+
+    // Borde del panel
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 80);
+    SDL_RenderDrawRect(renderer, &panel);
+
+
+
+    mostrarTexto(renderer, fuente, "RANKING DE JUGADORES", 540, 90, amarillo);
+
+    if (cantidad == 0) {
+        mostrarTexto(renderer, fuente, "No hay registros guardados.", 540, 130, blanco);
+        SDL_RenderPresent(renderer);
+        SDL_Delay(1500);
+        return;
+    }
+
+    // Ordenar por puntaje descendente
+    if(cantidad > 0)
+    {
+        qsort(lista, cantidad, sizeof(Jugador), compararPuntajes);// cambiar a funcion propia
+    }
+
+
+
+    mostrarTexto(renderer, fuente, "NOMBRE", 400, 200, gris);
+    mostrarTexto(renderer, fuente, "SIMON", 700, 200, gris);
+    mostrarTexto(renderer, fuente, "MODO", 820, 200, gris);
+    mostrarTexto(renderer, fuente, "PUNTAJE", 950, 200, gris);
+
+
+
+    int y = 240;
+    char buffer[128];
+    const char* modos[] = {"Mozart", "Sch√∂nberg", "Cheat"};
+
+    // Mostrar hasta los 10 mejores
+    for (int i = 0; i < cantidad && i < 10; i++) {
+        // fondo alternado por color tipo Simon
+        SDL_SetRenderDrawColor(renderer,
+            colores[i % 8].r, colores[i % 8].g,
+            colores[i % 8].b, colores[i % 8].a);
+        SDL_Rect filaRect = {panel.x + 20, y - 8, panel.w - 40, 36};
+        SDL_RenderFillRect(renderer, &filaRect);
+
+        snprintf(buffer, sizeof(buffer), "%d. %s", i + 1, lista[i].nombre);
+        mostrarTexto(renderer, fuente, buffer, 380, y, blanco);
+
+        snprintf(buffer, sizeof(buffer), "%d", lista[i].colores);
+        mostrarTexto(renderer, fuente, buffer, 720, y, blanco);
+
+        snprintf(buffer, sizeof(buffer), "%s", modos[lista[i].modo]);
+        mostrarTexto(renderer, fuente, buffer, 820, y, blanco);
+
+        snprintf(buffer, sizeof(buffer), "%d", lista[i].puntaje);
+        mostrarTexto(renderer, fuente, buffer, 950, y, blanco);
+
+        y += 40;
+    }
+
+    SDL_RenderPresent(renderer);
+    // Bot√≥n Volver
+    if(botonVolver(renderer, fuente))
+    {
+        free(lista);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
+    }
+}
+
+
+void guardarEstadistica(const Jugador* j)
+{
+    FILE* f = fopen("estadisticas.dat", "ab");
+    if (!f) {
+        printf("Error al abrir archivo de estadisticas");
+        return;
+    }
+    fwrite(j, sizeof(Jugador), 1, f);
+    fclose(f);
+}
+
+
+int cargarEstadisticas(Jugador** vec)
+ {
+    FILE* f = fopen("estadisticas.dat", "rb");
+    if (!f)
+        return 0;
+
+    fseek(f, 0, SEEK_END);
+    int cant = ftell(f) / sizeof(Jugador);
+    rewind(f);
+
+    *vec = malloc(cant * sizeof(Jugador));
+    if (!*vec)
+    {
+        fclose(f);
+        return 0;
+    }
+
+    fread(*vec, sizeof(Jugador), cant, f);
+    fclose(f);
+    return cant;
+}
+
+// Funci√≥n para comparar puntajes (descendente)
+int compararPuntajes(const void* a, const void* b)
+{
+    const Jugador* ea = (const Jugador*)a;
+    const Jugador* eb = (const Jugador*)b;
+    return eb->puntaje - ea->puntaje;
+}
+
+
+int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente)
+{
+    Boton volver;
+    boton_carga(&volver, 580, 650, 200, 50, "< Volver",
+                colores[2], colores[8], colores[8]);
+
+    SDL_Event evento;
+    int salir = 0;
+
+    while (!salir)
+        {
+        // Dibujar el bot√≥n
+        boton_render(renderer, &volver, fuente);
+        SDL_RenderPresent(renderer);
+
+        while (SDL_PollEvent(&evento))
+            {
+            if (evento.type == SDL_QUIT)
+            {
+                salir = 1;
+            } else if (boton_manejo_evento(&volver, &evento) == 1)
+            {
+                salir = 1;
+            }
+        }
+        SDL_Delay(10);
+    }
+    return 1;
+}
+
+void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
+{
+    SDL_StartTextInput();
+    Boton volver, guardar, mozart, desafio, schonberg, mas, menos, cheat,archivo,mas1,menos1;
+    Jugador aux;
+    aux.colores = 3;
+    aux.velocidad=500;
+    char modo[10], cant[2],cantDuracion[6];
+    aux.cheat = false;
+
+    boton_carga(&volver, SCREEN_W/2 - 275, SCREEN_H/2 + 200, 200, 50,
+                "Volver",
+                (SDL_Color){215,0,0,255},
+                (SDL_Color){215,0,15,200},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&guardar, SCREEN_W/2 +75, SCREEN_H/2 + 200, 200, 50,
+                "Guardar",
+                (SDL_Color){0,200,10,255},
+                (SDL_Color){80,200,80,200},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&schonberg, SCREEN_W/2 -300, SCREEN_H/2 -250, 150, 50,
+                "Schonberg",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&mozart, SCREEN_W/2 - 100, SCREEN_H/2 -250, 150, 50,
+                "Mozart",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&desafio, SCREEN_W/2 + 100, SCREEN_H/2 -250, 150, 50,
+                "Desafio",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&mas, SCREEN_W/2 + 50, SCREEN_H/2 -150, 50, 50,
+                "+",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&menos, SCREEN_W/2 - 150, SCREEN_H/2 -150, 50, 50,
+                "-",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){215,0,15,200},
+                (SDL_Color){215,0,15,150});
+
+    boton_carga(&cheat, SCREEN_W/2 - 300, SCREEN_H/2 -50, 75, 50,
+                "",
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50});
+
+    boton_carga(&archivo, SCREEN_W/2 - 300, 400, 220, 50,
+                "",
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50});
+
+
+    boton_carga(&mas1,SCREEN_W/2 + 50, 480, 50, 50,
+                "+",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&menos1,  SCREEN_W/2 - 150, 480, 50, 50,
+                "-",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){215,0,15,200},
+                (SDL_Color){215,0,15,150});
+
+
+    SDL_Event evento;
+
+    while(volver.presionado == 0 && guardar.presionado == 0)
+    {
+        while(SDL_PollEvent(&evento))
+        {
+            boton_manejo_evento(&volver, &evento);
+            boton_manejo_evento(&guardar, &evento);
+            if(boton_manejo_evento(&schonberg, &evento))
+            {
+                aux.modo = 0;
+                strcpy(modo, "Schonberg");
+            }
+            if(boton_manejo_evento(&mozart, &evento))
+            {
+                aux.modo = 1;
+                strcpy(modo, "Mozart");
+            }
+            if(boton_manejo_evento(&desafio, &evento))
+            {
+                aux.modo = 2;
+                strcpy(modo, "Desafio");
+            }
+            if(boton_manejo_evento(&mas, &evento) && aux.colores < 8)
+            {
+                aux.colores++;
+            }
+            if(boton_manejo_evento(&menos, &evento) && aux.colores > 3)
+            {
+                aux.colores--;
+            }
+            if(boton_manejo_evento(&cheat, &evento))
+            {
+                aux.cheat = !aux.cheat;
+            }
+            if(boton_manejo_evento(&archivo, &evento))
+            {
+                aux.archivo = !aux.archivo;
+            }
+            if(boton_manejo_evento(&mas1, &evento) && aux.velocidad< 2000)
+            {
+                aux.velocidad=aux.velocidad+100;
+            }
+            if(boton_manejo_evento(&menos1, &evento) && aux.velocidad> 500)
+            {
+                aux.velocidad=aux.velocidad-100;
+            }
+
+        }
+        SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+        SDL_RenderClear(renderer);
+        mostrarTexto(renderer, fuente, "Modo de juego:", 200, 145, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, "Cantidad de colores:", 200, 245, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, "Cheat Mode:", 200, 345, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, modo, 1000, 200, (SDL_Color){255, 255, 0, 0});
+        mostrarTexto(renderer, fuente, "Tipo de Archivo:", 200, 410, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, itoa(aux.colores, cant, 10), 650, 245, (SDL_Color){255, 255, 0, 0});
+        mostrarTexto(renderer, fuente, "Duracion:", 200, 490, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, itoa(aux.velocidad, cantDuracion, 10), 640, 490, (SDL_Color){255, 255, 0, 0});
+        if(aux.cheat)
+            mostrarTexto(renderer, fuente, "ON", 400, 345, (SDL_Color){0, 255, 0, 0});
+        else
+            mostrarTexto(renderer, fuente, "OFF", 400, 345, (SDL_Color){255, 0, 0, 0});
+
+        if(aux.archivo)
+            mostrarTexto(renderer, fuente, "Melodia Propia", 400, 410, (SDL_Color){0, 255, 0, 0});
+        else
+            mostrarTexto(renderer, fuente, "Melodia Generada", 400, 410, (SDL_Color){0, 255, 0, 0});
+
+        boton_render(renderer, &volver, fuente);
+        boton_render(renderer, &guardar, fuente);
+        boton_render(renderer, &schonberg, fuente);
+        boton_render(renderer, &mozart, fuente);
+        boton_render(renderer, &desafio, fuente);
+        boton_render(renderer, &mas, fuente);
+        boton_render(renderer, &menos, fuente);
+        boton_render(renderer, &cheat, fuente);
+        boton_render(renderer, &archivo, fuente);
+        boton_render(renderer, &mas1, fuente);
+        boton_render(renderer, &menos1, fuente);
+        SDL_RenderPresent(renderer);
+    }
+
+    SDL_StopTextInput();
+
+    if (guardar.presionado)
+    {
+        jug->modo = aux.modo;
+        jug->colores = aux.colores;
+        jug->cheat = aux.cheat;
+        jug->archivo= aux.archivo;
+        jug->velocidad = aux.velocidad;
+    }
+
+
+    SDL_RenderClear(renderer);
 }

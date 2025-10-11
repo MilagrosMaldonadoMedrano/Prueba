@@ -1,10 +1,13 @@
 # depslib dependency file v1.0
-1758841010 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
+1760193768 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
 	"sonido.h"
 	"menu.h"
+	"string.h"
+	"texto.h"
+	"funciones.h"
 
 1748917206 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -448,13 +451,15 @@
 	"begin_code.h"
 	"close_code.h"
 
-1759534337 source:c:\users\botta\documents\github\prueba\main.c
+1760159829 source:c:\users\botta\documents\github\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
 	"sonido.h"
 	"menu.h"
 	"string.h"
+	"texto.h"
+	"funciones.h"
 
 1758404805 c:\users\botta\documents\github\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -898,11 +903,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758508261 source:c:\users\botta\documents\github\prueba\funciones.c
+1759552746 source:c:\users\botta\documents\github\prueba\funciones.c
 	<stdio.h>
 	"funciones.h"
+	<string.h>
 
-1758509685 c:\users\botta\documents\github\prueba\funciones.h
+1759552746 c:\users\botta\documents\github\prueba\funciones.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	"Dibujo.h"
@@ -916,12 +922,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758816304 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\main.c
+1758999593 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
 	"sonido.h"
 	"menu.h"
+	"string.h"
 
 1758478807 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\lib\sdl2-devel-2.32.8-mingw\sdl2-2.32.8\x86_64-w64-mingw32\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -1374,13 +1381,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758814644 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.c
+1758941207 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.c
 	<time.h>
 	<stdlib.h>
 	<stdio.h>
 	"funciones.h"
 
-1758814644 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.h
+1758937951 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\dibujo.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
@@ -1402,21 +1409,21 @@
 	<stdio.h>
 	<stdlib.h>
 
-1758805672 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.c
+1758999667 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.c
+	"Simon.h"
+
+1758999101 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<SDL_ttf.h>
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
+	"Vector.h"
+	"sonido.h"
 	"Dibujo.h"
 	"Vector.h"
 	"Funciones.h"
-	"sonido.h"
-
-1758800125 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\simon.h
-	<stdio.h>
-	<stdlib.h>
-	<SDL2/SDL.h>
-	<SDL2/SDL_mixer.h>
-	<time.h>
 
 1758496675 source:c:\users\kevin\downloads\prueba-main\prueba-main\dibujo.c
 	<time.h>
@@ -1948,13 +1955,13 @@
 1758498145 source:c:\users\kevin\downloads\prueba-main\prueba-main\menu.c
 	"menu.h"
 
-1759534337 source:c:\users\botta\documents\github\prueba\dibujo.c
+1760150390 source:c:\users\botta\documents\github\prueba\dibujo.c
 	<time.h>
 	<stdlib.h>
 	<stdio.h>
 	"funciones.h"
 
-1758842438 c:\users\botta\documents\github\prueba\dibujo.h
+1760150390 c:\users\botta\documents\github\prueba\dibujo.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
@@ -1963,7 +1970,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1759534337 c:\users\botta\documents\github\prueba\simon.h
+1760150390 c:\users\botta\documents\github\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>
@@ -1976,40 +1983,45 @@
 	"Vector.h"
 	"Funciones.h"
 
-1759534338 c:\users\botta\documents\github\prueba\sonido.h
+1759538235 c:\users\botta\documents\github\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1759534337 c:\users\botta\documents\github\prueba\menu.h
+1760152605 c:\users\botta\documents\github\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 	<stdbool.h>
 	<stdio.h>
-
-1759534337 source:c:\users\botta\documents\github\prueba\menu.c
-	"menu.h"
-
-1759534337 source:c:\users\botta\documents\github\prueba\simon.c
 	"Simon.h"
 
-1758509761 c:\users\botta\documents\github\prueba\vector.h
+1760164373 source:c:\users\botta\documents\github\prueba\menu.c
+	"menu.h"
+	"texto.h"
+	"Dibujo.h"
+
+1760151520 source:c:\users\botta\documents\github\prueba\simon.c
+	"Simon.h"
+	"texto.h"
+	"menu.h"
+
+1760150390 c:\users\botta\documents\github\prueba\vector.h
 	<stdbool.h>
 	<stddef.h>
 
-1758906921 source:c:\users\botta\documents\github\prueba\sonido.c
+1759538235 source:c:\users\botta\documents\github\prueba\sonido.c
 	"sonido.h"
 	"math.h"
 
-1758509761 source:c:\users\botta\documents\github\prueba\vector.c
+1760150390 source:c:\users\botta\documents\github\prueba\vector.c
 	"Vector.h"
 	<stdio.h>
 	<stdlib.h>
 
-1758731676 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.h
+1758980269 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1758731676 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.h
+1758939792 c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 
@@ -2018,19 +2030,20 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758731676 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.c
+1758939792 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\menu.c
 	"menu.h"
 
-1758731676 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.c
+1758998223 source:c:\users\milag\desktop\ingeniería\topicos\prueba\prueba\sonido.c
 	"sonido.h"
+	"math.h"
 
-1758841355 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\dibujo.c
+1760193768 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\dibujo.c
 	<time.h>
 	<stdlib.h>
 	<stdio.h>
 	"funciones.h"
 
-1758828781 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\funciones.h
+1760035017 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\funciones.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	"Dibujo.h"
@@ -2044,55 +2057,84 @@
 	"begin_code.h"
 	"close_code.h"
 
-1758841355 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\dibujo.h
+1760193768 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\dibujo.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1758828781 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\funciones.c
+1760035017 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\funciones.c
 	<stdio.h>
 	"funciones.h"
+	<string.h>
 
-1758828782 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
+1760209339 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
 	"menu.h"
+	"texto.h"
+	"Dibujo.h"
 
-1758828782 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.h
+1760195022 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
+	<stdbool.h>
+	<stdio.h>
+	"Simon.h"
 
 1758828782 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\lib\sdl2_ttf-2.24.0\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
 	"begin_code.h"
 	"close_code.h"
 
-1758839480 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
-	<stdio.h>
-	<stdlib.h>
-	<time.h>
-	"Dibujo.h"
-	"Vector.h"
-	"Funciones.h"
-	"sonido.h"
+1760205349 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
+	"Simon.h"
+	"texto.h"
+	"menu.h"
 
-1758828781 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.h
+1760136608 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.h
 	<stdbool.h>
 	<stddef.h>
 
-1758828782 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.h
+1759162943 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1758828782 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.c
+1760197014 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.c
 	"sonido.h"
+	"math.h"
 
-1758828781 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.c
+1760134491 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\vector.c
 	"Vector.h"
 	<stdio.h>
 	<stdlib.h>
 
-1758839479 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.h
-	<stdio.h>
-	<stdlib.h>
+1760211484 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
+	<SDL_ttf.h>
+	<stdio.h>
+	<stdlib.h>
 	<time.h>
+	"Vector.h"
+	"sonido.h"
+	"Dibujo.h"
+	"Vector.h"
+	"Funciones.h"
+
+1759551980 c:\users\botta\documents\github\prueba\texto.h
+	<stdio.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<SDL_ttf.h>
+	"Simon.h"
+
+1759551980 source:c:\users\botta\documents\github\prueba\texto.c
+	"texto.h"
+
+1760035017 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\texto.h
+	<stdio.h>
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<SDL_ttf.h>
+	"Simon.h"
+
+1760035017 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\texto.c
+	"texto.h"
 

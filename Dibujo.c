@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include "funciones.h"
 
-SDL_Color colores[] =
+const SDL_Color colores[] =
 {
     {  0,   0, 255, 255}, //AZUL[0]
     {255, 255,   0, 255}, // Y[1] - Amarillo
@@ -26,16 +26,6 @@ SDL_Color colores[] =
     { 86,  43, 135, 255}, //VIOLETA2[14]
     {111,  62, 163, 255}  //VIOLETA3[15]
 };
-
-/*SDL_Color coloresMenu[]=
-{
-    {255, 74, 12, 255}, //VIOLETA1[0]
-    {255, 69, 21, 255}, //VIOLETA2[1]
-    {255, 69, 21, 255}, //VIOLETA2[2]
-    {70, 30, 130, 255}, //VIOLETA3[3]
-    {95, 55, 158, 255}  //VIOLERA4[4]
-
-};*/
 
 
 

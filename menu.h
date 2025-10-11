@@ -4,6 +4,8 @@
 #include <SDL_ttf.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "Simon.h"
+
 #define SCREEN_W 1366
 #define SCREEN_H 768
 #define MAX_LENGTH 30
@@ -30,14 +32,13 @@ typedef struct
 typedef struct
 {
     char usuario[31];
-    char contra[31];
-    int velocidad;
+    float velocidad;
     int modo;
     int colores;
+    bool cheat;
 } Configuracion;
 
-void boton_carga(Boton* b, int x, int y, int w, int h, char* texto,
-                 SDL_Color normal, SDL_Color encima, SDL_Color presionado);
+void boton_carga(Boton* b, int x, int y, int w, int h, char* texto,SDL_Color normal, SDL_Color encima, SDL_Color presionado);
 void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente);
 int boton_manejo_evento(Boton* b, SDL_Event* e);
 void botones_menu(Boton* botones, int cantidad, int screen_w, int screen_h);
@@ -46,9 +47,18 @@ void input_carga(Input*, int x, int y, int w, int h, char* texto, SDL_Color norm
 void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente);
 int input_manejo_evento(Input *i, SDL_Event *e);
 void EscribirPalabra(SDL_Event *evento, Input * campo);
-bool CorroborarUsuario(char* usu,char* cont,Configuracion *usuario);
-void CrearCuenta(Configuracion *usuario , SDL_Renderer *renderer, TTF_Font* fuente);
-bool CorroborarNuevoUsuario(char* usu,char* cont,Configuracion *usuario);
+bool CorroborarUsuario(char* usu, Configuracion *usuario);
+void configuracionJugador(Configuracion *usu, Jugador *jug);
+void GuardarModo(Jugador * jugador);
+
+void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente);
+int cargarEstadisticas(Jugador** vec);
+void guardarEstadistica(const Jugador* e);
+int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente);
+int compararPuntajes(const void* a, const void* b);
+void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente);
+
 
 
 #endif // MENU_H_INCLUDED
+
