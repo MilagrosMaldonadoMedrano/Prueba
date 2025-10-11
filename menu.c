@@ -362,7 +362,7 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
 
     int y = 240;
     char buffer[128];
-    const char* modos[] = {"Mozart", "Schönberg", "Cheat"};
+    const char* modos[] = {"Mozart", "Schonberg", "Cheat"};
 
     // Mostrar hasta los 10 mejores
     for (int i = 0; i < cantidad && i < 10; i++) {
