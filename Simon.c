@@ -1,7 +1,7 @@
 #include "Simon.h"
 #include "texto.h"
+#include "menu.h"
 
-int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido** notas, int cantidad, float duracion,Boton *b,TTF_Font* fuente);
 
 int simon3Colores[ORDEN][ORDEN]=
 {
@@ -485,10 +485,11 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
 
 
     int simonRotable[ORDEN][ORDEN];
+    int simonAux[ORDEN][ORDEN];
     Sonido* notas[8];
     cargarSonidos(jugador->colores,notas);//Array to pointer decay
 
-    Simon* juego = simonCrear(jugador->colores);
+    Simon* juego = simonCrear(jugador->colores,"Schomberg");
     if(jugador->cheat==true)
     {
         cargarSimon(simon,simonRotable);
@@ -515,7 +516,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
     SDL_Event evento;
 
     int tiempoDelay=300;
-    int simonAux[ORDEN][ORDEN];
+
 
     while(juego->enJuego)
     {
@@ -582,11 +583,12 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
 
     free(juego);
 }
-Simon* simonCrear(int cantidad)
+Simon* simonCrear(int cantidad,const char* modoJuego)
 {
     Simon* juego = malloc(sizeof(Simon));
     vectorCrear(&juego->secuencia);
-    //vectorInsertarAlFinal(&juego->secuencia, rand() % cantidad);// 1er boton
+    if(!strcmp(modoJuego,"Schomberg"))
+        vectorInsertarAlFinal(&juego->secuencia, rand() % cantidad);// 1er boton
     juego->tam = 1;
     juego->indiceJugador = 0;
     juego->enJuego = 1;
@@ -781,11 +783,15 @@ void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer)
     {
         case 0:
             {
-                simon(renderer, sim, jug);
+                //desafio(renderer,sim,jug,"Secuencias/ModoDesafio4.txt");
+                mozart(renderer,sim,jug,"Secuencias/ModoDesafio4.txt");
+                //mozart(renderer,sim,jug,"Secuencias/Secuencia4Notas.txt");
+                //simon(renderer, sim, jug);
                 break;
             }
         case 1:
             {
+
                 //mozart(renderer, simon, jug, cheat[ORDEN][ORDEN]);
                 break;
             }
@@ -798,21 +804,19 @@ void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer)
     }
 }
 
-void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],char* nombreArchivo)
+void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,const char* nombreArchivo)
 {
-
-    //recordar  ue en crear simon comente una linea importante para que funcione el modo mozart
-
-
-
     if (!sonido_ini())
         return;
 
     Sonido* notas[8];
-    cargarSonidos(cantidad,notas);//Array to pointer decay
+    cargarSonidos(jugador->colores,notas);
 
-    Simon* juego = simonCrear(cantidad);
-    if(juego->cheat==true)
+    Simon* juego = simonCrear(jugador->colores,"Mozart");
+    int simonAux[ORDEN][ORDEN];
+    int simonRotable[ORDEN][ORDEN];
+
+    if(jugador->cheat==true)
     {
         cargarSimon(simon,simonRotable);
     }
@@ -821,7 +825,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
 
     if(!pArch)
     {
-        printf("Error en la apertura del archivo %s/n",nombreArchivo);
+        printf("Error en la apertura del archivo %s\n",nombreArchivo);
         exit(1);
     }
 
@@ -846,17 +850,18 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
 
     float duracion=2000;
     int tiempoDelay=300;
-    int simonAux[ORDEN][ORDEN];
+
 
     int patron;
 
-    fscanf(pArch,"%d",&patron);
+    fscanf(pArch,"%d;",&patron);
+
 
     while(!feof(pArch))
     {
         printf("%d\n",patron);
         vectorInsertarAlFinal(&juego->secuencia,patron);
-        fscanf(pArch,"%d",&patron);
+        fscanf(pArch,"%d;",&patron);
 
     }
 
@@ -867,7 +872,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
         SDL_Delay(300);
         SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255); //Color turquesa
         SDL_RenderClear(renderer);    // Limpia toda la pantalla con ese color
-        if(juego->cheat==true)
+        if(jugador->cheat==true)
         {
             dibujar(renderer,simonRotable,ORDEN,ORDEN,inicioX,inicioY);
             mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
@@ -891,10 +896,10 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
         {
             while(SDL_PollEvent(&evento))
             {
-                if(juego->cheat==true)
-                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,cantidad,duracion);
+                if(jugador->cheat==true)
+                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,jugador->colores,duracion);
                 else
-                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,cantidad,duracion);
+                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,jugador->colores,duracion);
             }
 
         }
@@ -909,21 +914,21 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
         }
         duracion=(duracion -(duracion*10)/100);
         tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
-        if(juego->cheat==true)
+        if(jugador->cheat==true)
         {
             cargarSimon(simonRotable,simonAux);
             rotarSimon(simonAux,simonRotable);
         }
 
     }
-    if(juego->tam==vectorDevolverCantidad(&juego->secuencia))
+    if(juego->tam-1==vectorDevolverCantidad(&juego->secuencia))
         printf("Ha ganado! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
     else
         printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
 
     vectorDestruir(&juego->secuencia);
 
-    for (int i = 0; i < cantidad; i++)
+    for (int i = 0; i < jugador->colores; i++)
     {
         sound_free(&notas[i]); //como espera un puntero doble de la estructura Sonido le paso &notas[i]
     }
@@ -932,26 +937,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Juga
     free(juego);
 }
 
-/*
-int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion,Boton b,TTF_Font* fuente)
-{
-    if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT) {
-        int x = e->button.x, y = e->button.y;
-        int deteccion = detectarClic(x, y, simon, ORDEN, iniX, iniY);
-
-        if (deteccion >= 0 && deteccion < cantidad) {
-            iluminarZona(deteccion, simon, ORDEN, iniX, iniY, renderer, N);
-            sonido_play(notas[deteccion], duracion);
-            SDL_Delay(150);
-            dibujar(renderer, simon, ORDEN, ORDEN, iniX, iniY);
-            return deteccion;
-        }
-    }
-    return -1;
-}*/
-
-
-int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido** notas, int cantidad, float duracion,Boton *b,TTF_Font* fuente)
+int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido** notas, int cantidad, float duracion)
 {
     if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
     {
@@ -975,7 +961,7 @@ int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX
 }
 
 
-void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador, const char* nombreArch)
+void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador, const char* nombreArch)
 {
     FILE* pArch = fopen(nombreArch, "wt");
     if (!pArch)
@@ -991,9 +977,9 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jug
         return;
 
     Sonido* notas[8];
-    cargarSonidos(cantidad, notas);
+    cargarSonidos(jugador->colores, notas);
 
-    Simon* juego = simonCrear(cantidad, "modoDesafio");
+    Simon* juego = simonCrear(jugador->colores, "modoDesafio");
 
     int inicioX = (SCREEN_W / 2) - (ORDEN * TAM_PIXEL / 2);
     int inicioY = (SCREEN_H / 2) - (ORDEN * TAM_PIXEL / 2);
@@ -1014,8 +1000,8 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jug
 
         while (SDL_PollEvent(&evento))
         {
-            deteccion = validarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas, cantidad, 2000.0,&b,fuente);
-            if (deteccion >= 0 && deteccion < cantidad)
+            deteccion = validarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas, jugador->colores, 2000.0);
+            if (deteccion >= 0 && deteccion < jugador->colores)
             {
                 fprintf(pArch, "%d;", deteccion);
             }
@@ -1039,7 +1025,7 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jug
     fclose(pArch);
     vectorDestruir(&juego->secuencia);
 
-    for (int i = 0; i < cantidad; i++)
+    for (int i = 0; i < jugador->colores; i++)
     {
         sound_free(&notas[i]);
     }

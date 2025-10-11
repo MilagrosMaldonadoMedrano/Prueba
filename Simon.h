@@ -43,7 +43,7 @@ void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
 void simon1(SDL_Renderer* renderer,const int simon[][ORDEN],int cantidad);
 
 void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador);
-Simon* simonCrear(int cantidad);
+Simon* simonCrear(int cantidad,const char* modoJuego);
 void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][ORDEN], int iniX, int iniY, Sonido** notas,float duracion,int tiempoDelay);
 int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int iniX, int iniY, SDL_Renderer* renderer, Sonido** notas,int cantidad,float duracion);
 void rotarSimon(int simon[][ORDEN],int simonAux[][ORDEN]);
@@ -51,7 +51,8 @@ void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer);
 void cargarSimon(const int simon[][ORDEN],int simonRotable[][ORDEN]);
 void CopiarSimon(int origen[][ORDEN], int destino[][ORDEN]);
 
-void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,int simonRotable[][ORDEN],char* nombreArchivo);
-void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], int cantidad, Jugador* jugador,const char* nombreArch);
+void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,const char* nombreArchivo);
+void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,const char* nombreArch);
+int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido** notas, int cantidad, float duracion);
 
 #endif // SIMON_H

@@ -66,7 +66,8 @@ int main(int argc, char* argv[])
                     if(i == 0)
                     {
                         DeterminarJuego(&jugador, renderer);
-                        //simon(renderer, simon4Colores, 4, &jugador,simonRotable);
+
+
                     }
                     if(i == 1)
                     {
