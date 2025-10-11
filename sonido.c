@@ -98,70 +98,110 @@ void sound_quit()
 }
 
 
-void cargarSonidos(int cantidad,Sonido** vSimon)
+//void cargarSonidos(int cantidad,Sonido** vSimon)
+//{
+//
+//    if(cantidad==3)
+//    {
+//        vSimon[0]=sonido_carga("snd/do.mp3");
+//        vSimon[1]=sonido_carga("snd/mi.mp3");
+//        vSimon[2]=sonido_carga("snd/sol.mp3");
+//    }
+//
+//    if(cantidad==4)
+//    {
+//        vSimon[0]=sonido_carga("snd/do.mp3");
+//        vSimon[1]=sonido_carga("snd/mi.mp3");
+//        vSimon[2]=sonido_carga("snd/sol.mp3");
+//        vSimon[3]=sonido_carga("snd/la.mp3");
+//    }
+//
+//    if(cantidad==5)
+//    {
+//        vSimon[0]=sonido_carga("snd/do.mp3");
+//        vSimon[1]=sonido_carga("snd/re.mp3");
+//        vSimon[2]=sonido_carga("snd/mi.mp3");
+//        vSimon[3]=sonido_carga("snd/sol.mp3");
+//        vSimon[4]=sonido_carga("snd/la.mp3");
+//    }
+//
+//    if(cantidad==6)
+//    {
+//        vSimon[0]=sonido_carga("snd/do.mp3");
+//        vSimon[1]=sonido_carga("snd/re.mp3");
+//        vSimon[2]=sonido_carga("snd/mi.mp3");
+//        vSimon[3]=sonido_carga("snd/FA#.mp3");
+//        vSimon[4]=sonido_carga("snd/SOL#.mp3");
+//        vSimon[5]=sonido_carga("snd/LA#.mp3");
+//
+//    }
+//
+//    if(cantidad==7)
+//    {
+//
+//        vSimon[0]=sonido_carga("snd/do.mp3");
+//        vSimon[1]=sonido_carga("snd/re.mp3");
+//        vSimon[2]=sonido_carga("snd/Mib.mp3");
+//        vSimon[3]=sonido_carga("snd/fa.mp3");
+//        vSimon[4]=sonido_carga("snd/sol.mp3");
+//        vSimon[5]=sonido_carga("snd/lab.mp3");
+//        vSimon[6]=sonido_carga("snd/si.mp3");
+//
+//    }
+//
+//    if(cantidad==8)
+//    {
+//
+//        vSimon[0]=sonido_carga("snd/do.mp3");
+//        vSimon[1]=sonido_carga("snd/re.mp3");
+//        vSimon[2]=sonido_carga("snd/mi.mp3");
+//        vSimon[3]=sonido_carga("snd/fa.mp3");
+//        vSimon[4]=sonido_carga("snd/sol.mp3");
+//        vSimon[5]=sonido_carga("snd/la.mp3");
+//        vSimon[6]=sonido_carga("snd/si.mp3");
+//        vSimon[7]=sonido_carga("snd/do_2.mp3");
+//    }
+//}
+
+
+void cargarSonidos(int cantidad, Sonido** vSimon)
 {
+    const char* sonidos[8][8] = {
+        // simon 1–2 solo para mantener indice
+        {"", "", "", "", "", "", "", ""},
+        {"", "", "", "", "", "", "", ""},
 
-    if(cantidad==3)
-    {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/mi.mp3");
-        vSimon[2]=sonido_carga("snd/sol.mp3");
+        // simon 3
+        {"snd/do.mp3", "snd/mi.mp3", "snd/sol.mp3"},
+        // simon 4
+        {"snd/do.mp3", "snd/mi.mp3", "snd/sol.mp3", "snd/la.mp3"},
+        // simon 5
+        {"snd/do.mp3", "snd/re.mp3", "snd/mi.mp3", "snd/sol.mp3", "snd/la.mp3"},
+        // simon 6
+        {"snd/do.mp3", "snd/re.mp3", "snd/mi.mp3", "snd/FA#.mp3", "snd/SOL#.mp3", "snd/LA#.mp3"},
+        // simon 7
+        {"snd/do.mp3", "snd/re.mp3", "snd/Mib.mp3", "snd/fa.mp3", "snd/sol.mp3", "snd/lab.mp3", "snd/si.mp3"},
+        // simon 8
+        {"snd/do.mp3", "snd/re.mp3", "snd/mi.mp3", "snd/fa.mp3", "snd/sol.mp3", "snd/la.mp3", "snd/si.mp3", "snd/do_2.mp3"}
+    };
+
+
+    if (cantidad < 3 || cantidad > 8) {
+        return;
     }
 
-    if(cantidad==4)
-    {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/mi.mp3");
-        vSimon[2]=sonido_carga("snd/sol.mp3");
-        vSimon[3]=sonido_carga("snd/la.mp3");
-    }
-
-    if(cantidad==5)
-    {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/sol.mp3");
-        vSimon[4]=sonido_carga("snd/la.mp3");
-    }
-
-    if(cantidad==6)
-    {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/sol.mp3"); //CAMBIAR
-        vSimon[4]=sonido_carga("snd/la.mp3");  //CAMBIAR
-        vSimon[5]=sonido_carga("snd/la.mp3"); //CAMBIAR
-
-    }
-
-    if(cantidad==7)
-    {
-
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/sol.mp3"); //CAMBIAR
-        vSimon[4]=sonido_carga("snd/la.mp3");  //CAMBIAR
-        vSimon[5]=sonido_carga("snd/la.mp3");  //CAMBIAR
-        vSimon[6]=sonido_carga("snd/do.mp3"); //CAMBIAR
-
-    }
-
-    if(cantidad==8)
-    {
-
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/fa.mp3"); //CAMBIAR
-        vSimon[4]=sonido_carga("snd/sol.mp3");  //CAMBIAR
-        vSimon[5]=sonido_carga("snd/la.mp3");  //CAMBIAR
-        vSimon[6]=sonido_carga("snd/si.mp3");  //CAMBIAR
-        vSimon[7]=sonido_carga("snd/do_2.mp3");  //CAMBIAR
+    // Carga los sonidos segun la cantidad
+    for (int i = 0; i < cantidad; i++) {
+        const char* ruta = sonidos[cantidad][i];
+        if (ruta && ruta[0] != '\0') {
+            vSimon[i] = sonido_carga(ruta);
+        } else {
+            vSimon[i] = NULL;
+        }
     }
 }
+
+
 
 
 /*Sonido* modificarTiempoSonido(float duracion,Sonido *s)
