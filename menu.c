@@ -475,10 +475,11 @@ int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente)
 void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
 {
     SDL_StartTextInput();
-    Boton volver, guardar, mozart, desafio, schonberg, mas, menos, cheat;
+    Boton volver, guardar, mozart, desafio, schonberg, mas, menos, cheat,archivo,mas1,menos1;
     Jugador aux;
-    aux.colores = 4;
-    char modo[10], cant[2];
+    aux.colores = 3;
+    aux.velocidad=500;
+    char modo[10], cant[2],cantDuracion[6];
     aux.cheat = false;
 
     boton_carga(&volver, SCREEN_W/2 - 275, SCREEN_H/2 + 200, 200, 50,
@@ -529,6 +530,25 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
                 (SDL_Color){100,100,100,50},
                 (SDL_Color){100,100,100,50});
 
+    boton_carga(&archivo, SCREEN_W/2 - 300, 400, 220, 50,
+                "",
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50},
+                (SDL_Color){100,100,100,50});
+
+
+    boton_carga(&mas1,SCREEN_W/2 + 50, 480, 50, 50,
+                "+",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){80,200,80,255},
+                (SDL_Color){30,100,30,255});
+
+    boton_carga(&menos1,  SCREEN_W/2 - 150, 480, 50, 50,
+                "-",
+                (SDL_Color){100,100,100,255},
+                (SDL_Color){215,0,15,200},
+                (SDL_Color){215,0,15,150});
+
 
     SDL_Event evento;
 
@@ -537,6 +557,7 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
         while(SDL_PollEvent(&evento))
         {
             boton_manejo_evento(&volver, &evento);
+            boton_manejo_evento(&guardar, &evento);
             if(boton_manejo_evento(&schonberg, &evento))
             {
                 aux.modo = 0;
@@ -564,6 +585,18 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
             {
                 aux.cheat = !aux.cheat;
             }
+            if(boton_manejo_evento(&archivo, &evento))
+            {
+                aux.archivo = !aux.archivo;
+            }
+            if(boton_manejo_evento(&mas1, &evento) && aux.velocidad< 2000)
+            {
+                aux.velocidad=aux.velocidad+100;
+            }
+            if(boton_manejo_evento(&menos1, &evento) && aux.velocidad> 500)
+            {
+                aux.velocidad=aux.velocidad-100;
+            }
 
         }
         SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
@@ -572,11 +605,19 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
         mostrarTexto(renderer, fuente, "Cantidad de colores:", 200, 245, (SDL_Color){255, 255, 255, 0});
         mostrarTexto(renderer, fuente, "Cheat Mode:", 200, 345, (SDL_Color){255, 255, 255, 0});
         mostrarTexto(renderer, fuente, modo, 1000, 200, (SDL_Color){255, 255, 0, 0});
+        mostrarTexto(renderer, fuente, "Tipo de Archivo:", 200, 410, (SDL_Color){255, 255, 255, 0});
         mostrarTexto(renderer, fuente, itoa(aux.colores, cant, 10), 650, 245, (SDL_Color){255, 255, 0, 0});
+        mostrarTexto(renderer, fuente, "Duracion:", 200, 490, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, itoa(aux.velocidad, cantDuracion, 10), 640, 490, (SDL_Color){255, 255, 0, 0});
         if(aux.cheat)
             mostrarTexto(renderer, fuente, "ON", 400, 345, (SDL_Color){0, 255, 0, 0});
         else
             mostrarTexto(renderer, fuente, "OFF", 400, 345, (SDL_Color){255, 0, 0, 0});
+
+        if(aux.archivo)
+            mostrarTexto(renderer, fuente, "Melodia Propia", 400, 410, (SDL_Color){0, 255, 0, 0});
+        else
+            mostrarTexto(renderer, fuente, "Melodia Generada", 400, 410, (SDL_Color){0, 255, 0, 0});
 
         boton_render(renderer, &volver, fuente);
         boton_render(renderer, &guardar, fuente);
@@ -586,9 +627,23 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
         boton_render(renderer, &mas, fuente);
         boton_render(renderer, &menos, fuente);
         boton_render(renderer, &cheat, fuente);
+        boton_render(renderer, &archivo, fuente);
+        boton_render(renderer, &mas1, fuente);
+        boton_render(renderer, &menos1, fuente);
         SDL_RenderPresent(renderer);
     }
 
     SDL_StopTextInput();
+
+    if (guardar.presionado)
+    {
+        jug->modo = aux.modo;
+        jug->colores = aux.colores;
+        jug->cheat = aux.cheat;
+        jug->archivo= aux.archivo;
+        jug->velocidad = aux.velocidad;
+    }
+
+
     SDL_RenderClear(renderer);
 }

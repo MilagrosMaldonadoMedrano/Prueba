@@ -749,6 +749,12 @@ void CopiarSimon(int origen[][ORDEN], int destino[][ORDEN])
 void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer)
 {
     int sim[ORDEN][ORDEN];
+    char* secuencia="SecuenciaNotas";
+    char* modo="ModoDesafio";
+    char nombreArchivo[30];
+
+    char* baseNombre = (jug->archivo) ? secuencia : modo;
+    sprintf(nombreArchivo, "Secuencias/%s%d.txt", baseNombre, jug->colores);
 
     switch(jug->colores)
     {
@@ -787,21 +793,21 @@ void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer)
     {
         case 0:
             {
-                //desafio(renderer,sim,jug,"Secuencias/ModoDesafio4.txt");
-                mozart(renderer,sim,jug,"Secuencias/ModoDesafio4.txt");
                 //mozart(renderer,sim,jug,"Secuencias/Secuencia4Notas.txt");
-                //simon(renderer, sim, jug);
+                simon(renderer, sim, jug);
                 break;
             }
         case 1:
             {
 
-                //mozart(renderer, simon, jug, cheat[ORDEN][ORDEN]);
+                mozart(renderer,sim,jug,nombreArchivo);
+
+
                 break;
             }
         case 2:
             {
-                //desafio(renderer, simon, jug, cheat[ORDEN][ORDEN]);
+                desafio(renderer,sim,jug,nombreArchivo);
                 break;
             }
 

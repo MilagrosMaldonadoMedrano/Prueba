@@ -34,8 +34,9 @@ typedef struct {
     int puntaje;
     int colores;
     int modo;
-    int velocidad;
+    float velocidad;
     bool cheat;
+    bool archivo; //true=SecuenciaNotas, false ModoDesafio
 } Jugador;
 
 //Juego basico
