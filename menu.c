@@ -134,9 +134,9 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
 
     boton_carga(&boton, SCREEN_W/2 - 150, SCREEN_H/2 + 75, 300, 50,
                 "Ingresar",
-                (SDL_Color){50,150,50,255},
-                (SDL_Color){80,200,80,255},
-                (SDL_Color){30,100,30,255});
+                (SDL_Color){18,91,120,255},
+                (SDL_Color){31,151,196,255},
+                (SDL_Color){18,91,120,255});
 
     input_carga(&input, SCREEN_W/2 - 150, SCREEN_H/2 - 100, 300, 50, "",(SDL_Color){255,255,255,0});
 
@@ -154,9 +154,9 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
             input_manejo_evento(&input, &evento);
             EscribirPalabra(&evento, &input);
         }
-        SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+        SDL_SetRenderDrawColor(renderer, 0,0,0, 255);
         SDL_RenderClear(renderer);
-        mostrarTexto(renderer, fuente, "Nombre:", 420, 300, (SDL_Color){255, 255, 255, 0});
+        mostrarTexto(renderer, fuente, "Ingrese su nombre...", 575, 255, (SDL_Color){255, 255, 255, 0});
 
         boton_render(renderer, &boton, fuente);
         input_render(renderer, &input, fuente);
@@ -244,7 +244,7 @@ void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente)
     SDL_SetRenderDrawColor(renderer, c.r, c.g, c.b, c.a);
     SDL_RenderFillRect(renderer, &i->rect);
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderDrawRect(renderer, &i->rect);
 
 
@@ -314,8 +314,22 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
     int cantidad = cargarEstadisticas(&lista);
 
     SDL_Color blanco = colores[8];
-    SDL_Color amarillo = colores[1];
+    //SDL_Color amarillo = colores[1];
     SDL_Color gris = colores[10];
+
+    SDL_Color coloresFilas[10] = {
+    {18,91,120,255},
+    {20,99,130,255},
+    {21,107,140,255},
+    {23,118,153,255},
+    {25,128,166,255},
+    {28,136,176,255},
+    {30,145,189,255},
+    {31,151,196,255},
+    {33,157,204,255},
+    {35,166,217,255}
+};
+
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
@@ -325,6 +339,7 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(renderer, 20, 20, 20, 180);  // gris oscuro con transparencia
     SDL_Rect panel = {280, 120, 800, 500};
+    //SDL_Rect panel = {280, 120, 800, 500};
     SDL_RenderFillRect(renderer, &panel);
 
     // Borde del panel
@@ -333,7 +348,7 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
 
 
 
-    mostrarTexto(renderer, fuente, "RANKING DE JUGADORES", 540, 90, amarillo);
+    mostrarTexto(renderer, fuente, "RANKING DE JUGADORES", 540, 90, blanco);
 
     if (cantidad == 0) {
         mostrarTexto(renderer, fuente, "No hay registros guardados.", 540, 130, blanco);
@@ -345,28 +360,27 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
     // Ordenar por puntaje descendente
     if(cantidad > 0)
     {
-        qsort(lista, cantidad, sizeof(Jugador), compararPuntajes);// cambiar a funcion propia
+        qsort(lista, cantidad, sizeof(Jugador), compararPuntajes);
     }
 
 
 
-    mostrarTexto(renderer, fuente, "NOMBRE", 400, 200, gris);
-    mostrarTexto(renderer, fuente, "SIMON", 700, 200, gris);
-    mostrarTexto(renderer, fuente, "MODO", 820, 200, gris);
-    mostrarTexto(renderer, fuente, "PUNTAJE", 950, 200, gris);
+    mostrarTexto(renderer, fuente, "NOMBRE", 400, 165, gris);
+    mostrarTexto(renderer, fuente, "SIMON", 700, 165, gris);
+    mostrarTexto(renderer, fuente, "MODO", 820, 165, gris);
+    mostrarTexto(renderer, fuente, "PUNTAJE", 950, 165, gris);
 
 
-
-    int y = 240;
+    //int y = 240;
+    int y = 200;
     char buffer[128];
     const char* modos[] = {"Mozart", "Schonberg", "Cheat"};
 
     // Mostrar hasta los 10 mejores
     for (int i = 0; i < cantidad && i < 10; i++) {
-        // fondo alternado por color tipo Simon
         SDL_SetRenderDrawColor(renderer,
-            colores[i % 8].r, colores[i % 8].g,
-            colores[i % 8].b, colores[i % 8].a);
+            coloresFilas[i].r, coloresFilas[i].g,
+            coloresFilas[i].b, coloresFilas[i].a);
         SDL_Rect filaRect = {panel.x + 20, y - 8, panel.w - 40, 36};
         SDL_RenderFillRect(renderer, &filaRect);
 
@@ -443,7 +457,9 @@ int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente)
 {
     Boton volver;
     boton_carga(&volver, 580, 650, 200, 50, "< Volver",
-                colores[2], colores[8], colores[8]);
+                (SDL_Color){150,50,50,255},
+                (SDL_Color){200,80,80,255},
+                (SDL_Color){100,30,30,255});
 
     SDL_Event evento;
     int salir = 0;
@@ -476,38 +492,39 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
     Jugador aux;
     aux.colores = 3;
     aux.velocidad=500;
+    aux.modo = 0;
     char modo[10], cant[2],cantDuracion[6];
     aux.cheat = false;
 
     boton_carga(&volver, SCREEN_W/2 - 275, SCREEN_H/2 + 200, 200, 50,
                 "Volver",
-                (SDL_Color){215,0,0,255},
-                (SDL_Color){215,0,15,200},
-                (SDL_Color){30,100,30,255});
+                (SDL_Color){150,50,50,255},
+                (SDL_Color){200,80,80,255},
+                (SDL_Color){100,30,30,255});
 
     boton_carga(&guardar, SCREEN_W/2 +75, SCREEN_H/2 + 200, 200, 50,
                 "Guardar",
-                (SDL_Color){0,200,10,255},
-                (SDL_Color){80,200,80,200},
+                (SDL_Color){50,150,50,255},
+                (SDL_Color){80,200,80,255},
                 (SDL_Color){30,100,30,255});
 
     boton_carga(&schonberg, SCREEN_W/2 -300, SCREEN_H/2 -250, 150, 50,
                 "Schonberg",
-                (SDL_Color){100,100,100,255},
-                (SDL_Color){80,200,80,255},
-                (SDL_Color){30,100,30,255});
+                (SDL_Color){18,91,120,255},
+                (SDL_Color){31,151,196,255},
+                (SDL_Color){18,91,120,255});
 
     boton_carga(&mozart, SCREEN_W/2 - 100, SCREEN_H/2 -250, 150, 50,
                 "Mozart",
-                (SDL_Color){100,100,100,255},
-                (SDL_Color){80,200,80,255},
-                (SDL_Color){30,100,30,255});
+                (SDL_Color){18,91,120,255},
+                (SDL_Color){31,151,196,255},
+                (SDL_Color){18,91,120,255});
 
     boton_carga(&desafio, SCREEN_W/2 + 100, SCREEN_H/2 -250, 150, 50,
                 "Desafio",
-                (SDL_Color){100,100,100,255},
-                (SDL_Color){80,200,80,255},
-                (SDL_Color){30,100,30,255});
+                (SDL_Color){18,91,120,255},
+                (SDL_Color){31,151,196,255},
+                (SDL_Color){18,91,120,255});
 
     boton_carga(&mas, SCREEN_W/2 + 50, SCREEN_H/2 -150, 50, 50,
                 "+",
@@ -596,25 +613,25 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
             }
 
         }
-        SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+        SDL_SetRenderDrawColor(renderer,0, 0, 0, 255);
         SDL_RenderClear(renderer);
         mostrarTexto(renderer, fuente, "Modo de juego:", 200, 145, (SDL_Color){255, 255, 255, 0});
         mostrarTexto(renderer, fuente, "Cantidad de colores:", 200, 245, (SDL_Color){255, 255, 255, 0});
         mostrarTexto(renderer, fuente, "Cheat Mode:", 200, 345, (SDL_Color){255, 255, 255, 0});
         mostrarTexto(renderer, fuente, modo, 1000, 200, (SDL_Color){255, 255, 0, 0});
         mostrarTexto(renderer, fuente, "Tipo de Archivo:", 200, 410, (SDL_Color){255, 255, 255, 0});
-        mostrarTexto(renderer, fuente, itoa(aux.colores, cant, 10), 650, 245, (SDL_Color){255, 255, 0, 0});
+        mostrarTexto(renderer, fuente, itoa(aux.colores, cant, 10), 650, 245, (SDL_Color){255, 255, 255, 255});
         mostrarTexto(renderer, fuente, "Duracion:", 200, 490, (SDL_Color){255, 255, 255, 0});
-        mostrarTexto(renderer, fuente, itoa(aux.velocidad, cantDuracion, 10), 640, 490, (SDL_Color){255, 255, 0, 0});
+        mostrarTexto(renderer, fuente, itoa(aux.velocidad, cantDuracion, 10), 640, 490, (SDL_Color){255, 255, 255, 255});
         if(aux.cheat)
-            mostrarTexto(renderer, fuente, "ON", 400, 345, (SDL_Color){0, 255, 0, 0});
+            mostrarTexto(renderer, fuente, "ON", 400, 345, (SDL_Color){35,166,217,255});
         else
-            mostrarTexto(renderer, fuente, "OFF", 400, 345, (SDL_Color){255, 0, 0, 0});
+            mostrarTexto(renderer, fuente, "OFF", 400, 345, (SDL_Color){35,166,217,255});
 
         if(aux.archivo)
-            mostrarTexto(renderer, fuente, "Melodia Propia", 400, 410, (SDL_Color){0, 255, 0, 0});
+            mostrarTexto(renderer, fuente, "Melodia Propia", 400, 410, (SDL_Color){35,166,217,255});
         else
-            mostrarTexto(renderer, fuente, "Melodia Generada", 400, 410, (SDL_Color){0, 255, 0, 0});
+            mostrarTexto(renderer, fuente, "Melodia Generada", 400, 410, (SDL_Color){35,166,217,255});
 
         boton_render(renderer, &volver, fuente);
         boton_render(renderer, &guardar, fuente);
@@ -734,18 +751,6 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
             {
 
                 opcion = 1;//jugar de nuevo
-                /*jugador->nivel=1;
-                jugador->puntaje=0;
-
-
-
-                SDL_PumpEvents();
-                SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
-                DeterminarJuego(jugador,renderer);SDL_PumpEvents();
-
-                SDL_PumpEvents();
-                SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);*/
-
 
             }
             else if (boton_manejo_evento(&salir, &evento))
@@ -753,7 +758,8 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
                 opcion = 0;//salir
             }
         }
-            // Redibujar los botones para que respondan al hover
+
+        // Redibujar los botones para que respondan al hover
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 230);
         SDL_RenderClear(renderer);
@@ -798,15 +804,6 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
 
     }
 
-
-    /*if(opcion==1)
-    {
-        jugador->nivel=1;
-        jugador->puntaje=0;
-        SDL_PumpEvents();
-        SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
-        DeterminarJuego(jugador,renderer);SDL_PumpEvents();
-    }*/
     SDL_PumpEvents();
     SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
 

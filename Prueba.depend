@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1760212915 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
+1760294232 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
@@ -2066,7 +2066,7 @@
 	"funciones.h"
 	<string.h>
 
-1760281650 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
+1760295220 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
 	"menu.h"
 	"texto.h"
 	"Dibujo.h"
@@ -2083,7 +2083,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1760281977 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
+1760294617 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
 	"Simon.h"
 	"texto.h"
 	"menu.h"
@@ -2135,6 +2135,6 @@
 	<SDL_ttf.h>
 	"Simon.h"
 
-1760212915 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\texto.c
+1760292727 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\texto.c
 	"texto.h"
 
