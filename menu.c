@@ -126,7 +126,7 @@ int input_manejo_evento(Input *i, SDL_Event *e)
     return 0;
 }
 
-void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
+void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente, TTF_Font* fuente2)
 {
     SDL_StartTextInput();
     Boton boton;
@@ -157,7 +157,7 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente)
         SDL_SetRenderDrawColor(renderer, 0,0,0, 255);
         SDL_RenderClear(renderer);
         mostrarTexto(renderer, fuente, "Ingrese su nombre...", 575, 255, (SDL_Color){255, 255, 255, 0});
-
+        mostrarTexto(renderer, fuente2, "SIMON", 435, 120, (SDL_Color){255, 255, 255, 0});
         boton_render(renderer, &boton, fuente);
         input_render(renderer, &input, fuente);
         SDL_RenderPresent(renderer);

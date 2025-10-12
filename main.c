@@ -49,8 +49,9 @@ int main(int argc, char* argv[])
 
     // Cargar fuente
     TTF_Font* fuente = TTF_OpenFont("fnt/arial.ttf", 24);
+    TTF_Font* fuente2 = TTF_OpenFont("fnt/Simon.ttf", 100);
 
-    Log_in(&usuario, renderer, fuente);
+    Log_in(&usuario, renderer, fuente, fuente2);
 
     SDL_SetRenderDrawColor(renderer,0,0,0, 255);
     SDL_RenderClear(renderer);
@@ -69,6 +70,7 @@ int main(int argc, char* argv[])
         jugador.nivel = 1;
         while (SDL_PollEvent(&e))
         {
+            mostrarTexto(renderer, fuente2, "SIMON", 435, 120, (SDL_Color){255, 255, 255, 0});
 
             if (e.type == SDL_QUIT)
                 ejecutando = 0;

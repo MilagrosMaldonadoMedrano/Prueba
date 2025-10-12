@@ -42,7 +42,7 @@ void boton_carga(Boton* b, int x, int y, int w, int h, char* texto,SDL_Color nor
 void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente);
 int boton_manejo_evento(Boton* b, SDL_Event* e);
 void botones_menu(Boton* botones, int cantidad, int screen_w, int screen_h);
-void Log_in(Configuracion *usuario, SDL_Renderer* renderer, TTF_Font* fuente);
+void Log_in(Configuracion *usuario, SDL_Renderer* renderer, TTF_Font* fuente, TTF_Font* fuente2);
 void input_carga(Input*, int x, int y, int w, int h, char* texto, SDL_Color normal);
 void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente);
 int input_manejo_evento(Input *i, SDL_Event *e);
