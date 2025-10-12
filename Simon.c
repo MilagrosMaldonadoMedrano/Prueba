@@ -483,11 +483,12 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
     if (!sonido_ini())
         return;
 
-
+    int opcion;
     int simonRotable[ORDEN][ORDEN];
     int simonAux[ORDEN][ORDEN];
     Sonido* notas[3][8];
     cargarSonidos(jugador->colores,notas);//Array to pointer decay
+    int duracion=jugador->velocidad;
 
     Simon* juego = simonCrear(jugador->colores,"Schomberg");
     if(jugador->cheat==true)
@@ -528,14 +529,14 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
             dibujar(renderer,simonRotable,ORDEN,ORDEN,inicioX,inicioY);
             mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
             SDL_RenderPresent(renderer);
-            mostrarSecuencia(juego, renderer, simonRotable, inicioX, inicioY, notas,jugador->velocidad,tiempoDelay); //agregar la frecuencia
+            mostrarSecuencia(juego, renderer, simonRotable, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
         }
         else
         {
             dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
             mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
             SDL_RenderPresent(renderer);
-            mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,jugador->velocidad,tiempoDelay); //agregar la frecuencia
+            mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,duracion,tiempoDelay); //agregar la frecuencia
         }
 
         juego->indiceJugador = 0;
@@ -546,9 +547,9 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
             while(SDL_PollEvent(&evento))
             {
                 if(jugador->cheat==true)
-                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,jugador->colores,jugador->velocidad);
+                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,jugador->colores,duracion);
                 else
-                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,jugador->colores,jugador->velocidad);
+                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,jugador->colores,duracion);
             }
 
         }
@@ -561,16 +562,16 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
             vectorInsertarAlFinal(&juego->secuencia, rand () % jugador->colores);
             juego->tam++;
         }
-                else
+        else
         {
-            juego->enJuego = pantallaResultado(renderer, fuente, jugador);
-            jugador->nivel = 1;
-            jugador->puntaje = 0;
+            opcion=pantallaResultado(renderer,fuente,jugador,"HAS PERDIDO");
+            //juego->enJuego = 0;
+
         }
 
 
-        jugador->velocidad=(jugador->velocidad -(jugador->velocidad*10)/100);
-        tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
+        duracion=(duracion -(duracion*3)/100);
+        tiempoDelay=(tiempoDelay-(tiempoDelay*3)/100);
         if(jugador->cheat==true)
         {
             cargarSimon(simonRotable,simonAux);
@@ -580,6 +581,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
     }
 
     printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
+
 
 
 
@@ -593,6 +595,21 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
     sound_quit();
 
     free(juego);
+
+    if (opcion == 1)
+    {
+        jugador->nivel = 1;
+        jugador->puntaje = 0;
+        SDL_PumpEvents();
+        SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+
+        DeterminarJuego(jugador, renderer);
+    }
+
+
+    SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
 }
 Simon* simonCrear(int cantidad,const char* modoJuego)
 {
@@ -837,6 +854,8 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
     int simonAux[ORDEN][ORDEN];
     int simonRotable[ORDEN][ORDEN];
 
+    int opcion;
+
     if(jugador->cheat==true)
     {
         cargarSimon(simon,simonRotable);
@@ -869,7 +888,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
 
     SDL_Event evento;
 
-    float duracion=2000;
+    float duracion=jugador->velocidad;
     int tiempoDelay=300;
 
 
@@ -935,13 +954,12 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
         }
         else
         {
-            juego->enJuego = pantallaResultado(renderer, fuente, jugador);
-            jugador->nivel = 1;
-            jugador->puntaje = 0;
+            //seguir por acá
+            opcion=pantallaResultado(renderer,fuente,jugador,"GANADO");
         }
 
-        duracion=(duracion -(duracion*10)/100);
-        tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
+        duracion=(duracion -(duracion*3)/100);
+        tiempoDelay=(tiempoDelay-(tiempoDelay*3)/100);
         if(jugador->cheat==true)
         {
             cargarSimon(simonRotable,simonAux);
@@ -950,7 +968,13 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
 
     }
     if(juego->tam-1==vectorDevolverCantidad(&juego->secuencia))
+    {
         printf("Ha ganado! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
+
+        opcion=pantallaResultado(renderer,fuente,jugador,"GANADO");
+        juego->enJuego=0;
+    }
+
     else
         printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
 
@@ -964,6 +988,20 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
             sound_free(notas[i][j]);
     }
     free(juego);
+
+    if (opcion == 1)
+    {
+        jugador->nivel = 1;
+        jugador->puntaje = 0;
+        SDL_PumpEvents();
+        SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+
+        DeterminarJuego(jugador, renderer);
+    }
+
+    SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
 }
 
 int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido* notas[][8], int cantidad, float duracion)
@@ -977,13 +1015,10 @@ int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX
         {
             printf("%d", deteccion);
             iluminarZona(deteccion, simon, ORDEN, iniX, iniY, renderer, N);
-            //boton_render(renderer, b, fuente);
             int fila=rand()%2;
             sonido_play(notas[fila][deteccion],duracion);
-            //sonido_play(&notas[deteccion], duracion);
             SDL_Delay(150);
 
-            //dibujar(renderer, simon, ORDEN, ORDEN, iniX, iniY);
 
             return deteccion;
         }
@@ -1008,7 +1043,7 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
         return;
 
     Sonido* notas[3][8];
-    cargarSonidos(jugador->colores,notas);//Array to pointer decay
+    cargarSonidos(jugador->colores,notas);
 
     Simon* juego = simonCrear(jugador->colores, "modoDesafio");
 
@@ -1026,7 +1061,7 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
 
         while (SDL_PollEvent(&evento))
         {
-            deteccion = validarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas, jugador->colores, 2000.0);
+            deteccion = validarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas, jugador->colores, jugador->velocidad);
             if (deteccion >= 0 && deteccion < jugador->colores)
             {
                 fprintf(pArch, "%d;", deteccion);
@@ -1047,9 +1082,7 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
     }
 
     printf("Ha terminado!\n");
-    //guardo datos estadisticas
-    //jugador->colores = cantidad;
-    //jugador->modo =
+
     guardarEstadistica(jugador);
 
 
@@ -1064,6 +1097,12 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
 
     sound_quit();
     free(juego);
+
+
+    SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+
 }
 
 
