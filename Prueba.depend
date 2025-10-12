@@ -451,7 +451,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1760300953 source:c:\users\botta\documents\github\prueba\main.c
+1760304777 source:c:\users\botta\documents\github\prueba\main.c
 	<time.h>
 	"Dibujo.h"
 	"Simon.h"
@@ -1955,13 +1955,13 @@
 1758498145 source:c:\users\kevin\downloads\prueba-main\prueba-main\menu.c
 	"menu.h"
 
-1760150390 source:c:\users\botta\documents\github\prueba\dibujo.c
+1760304777 source:c:\users\botta\documents\github\prueba\dibujo.c
 	<time.h>
 	<stdlib.h>
 	<stdio.h>
 	"funciones.h"
 
-1760150390 c:\users\botta\documents\github\prueba\dibujo.h
+1760304777 c:\users\botta\documents\github\prueba\dibujo.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
@@ -1970,7 +1970,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1760239147 c:\users\botta\documents\github\prueba\simon.h
+1760304777 c:\users\botta\documents\github\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>
@@ -1983,7 +1983,7 @@
 	"Vector.h"
 	"Funciones.h"
 
-1760239147 c:\users\botta\documents\github\prueba\sonido.h
+1760304777 c:\users\botta\documents\github\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
@@ -1994,12 +1994,12 @@
 	<stdio.h>
 	"Simon.h"
 
-1760300181 source:c:\users\botta\documents\github\prueba\menu.c
+1760304777 source:c:\users\botta\documents\github\prueba\menu.c
 	"menu.h"
 	"texto.h"
 	"Dibujo.h"
 
-1760300181 source:c:\users\botta\documents\github\prueba\simon.c
+1760304777 source:c:\users\botta\documents\github\prueba\simon.c
 	"Simon.h"
 	"texto.h"
 	"menu.h"
@@ -2008,11 +2008,11 @@
 	<stdbool.h>
 	<stddef.h>
 
-1760239147 source:c:\users\botta\documents\github\prueba\sonido.c
+1760304777 source:c:\users\botta\documents\github\prueba\sonido.c
 	"sonido.h"
 	"math.h"
 
-1760150390 source:c:\users\botta\documents\github\prueba\vector.c
+1760304777 source:c:\users\botta\documents\github\prueba\vector.c
 	"Vector.h"
 	<stdio.h>
 	<stdlib.h>
@@ -2118,15 +2118,16 @@
 	"Vector.h"
 	"Funciones.h"
 
-1759551980 c:\users\botta\documents\github\prueba\texto.h
+1760304777 c:\users\botta\documents\github\prueba\texto.h
 	<stdio.h>
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>
 	"Simon.h"
 
-1759551980 source:c:\users\botta\documents\github\prueba\texto.c
+1760304777 source:c:\users\botta\documents\github\prueba\texto.c
 	"texto.h"
+	"math.h"
 
 1760212915 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\texto.h
 	<stdio.h>
