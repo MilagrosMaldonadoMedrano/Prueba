@@ -685,8 +685,8 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
     SDL_Color amarillo = colores[1];
 
     Boton reintentar, salir;
-    boton_carga(&reintentar, 430, 550, 200, 60, "Reintentar", colores[3], colores[1], colores[8]);
-    boton_carga(&salir, 770, 550, 200, 60, "Salir", colores[2], colores[1], colores[8]);
+    boton_carga(&reintentar, 430, 550, 200, 60, "Reintentar", (SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+    boton_carga(&salir, 770, 550, 200, 60, "Salir", (SDL_Color){150,50,50,255},(SDL_Color){200,80,80,255},(SDL_Color){100,30,30,255});
 
     //fondo
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -725,7 +725,7 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
 
     y += 40;
 
-    const char* modos[] = {"Mozart", "Schonberg", "Desafio"};
+    const char* modos[] = {"Schonberg", "Mozart", "Desafio"};
     snprintf(buffer, sizeof(buffer), "Jugador: %s", modos[jugador->modo]);
     mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
 
