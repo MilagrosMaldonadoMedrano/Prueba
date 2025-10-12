@@ -104,18 +104,18 @@ void cargarSonidos(int cantidad,Sonido* mSimon[][8])
     if(cantidad==3)
     {
         mSimon[0][0]=sonido_carga("snd/do.mp3");
-        mSimon[1][0]=sonido_carga("snd/C4-Arpa.wav");
-        mSimon[2][0]=sonido_carga("snd/C4-Arpa.wav");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/C4-Arpa.wav");
 
 
         mSimon[0][1]=sonido_carga("snd/mi.mp3");
-        mSimon[1][1]=sonido_carga("snd/mi.mp3");
-        mSimon[2][1]=sonido_carga("snd/mi.mp3");
+        mSimon[1][1]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/mi.mp3");
 
 
         mSimon[0][2]=sonido_carga("snd/sol.mp3");
-        mSimon[1][2]=sonido_carga("snd/sol.mp3");
-        mSimon[2][2]=sonido_carga("snd/sol.mp3");
+        mSimon[1][2]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/sol.mp3");
 
 
     }
@@ -124,22 +124,22 @@ void cargarSonidos(int cantidad,Sonido* mSimon[][8])
     {
 
         mSimon[0][0]=sonido_carga("snd/do.mp3");
-        mSimon[1][0]=sonido_carga("snd/C4.wav");
-        mSimon[2][0]=sonido_carga("snd/C4-Arpa.wav");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/C4-Arpa.wav");
 
 
         mSimon[0][1]=sonido_carga("snd/mi.mp3");
-        mSimon[1][1]=sonido_carga("snd/mi.mp3");
-        mSimon[2][1]=sonido_carga("snd/mi.mp3");
+        mSimon[1][1]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/mi.mp3");
 
 
         mSimon[0][2]=sonido_carga("snd/sol.mp3");
-        mSimon[1][2]=sonido_carga("snd/sol.mp3");
-        mSimon[2][2]=sonido_carga("snd/sol.mp3");
+        mSimon[1][2]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/sol.mp3");
 
         mSimon[0][3]=sonido_carga("snd/la.mp3");
-        mSimon[1][3]=sonido_carga("snd/la.mp3");
-        mSimon[2][3]=sonido_carga("snd/la.mp3");
+        mSimon[1][3]=sonido_carga("snd/A4.mp3");
+       // mSimon[2][3]=sonido_carga("snd/la.mp3");
 
     }
 
@@ -147,27 +147,27 @@ void cargarSonidos(int cantidad,Sonido* mSimon[][8])
     {
 
         mSimon[0][0]=sonido_carga("snd/do.mp3");
-        mSimon[1][0]=sonido_carga("snd/do.mp3");
-        mSimon[2][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
 
 
         mSimon[0][1]=sonido_carga("snd/re.mp3");
-        mSimon[1][1]=sonido_carga("snd/re.mp3");
-        mSimon[2][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
 
 
         mSimon[0][2]=sonido_carga("snd/mi.mp3");
-        mSimon[1][2]=sonido_carga("snd/mi.mp3");
-        mSimon[2][2]=sonido_carga("snd/mi.mp3");
+        mSimon[1][2]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
 
 
         mSimon[0][3]=sonido_carga("snd/sol.mp3");
-        mSimon[1][3]=sonido_carga("snd/sol.mp3");
-        mSimon[2][3]=sonido_carga("snd/sol.mp3");
+        mSimon[1][3]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/sol.mp3");
 
         mSimon[0][4]=sonido_carga("snd/la.mp3");
-        mSimon[1][4]=sonido_carga("snd/la.mp3");
-        mSimon[2][4]=sonido_carga("snd/la.mp3");
+        mSimon[1][4]=sonido_carga("snd/A4.mp3");
+        //mSimon[2][4]=sonido_carga("snd/la.mp3");
 
     }
 
@@ -175,31 +175,31 @@ void cargarSonidos(int cantidad,Sonido* mSimon[][8])
     {
 
         mSimon[0][0]=sonido_carga("snd/do.mp3");
-        mSimon[1][0]=sonido_carga("snd/do.mp3");
-        mSimon[2][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
 
 
         mSimon[0][1]=sonido_carga("snd/re.mp3");
-        mSimon[1][1]=sonido_carga("snd/re.mp3");
-        mSimon[2][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
 
 
         mSimon[0][2]=sonido_carga("snd/mi.mp3");
-        mSimon[1][2]=sonido_carga("snd/mi.mp3");
-        mSimon[2][2]=sonido_carga("snd/mi.mp3");
+        mSimon[1][2]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
 
         //cambiar los ultimos tres
-        mSimon[0][3]=sonido_carga("snd/sol.mp3");
-        mSimon[1][3]=sonido_carga("snd/sol.mp3");
-        mSimon[2][3]=sonido_carga("snd/sol.mp3");
+        mSimon[0][3]=sonido_carga("snd/FA#.mp3");
+        mSimon[1][3]=sonido_carga("snd/F#4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/sol.mp3");
 
-        mSimon[0][4]=sonido_carga("snd/la.mp3");
-        mSimon[1][4]=sonido_carga("snd/la.mp3");
-        mSimon[2][4]=sonido_carga("snd/la.mp3");
+        mSimon[0][4]=sonido_carga("snd/SOL#.mp3");
+        mSimon[1][4]=sonido_carga("snd/G#4.mp3");
+        //mSimon[2][4]=sonido_carga("snd/la.mp3");
 
-        mSimon[0][5]=sonido_carga("snd/la.mp3");
-        mSimon[1][5]=sonido_carga("snd/la.mp3");
-        mSimon[2][5]=sonido_carga("snd/la.mp3");
+        mSimon[0][5]=sonido_carga("snd/LA#.mp3");
+        mSimon[1][5]=sonido_carga("snd/A#4.mp3");
+        //mSimon[2][5]=sonido_carga("snd/la.mp3");
 
     }
 
@@ -207,35 +207,35 @@ void cargarSonidos(int cantidad,Sonido* mSimon[][8])
     {
 
         mSimon[0][0]=sonido_carga("snd/do.mp3");
-        mSimon[1][0]=sonido_carga("snd/do.mp3");
-        mSimon[2][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
 
 
         mSimon[0][1]=sonido_carga("snd/re.mp3");
-        mSimon[1][1]=sonido_carga("snd/re.mp3");
-        mSimon[2][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
 
 
-        mSimon[0][2]=sonido_carga("snd/mi.mp3");
-        mSimon[1][2]=sonido_carga("snd/mi.mp3");
-        mSimon[2][2]=sonido_carga("snd/mi.mp3");
+        mSimon[0][2]=sonido_carga("snd/Mib.mp3");
+        mSimon[1][2]=sonido_carga("snd/Eb4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
 
         //cambiar los ultimos tres
-        mSimon[0][3]=sonido_carga("snd/sol.mp3");
-        mSimon[1][3]=sonido_carga("snd/sol.mp3");
-        mSimon[2][3]=sonido_carga("snd/sol.mp3");
+        mSimon[0][3]=sonido_carga("snd/fa.mp3");
+        mSimon[1][3]=sonido_carga("snd/F4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/sol.mp3");
 
-        mSimon[0][4]=sonido_carga("snd/la.mp3");
-        mSimon[1][4]=sonido_carga("snd/la.mp3");
-        mSimon[2][4]=sonido_carga("snd/la.mp3");
+        mSimon[0][4]=sonido_carga("snd/sol.mp3");
+        mSimon[1][4]=sonido_carga("snd/G4.mp3");
+       // mSimon[2][4]=sonido_carga("snd/la.mp3");
 
-        mSimon[0][5]=sonido_carga("snd/la.mp3");
-        mSimon[1][5]=sonido_carga("snd/la.mp3");
-        mSimon[2][5]=sonido_carga("snd/la.mp3");
+        mSimon[0][5]=sonido_carga("snd/lab.mp3");
+        mSimon[1][5]=sonido_carga("snd/Ab4.mp3");
+        //mSimon[2][5]=sonido_carga("snd/la.mp3");
 
-        mSimon[0][6]=sonido_carga("snd/do.mp3");
-        mSimon[1][6]=sonido_carga("snd/do.mp3");
-        mSimon[2][6]=sonido_carga("snd/do.mp3");
+        mSimon[0][6]=sonido_carga("snd/si.mp3");
+        mSimon[1][6]=sonido_carga("snd/B4.mp3");
+        //mSimon[2][6]=sonido_carga("snd/do.mp3");
 
     }
 
@@ -243,39 +243,39 @@ void cargarSonidos(int cantidad,Sonido* mSimon[][8])
     {
 
         mSimon[0][0]=sonido_carga("snd/do.mp3");
-        mSimon[1][0]=sonido_carga("snd/do.mp3");
-        mSimon[2][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
 
 
         mSimon[0][1]=sonido_carga("snd/re.mp3");
-        mSimon[1][1]=sonido_carga("snd/re.mp3");
-        mSimon[2][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
 
 
         mSimon[0][2]=sonido_carga("snd/mi.mp3");
-        mSimon[1][2]=sonido_carga("snd/mi.mp3");
-        mSimon[2][2]=sonido_carga("snd/mi.mp3");
+        mSimon[1][2]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
 
         //cambiar los ultimos tres
         mSimon[0][3]=sonido_carga("snd/fa.mp3");
-        mSimon[1][3]=sonido_carga("snd/fa.mp3");
-        mSimon[2][3]=sonido_carga("snd/fa.mp3");
+        mSimon[1][3]=sonido_carga("snd/F4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/fa.mp3");
 
         mSimon[0][4]=sonido_carga("snd/sol.mp3");
-        mSimon[1][4]=sonido_carga("snd/sol.mp3");
-        mSimon[2][4]=sonido_carga("snd/sol.mp3");
+        mSimon[1][4]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][4]=sonido_carga("snd/sol.mp3");
 
         mSimon[0][5]=sonido_carga("snd/la.mp3");
-        mSimon[1][5]=sonido_carga("snd/la.mp3");
-        mSimon[2][5]=sonido_carga("snd/la.mp3");
+        mSimon[1][5]=sonido_carga("snd/A4.mp3");
+        //mSimon[2][5]=sonido_carga("snd/la.mp3");
 
         mSimon[0][6]=sonido_carga("snd/si.mp3");
-        mSimon[1][6]=sonido_carga("snd/si.mp3");
-        mSimon[2][6]=sonido_carga("snd/si.mp3");
+        mSimon[1][6]=sonido_carga("snd/B4.mp3");
+        //mSimon[2][6]=sonido_carga("snd/si.mp3");
 
         mSimon[0][7]=sonido_carga("snd/do_2.mp3");
-        mSimon[1][7]=sonido_carga("snd/do_2.mp3");
-        mSimon[2][7]=sonido_carga("snd/do_2.mp3");
+        mSimon[1][7]=sonido_carga("snd/C5.mp3");
+        //mSimon[2][7]=sonido_carga("snd/do_2.mp3");
 
     }
 }

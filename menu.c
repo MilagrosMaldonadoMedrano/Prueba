@@ -194,7 +194,7 @@ bool CorroborarUsuario(char* usu, Configuracion *usuario)
     fseek(pf, 0, 2);
     usuario->colores = 4;
     usuario->modo = 0;
-    usuario->velocidad = 2000;
+    usuario->velocidad = 100;
     usuario->cheat = false;
     strcpy(usuario->usuario, usu);
     fwrite(usuario, sizeof(Configuracion), 1, pf);

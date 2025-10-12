@@ -2066,12 +2066,12 @@
 	"funciones.h"
 	<string.h>
 
-1760217087 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
+1760230186 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
 	"menu.h"
 	"texto.h"
 	"Dibujo.h"
 
-1760212915 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.h
+1760228324 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 	<stdbool.h>
@@ -2083,7 +2083,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1760222263 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
+1760230278 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
 	"Simon.h"
 	"texto.h"
 	"menu.h"
@@ -2092,11 +2092,11 @@
 	<stdbool.h>
 	<stddef.h>
 
-1760219448 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.h
+1760228243 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 
-1760226976 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.c
+1760235858 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\sonido.c
 	"sonido.h"
 	"math.h"
 
@@ -2105,7 +2105,7 @@
 	<stdio.h>
 	<stdlib.h>
 
-1760222251 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.h
+1760228243 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.h
 	<SDL2/SDL.h>
 	<SDL2/SDL_mixer.h>
 	<SDL_ttf.h>

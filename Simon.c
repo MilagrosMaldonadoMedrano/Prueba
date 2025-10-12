@@ -579,7 +579,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
 
     vectorDestruir(&juego->secuencia);
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 2; i++)
     {
         for(int j=0;j<jugador->colores;j++)
             sound_free(notas[i][j]);
@@ -609,7 +609,7 @@ void mostrarSecuencia(Simon* juego, SDL_Renderer* renderer, const int simon[][OR
 
         int boton = vectorDevolverValor(&juego->secuencia, i);
         iluminarZona(boton, simon, ORDEN, iniX, iniY, renderer, B);
-        int fila=rand()%3;
+        int fila=rand()%2;
         sonido_play(notas[fila][boton],duracion);
         //sonido_play(crearTonoAleatorio());
         SDL_Delay(tiempoDelay);
@@ -633,7 +633,7 @@ int procesarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN], int in
             printf("%d",deteccion);
             iluminarZona(deteccion, simon, ORDEN, iniX, iniY, renderer, N);
 
-            int fila=rand()%3;
+            int fila=rand()%2;
             sonido_play(notas[fila][deteccion],duracion);
 
             //sonido_play(notas[deteccion],duracion);
@@ -947,7 +947,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
     guardarEstadistica(jugador);
     vectorDestruir(&juego->secuencia);
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 2; i++)
     {
         for(int j=0;j<jugador->colores;j++)
             sound_free(notas[i][j]);
@@ -967,7 +967,7 @@ int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX
             printf("%d", deteccion);
             iluminarZona(deteccion, simon, ORDEN, iniX, iniY, renderer, N);
             //boton_render(renderer, b, fuente);
-            int fila=rand()%3;
+            int fila=rand()%2;
             sonido_play(notas[fila][deteccion],duracion);
             //sonido_play(&notas[deteccion], duracion);
             SDL_Delay(150);
@@ -1045,7 +1045,7 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
     fclose(pArch);
     vectorDestruir(&juego->secuencia);
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 2; i++)
     {
         for(int j=0;j<jugador->colores;j++)
             sound_free(notas[i][j]);
