@@ -561,6 +561,14 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
             vectorInsertarAlFinal(&juego->secuencia, rand () % jugador->colores);
             juego->tam++;
         }
+                else
+        {
+            juego->enJuego = pantallaResultado(renderer, fuente, jugador);
+            jugador->nivel = 1;
+            jugador->puntaje = 0;
+        }
+
+
         jugador->velocidad=(jugador->velocidad -(jugador->velocidad*10)/100);
         tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
         if(jugador->cheat==true)
@@ -572,9 +580,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
     }
 
     printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
-    //jugador->colores = cantidad;
-    //jugador->modo =
-    guardarEstadistica(jugador);
+
 
 
     vectorDestruir(&juego->secuencia);
@@ -927,6 +933,13 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
             //vectorInsertarAlFinal(&juego->secuencia, rand () % cantidad);
             juego->tam++;
         }
+        else
+        {
+            juego->enJuego = pantallaResultado(renderer, fuente, jugador);
+            jugador->nivel = 1;
+            jugador->puntaje = 0;
+        }
+
         duracion=(duracion -(duracion*10)/100);
         tiempoDelay=(tiempoDelay-(tiempoDelay*10)/100);
         if(jugador->cheat==true)
@@ -941,9 +954,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
     else
         printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
 
-    //guardo datos estadisticas
-    //jugador->colores = cantidad;
-    //jugador->modo =
+
     guardarEstadistica(jugador);
     vectorDestruir(&juego->secuencia);
 

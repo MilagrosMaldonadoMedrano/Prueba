@@ -57,7 +57,7 @@ void guardarEstadistica(const Jugador* e);
 int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente);
 int compararPuntajes(const void* a, const void* b);
 void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente);
-
+int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador);
 
 
 #endif // MENU_H_INCLUDED

@@ -359,7 +359,7 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
 
     int y = 240;
     char buffer[128];
-    const char* modos[] = {"Mozart", "Schönberg", "Cheat"};
+    const char* modos[] = {"Mozart", "Schonberg", "Cheat"};
 
     // Mostrar hasta los 10 mejores
     for (int i = 0; i < cantidad && i < 10; i++) {
@@ -643,4 +643,141 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
 
 
     SDL_RenderClear(renderer);
+}
+
+
+
+
+int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador)
+{
+    Jugador j;
+    snprintf(j.nombre, sizeof(j.nombre), "%s", jugador->nombre);
+    j.puntaje = jugador->puntaje;
+    j.nivel = jugador->nivel;
+    j.modo = jugador->modo;
+    j.colores = jugador->colores;
+
+    guardarEstadistica(&j);
+
+
+    SDL_Color blanco = colores[8];
+    SDL_Color amarillo = colores[1];
+
+    Boton reintentar, salir;
+    boton_carga(&reintentar, 450, 550, 200, 60, "Reintentar", colores[3], colores[1], colores[8]);
+    boton_carga(&salir, 750, 550, 200, 60, "Salir", colores[2], colores[1], colores[8]);
+
+    //fondo
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 230);
+    SDL_RenderClear(renderer);
+
+    //Panel
+    SDL_SetRenderDrawColor(renderer, 20, 20, 20, 200);
+    SDL_Rect panel = {350, 200, 650, 300};
+    SDL_RenderFillRect(renderer, &panel);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 100);
+    SDL_RenderDrawRect(renderer, &panel);
+
+    mostrarTexto(renderer, fuente, "JUEGO TERMINADO", 500, 230, amarillo);
+
+    //Estadisticas
+    char buffer[128];
+    int y = 280;
+
+    mostrarTexto(renderer, fuente, "Tus estadisticas", 520, y, blanco);
+
+    y += 40;
+
+    snprintf(buffer, sizeof(buffer), "Jugador: %s", jugador->nombre);
+    mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+    y += 40;
+
+    snprintf(buffer, sizeof(buffer), "Puntaje: %d", jugador->puntaje);
+    mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+    y += 40;
+
+    snprintf(buffer, sizeof(buffer), "Nivel alcanzado: %d", jugador->nivel);
+    mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+    y += 40;
+
+    const char* modos[] = {"Mozart", "Schonberg", "Desafio"};
+    snprintf(buffer, sizeof(buffer), "Jugador: %s", modos[jugador->modo]);
+    mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+
+    boton_render(renderer, &reintentar, fuente);
+    boton_render(renderer, &salir, fuente);
+
+    printf("Renderizando: %s (%d pts, nivel %d)\n", jugador->nombre, jugador->puntaje, jugador->nivel);
+
+    SDL_RenderPresent(renderer);
+
+
+    SDL_Event evento;
+
+    int opcion = -1;
+
+    while (opcion == -1)
+    {
+        while (SDL_PollEvent(&evento))
+            {
+            if (evento.type == SDL_QUIT)
+            {
+                opcion = 0;//sale
+            } else if (boton_manejo_evento(&reintentar, &evento))
+            {
+                opcion = 1;//jugar de nuevo
+            }
+            else if (boton_manejo_evento(&salir, &evento))
+            {
+                opcion = 0;//salir
+            }
+        }
+            // Redibujar los botones para que respondan al hover
+        SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 230);
+        SDL_RenderClear(renderer);
+
+        SDL_SetRenderDrawColor(renderer, 20, 20, 20, 200);
+        SDL_RenderFillRect(renderer, &panel);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 100);
+        SDL_RenderDrawRect(renderer, &panel);
+
+        mostrarTexto(renderer, fuente, "JUEGO TERMINADO", 500, 230, amarillo);
+
+        y = 280;
+
+        mostrarTexto(renderer, fuente, "Tus estadisticas", 500, y, blanco);
+
+        y += 40;
+
+        snprintf(buffer, sizeof(buffer), "Jugador: %s", jugador->nombre);
+        mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+        y += 40;
+
+        snprintf(buffer, sizeof(buffer), "Puntaje: %d", jugador->puntaje);
+        mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+        y += 40;
+
+        snprintf(buffer, sizeof(buffer), "Nivel alcanzado: %d", jugador->nivel);
+        mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+        y += 40;
+
+        snprintf(buffer, sizeof(buffer), "Modo: %s", modos[jugador->modo]);
+        mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
+
+
+        boton_render(renderer, &reintentar, fuente);
+        boton_render(renderer, &salir, fuente);
+        SDL_RenderPresent(renderer);
+    }
+
+    return opcion;
 }
