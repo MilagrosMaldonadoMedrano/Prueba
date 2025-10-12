@@ -2066,12 +2066,12 @@
 	"funciones.h"
 	<string.h>
 
-1760230186 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
+1760281650 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.c
 	"menu.h"
 	"texto.h"
 	"Dibujo.h"
 
-1760228324 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.h
+1760276427 c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\menu.h
 	<SDL2/SDL.h>
 	<SDL_ttf.h>
 	<stdbool.h>
@@ -2083,7 +2083,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1760230278 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
+1760281977 source:c:\users\cunde\desktop\ingeniería\tópicos\prueba1\prueba\simon.c
 	"Simon.h"
 	"texto.h"
 	"menu.h"

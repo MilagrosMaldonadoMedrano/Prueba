@@ -645,12 +645,14 @@ void MenuConfiguracion(Jugador * jug, SDL_Renderer* renderer, TTF_Font* fuente)
     SDL_RenderClear(renderer);
 }
 
-
-
-
-int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador)
+int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador,const char* resultado)
 {
+
+
     Jugador j;
+    char resultadoImprimir[40]="JUEGO TERMINADO: HAS ";
+    strcat(resultadoImprimir,resultado);
+
     snprintf(j.nombre, sizeof(j.nombre), "%s", jugador->nombre);
     j.puntaje = jugador->puntaje;
     j.nivel = jugador->nivel;
@@ -664,8 +666,8 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
     SDL_Color amarillo = colores[1];
 
     Boton reintentar, salir;
-    boton_carga(&reintentar, 450, 550, 200, 60, "Reintentar", colores[3], colores[1], colores[8]);
-    boton_carga(&salir, 750, 550, 200, 60, "Salir", colores[2], colores[1], colores[8]);
+    boton_carga(&reintentar, 430, 550, 200, 60, "Reintentar", colores[3], colores[1], colores[8]);
+    boton_carga(&salir, 770, 550, 200, 60, "Salir", colores[2], colores[1], colores[8]);
 
     //fondo
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
@@ -679,7 +681,7 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 100);
     SDL_RenderDrawRect(renderer, &panel);
 
-    mostrarTexto(renderer, fuente, "JUEGO TERMINADO", 500, 230, amarillo);
+    mostrarTexto(renderer, fuente, resultadoImprimir, 500, 230, amarillo);
 
     //Estadisticas
     char buffer[128];
@@ -724,13 +726,27 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
     while (opcion == -1)
     {
         while (SDL_PollEvent(&evento))
-            {
+        {
             if (evento.type == SDL_QUIT)
             {
                 opcion = 0;//sale
             } else if (boton_manejo_evento(&reintentar, &evento))
             {
+
                 opcion = 1;//jugar de nuevo
+                /*jugador->nivel=1;
+                jugador->puntaje=0;
+
+
+
+                SDL_PumpEvents();
+                SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+                DeterminarJuego(jugador,renderer);SDL_PumpEvents();
+
+                SDL_PumpEvents();
+                SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);*/
+
+
             }
             else if (boton_manejo_evento(&salir, &evento))
             {
@@ -747,7 +763,7 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 100);
         SDL_RenderDrawRect(renderer, &panel);
 
-        mostrarTexto(renderer, fuente, "JUEGO TERMINADO", 500, 230, amarillo);
+        mostrarTexto(renderer, fuente, resultadoImprimir, 500, 230, amarillo);
 
         y = 280;
 
@@ -774,10 +790,26 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
         mostrarTexto(renderer, fuente, buffer, 500, y, blanco);
 
 
+
         boton_render(renderer, &reintentar, fuente);
         boton_render(renderer, &salir, fuente);
         SDL_RenderPresent(renderer);
+
+
     }
+
+
+    /*if(opcion==1)
+    {
+        jugador->nivel=1;
+        jugador->puntaje=0;
+        SDL_PumpEvents();
+        SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+        DeterminarJuego(jugador,renderer);SDL_PumpEvents();
+    }*/
+    SDL_PumpEvents();
+    SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+
 
     return opcion;
 }
