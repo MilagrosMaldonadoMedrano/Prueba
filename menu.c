@@ -307,9 +307,6 @@ void GuardarModo(Jugador * jugador)
 
 }
 
-
-
-
 // Muestra las estadisticas ordenadas (max 10 registros)
 void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
 {
