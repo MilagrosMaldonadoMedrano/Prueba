@@ -21,7 +21,7 @@ bool redimensionarVector(Vector* vector, float factor)
         return false;
     }
 
-    //printf("Redimensión de %lld a %lld\n", vector->cap, nuevaCap);
+    //printf("Redimension de %lld a %lld\n", vector->cap, nuevaCap);
 
     vector->cap = nuevaCap;
     vector->vec = nuevoVec;

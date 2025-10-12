@@ -6,28 +6,28 @@ void botones_menu(Boton* botones, int cantidad, int screen_w, int screen_h)
 {
     int start_y = screen_h / 2 - (cantidad * 50 + (cantidad - 1) * 20) / 2;
 
-    // Boton 0: JUGAR
+    // boton 0: JUGAR
     boton_carga(&botones[0], screen_w/2 - 100, start_y, 200, 50,
                 "JUGAR",
                 (SDL_Color){50,150,50,255},
                 (SDL_Color){80,200,80,255},
                 (SDL_Color){30,100,30,255});
 
-    // Boton 1: CONFIGURAR
+    // boton 1: CONFIGURAR
     boton_carga(&botones[1], screen_w/2 - 100, start_y + 70, 200, 50,
                 "CONFIGURAR",
                 (SDL_Color){50,50,150,255},
                 (SDL_Color){80,80,200,255},
                 (SDL_Color){30,30,100,255});
 
-    // Boton 2: ESTADISTICAS
+    // boton 2: ESTADISTICAS
     boton_carga(&botones[2], screen_w/2 - 100, start_y + 140, 200, 50,
                 "ESTADISTICAS",
                 (SDL_Color){150,150,50,255},
                 (SDL_Color){200,200,80,255},
                 (SDL_Color){100,100,30,255});
 
-    // Boton 3: SALIR
+    // boton 3: SALIR
     boton_carga(&botones[3], screen_w/2 - 100, start_y + 210, 200, 50,
                 "SALIR",
                 (SDL_Color){150,50,50,255},
@@ -65,7 +65,7 @@ void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente)
     SDL_RenderDrawRect(renderer, &b->rect);
 
 
-    // --- Renderizar texto ---
+    // --- renderizar texto ---
     SDL_Surface* surface = TTF_RenderText_Blended(fuente, b->texto, (SDL_Color)
     {
         255,255,255,255
@@ -75,7 +75,7 @@ void boton_render(SDL_Renderer* renderer, Boton* b, TTF_Font* fuente)
     int texW = 0, texH = 0;
     SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 
-    // Centrar el texto dentro del botón
+    // centrar el texto dentro del boton
     SDL_Rect dst;
     dst.x = b->rect.x + (b->rect.w - texW) / 2;
     dst.y = b->rect.y + (b->rect.h - texH) / 2;
@@ -99,7 +99,7 @@ int boton_manejo_evento(Boton* b, SDL_Event* e)
     else if (e->type == SDL_MOUSEBUTTONDOWN && b->encima)
     {
         b->presionado = 1;
-        return 1; // Botón activado
+        return 1; // boton activado
     }
     else if (e->type == SDL_MOUSEBUTTONUP)
     {
@@ -119,7 +119,7 @@ int input_manejo_evento(Input *i, SDL_Event *e)
     if (e->type == SDL_MOUSEBUTTONDOWN && pos)
     {
         i->activo = 1;
-        return 1; // Botón activado
+        return 1; // boton activado
     }
     else if (e->type == SDL_MOUSEBUTTONDOWN && !pos)
         i->activo = 0;
@@ -208,7 +208,7 @@ void EscribirPalabra(SDL_Event *evento, Input * campo)
     {
         if (evento->type == SDL_TEXTINPUT)
         {
-        // Verifica longitud máxima
+        // verifica longitud maxima
             if (strlen(campo->texto) + strlen(evento->text.text) < MAX_LENGTH)
             {
                 strcat(campo->texto, evento->text.text);
@@ -216,10 +216,10 @@ void EscribirPalabra(SDL_Event *evento, Input * campo)
         }
         if (evento->type == SDL_KEYDOWN)
         {
-        // Manejo de Backspace
+        // manejo de backspace
             if (evento->key.keysym.sym == SDLK_BACKSPACE && strlen(campo->texto) > 0)
             {
-                campo->texto[strlen(campo->texto) - 1] = '\0'; // Eliminar último carácter
+                campo->texto[strlen(campo->texto) - 1] = '\0'; // eliminar ultimo caracter
             }
         }
     }
@@ -248,7 +248,7 @@ void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente)
     SDL_RenderDrawRect(renderer, &i->rect);
 
 
-    // --- Renderizar texto ---
+    // --- renderizar texto ---
     SDL_Surface* surface = TTF_RenderText_Solid(fuente, i->texto, (SDL_Color)
     {
         255,255,255,255
@@ -258,7 +258,7 @@ void input_render(SDL_Renderer* renderer, Input* i, TTF_Font* fuente)
     int texW = 0, texH = 0;
     SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
 
-    // Centrar el texto dentro del botón
+    // centrar el texto dentro del boton
     SDL_Rect dst;
     dst.x = i->rect.x + 10;
     dst.y = i->rect.y + (i->rect.h - texH) / 2;
@@ -307,7 +307,7 @@ void GuardarModo(Jugador * jugador)
 
 }
 
-// Muestra las estadisticas ordenadas (max 10 registros)
+// muestra las estadisticas ordenadas max 10 registros
 void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
 {
     Jugador* lista = NULL;
@@ -335,14 +335,13 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
     SDL_RenderClear(renderer);
 
 
-    //  Fondo translucido tipo panel
+    //  fondo translucido tipo panel
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(renderer, 20, 20, 20, 180);  // gris oscuro con transparencia
     SDL_Rect panel = {280, 120, 800, 500};
-    //SDL_Rect panel = {280, 120, 800, 500};
     SDL_RenderFillRect(renderer, &panel);
 
-    // Borde del panel
+    // borde del panel
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 80);
     SDL_RenderDrawRect(renderer, &panel);
 
@@ -357,7 +356,7 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
         return;
     }
 
-    // Ordenar por puntaje descendente
+    // ordenar por puntaje descendente
     if(cantidad > 0)
     {
         qsort(lista, cantidad, sizeof(Jugador), compararPuntajes);
@@ -371,12 +370,12 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
     mostrarTexto(renderer, fuente, "PUNTAJE", 950, 165, gris);
 
 
-    //int y = 240;
+
     int y = 200;
     char buffer[128];
     const char* modos[] = {"Mozart", "Schonberg", "Cheat"};
 
-    // Mostrar hasta los 10 mejores
+    // mostrar hasta los 10 mejores
     for (int i = 0; i < cantidad && i < 10; i++) {
         SDL_SetRenderDrawColor(renderer,
             coloresFilas[i].r, coloresFilas[i].g,
@@ -400,7 +399,7 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
     }
 
     SDL_RenderPresent(renderer);
-    // Botón Volver
+    // boton Volver
     if(botonVolver(renderer, fuente))
     {
         free(lista);
@@ -444,7 +443,7 @@ int cargarEstadisticas(Jugador** vec)
     return cant;
 }
 
-// Función para comparar puntajes (descendente)
+// funcion para comparar puntajes de forma descendente
 int compararPuntajes(const void* a, const void* b)
 {
     const Jugador* ea = (const Jugador*)a;
@@ -466,7 +465,7 @@ int botonVolver(SDL_Renderer* renderer, TTF_Font* fuente)
 
     while (!salir)
         {
-        // Dibujar el botón
+        // dibujar el boton
         boton_render(renderer, &volver, fuente);
         SDL_RenderPresent(renderer);
 
@@ -759,7 +758,7 @@ int pantallaResultado(SDL_Renderer* renderer, TTF_Font* fuente, Jugador* jugador
             }
         }
 
-        // Redibujar los botones para que respondan al hover
+        // redibujar los botones para que respondan al colocar el mouse encima
         SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 230);
         SDL_RenderClear(renderer);

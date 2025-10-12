@@ -28,6 +28,8 @@ int indiceJugador; //en que paso esta el jugador
 int enJuego; //flag de estado
 bool cheat;
 }Simon;
+
+
 typedef struct {
     char nombre[10];
     int nivel;
@@ -39,9 +41,6 @@ typedef struct {
     bool archivo; //true=SecuenciaNotas, false ModoDesafio
 } Jugador;
 
-//Juego basico
-void pulsarSectorLuz(SDL_Renderer *renderer, const int m[][ORDEN], int orden);
-void simon1(SDL_Renderer* renderer,const int simon[][ORDEN],int cantidad);
 
 void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador);
 Simon* simonCrear(int cantidad,const char* modoJuego);

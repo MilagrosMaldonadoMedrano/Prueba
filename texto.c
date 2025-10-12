@@ -1,4 +1,5 @@
 #include "texto.h"
+#include "math.h"
 
 int textIni()
 {
@@ -117,4 +118,63 @@ void ingresarNombre(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jugador)
         SDL_RenderPresent(renderer);
     }
     SDL_StopTextInput();
+}
+
+
+void mostrarTituloSimon(SDL_Renderer* renderer, TTF_Font* fuente, TTF_Font* fuente2)
+{
+    int ejecutando = 1;
+    SDL_Event e;
+    float tiempo = 0.0f;
+
+    while (ejecutando) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT)
+                ejecutando = 0;
+            else if (e.type == SDL_KEYDOWN || e.type == SDL_MOUSEBUTTONDOWN)
+                ejecutando = 0; // salir del titulo con cualquier tecla o clic
+        }
+
+        // fondo
+        SDL_SetRenderDrawColor(renderer, 20, 20, 40, 255);
+        SDL_RenderClear(renderer);
+
+        // animacion de color un ciclo de brillo suave
+        Uint8 r = (Uint8)(128 + 127 * sin(tiempo));
+        Uint8 g = (Uint8)(255 * fabs(sin(tiempo / 2)));
+        Uint8 b = 255;
+
+        SDL_Color colorTitulo = {r, g, b, 255};
+        SDL_Color colorSub = {255, 255, 255, 200};
+
+        // render titulo principal
+        const char* titulo = "SIMON DICE";
+        SDL_Surface* surfTitulo = TTF_RenderText_Blended(fuente, titulo, colorTitulo);
+        SDL_Texture* texTitulo = SDL_CreateTextureFromSurface(renderer, surfTitulo);
+
+        int texW, texH;
+        SDL_QueryTexture(texTitulo, NULL, NULL, &texW, &texH);
+        SDL_Rect dstTitulo = { (1366 - texW)/2, 250, texW, texH };
+        SDL_RenderCopy(renderer, texTitulo, NULL, &dstTitulo);
+
+        SDL_FreeSurface(surfTitulo);
+        SDL_DestroyTexture(texTitulo);
+
+        // subtitulo
+        const char* subtitulo = "Presione una tecla para comenzar";
+        SDL_Surface* surfSub = TTF_RenderText_Blended(fuente2, subtitulo, colorSub);
+        SDL_Texture* texSub = SDL_CreateTextureFromSurface(renderer, surfSub);
+
+        SDL_QueryTexture(texSub, NULL, NULL, &texW, &texH);
+        SDL_Rect dstSub = { (1366 - texW)/2, 500, texW, texH };
+        SDL_RenderCopy(renderer, texSub, NULL, &dstSub);
+
+        SDL_FreeSurface(surfSub);
+        SDL_DestroyTexture(texSub);
+
+        SDL_RenderPresent(renderer);
+
+        SDL_Delay(16); // para mantener 60 fps
+        tiempo += 0.05f;
+    }
 }

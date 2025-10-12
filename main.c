@@ -47,11 +47,14 @@ int main(int argc, char* argv[])
     //inicializa ttf
     TTF_Init();
 
-    // Cargar fuente
+    // cargar fuente
     TTF_Font* fuente = TTF_OpenFont("fnt/arial.ttf", 24);
-    TTF_Font* fuente2 = TTF_OpenFont("fnt/Simon.ttf", 100);
+    TTF_Font* fuenteTitulo = TTF_OpenFont("fnt/Simon.ttf", 100);
+    TTF_Font* fuenteSubtitulo = TTF_OpenFont("fnt/Simon.ttf", 40);
+    mostrarTituloSimon(renderer, fuenteTitulo, fuenteSubtitulo);
+    TTF_CloseFont(fuenteSubtitulo);
 
-    Log_in(&usuario, renderer, fuente, fuente2);
+    Log_in(&usuario, renderer, fuente, fuenteTitulo);
 
     SDL_SetRenderDrawColor(renderer,0,0,0, 255);
     SDL_RenderClear(renderer);
@@ -70,25 +73,25 @@ int main(int argc, char* argv[])
         jugador.nivel = 1;
         while (SDL_PollEvent(&e))
         {
-            mostrarTexto(renderer, fuente2, "SIMON", 435, 120, (SDL_Color){255, 255, 255, 0});
+            mostrarTexto(renderer, fuenteTitulo, "SIMON", 435, 120, (SDL_Color){255, 255, 255, 0});
 
             if (e.type == SDL_QUIT)
                 ejecutando = 0;
 
-            for (int i = 0; i < 4; i++)//Prueba el evento en cada boton
+            for (int i = 0; i < 4; i++)//prueba el evento en cada boton
             {
                 if (boton_manejo_evento(&menu_botones[i], &e))
                 {
                     SDL_Log("Boton %s presionado", menu_botones[i].texto);
-                    if(i == 0) // Jugar
+                    if(i == 0) // jugar
                     {
                         DeterminarJuego(&jugador, renderer);
                     }
-                    if(i == 1) // Configuracion
+                    if(i == 1) // configuracion
                     {
                         MenuConfiguracion(&jugador, renderer, fuente);
                     }
-                    if(i == 2) // Estadisiticas
+                    if(i == 2) // estadisiticas
                     {
                         pantallaEstadisticas(renderer, fuente);
                     }
@@ -117,6 +120,7 @@ int main(int argc, char* argv[])
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(ventana);
     TTF_CloseFont(fuente);
+    TTF_CloseFont(fuenteTitulo);
     TTF_Quit();
     SDL_Quit();
 

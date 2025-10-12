@@ -66,15 +66,6 @@ Sonido* crearTono(float frecuencia, float duracionSegundos)
 
 
 
-Sonido* crearTonoAleatorio()
-{
-    float freq;
-    int min = 200, max = 1000;
-
-    freq = min + rand() % (max - min + 1);
-
-    return crearTono(freq, 0.3f);// 0.3 segundos
-}
 
 void sonido_play(Sonido* s,float duracion)
 {

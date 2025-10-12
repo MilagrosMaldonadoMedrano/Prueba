@@ -26,10 +26,8 @@ int sonido_ini();
 Sonido* sonido_carga(const char* path);
 void sonido_play(Sonido* s,float duracion);
 Sonido* crearTono(float frecuencia, float duracionSegundos);
-Sonido* crearTonoAleatorio();
 void sound_free(Sonido* s);
 void sound_quit();
-//Sonido* modificarTiempoSonido(float duracion,Sonido *s);
 void cargarSonidos(int cantidad,Sonido* vSimon[][8]);
 
 #endif // SONIDO_H_INCLUDED

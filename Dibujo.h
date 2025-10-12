@@ -36,7 +36,7 @@ void dibujar(SDL_Renderer *renderer, const int m[][ORDEN], int filas, int column
 void imprimirDeteccion(int deteccion);
 void iluminarZona(const int zona,const int m[][ORDEN],const int orden,int origx,int origy,SDL_Renderer *renderer,int zonaMod);
 void dibujarEnMenu(SDL_Renderer *renderer, const int m[][ORDENMENU], int filas, int columnas, int origenX, int origenY,int escalar);
-
+int detectarClic(int x, int y,const int m[][ORDEN],int orden,int xMat,int yMat);
 
 
 

@@ -11,6 +11,7 @@ TTF_Font* cargarFnt(const char* path, int tamFnt);
 void mostrarTexto(SDL_Renderer* renderer, TTF_Font* fnt, const char* texto, int x, int y, SDL_Color color);
 void mostrarEstadisticaSimon(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jugador, int nivelSimon);
 void ingresarNombre(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jugador);
+void mostrarTituloSimon(SDL_Renderer* renderer, TTF_Font* fuente, TTF_Font* fuente2);
 
 
 #endif // TEXTO_H_INCLUDED
