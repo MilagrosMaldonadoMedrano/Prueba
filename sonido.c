@@ -83,12 +83,12 @@ void sonido_play(Sonido* s,float duracion)
         //Mix_PlayChannel(-1, s->chunk, 0); // -1 = cualquier canal libre
 }
 
-void sound_free(Sonido** s)
+void sound_free(Sonido* s)
 {
     if (s)
     {
-        if ((*s)->chunk) Mix_FreeChunk((*s)->chunk);
-        free(*s);
+        if (s->chunk) Mix_FreeChunk(s->chunk);
+        free(s);
     }
 }
 
@@ -98,68 +98,185 @@ void sound_quit()
 }
 
 
-void cargarSonidos(int cantidad,Sonido** vSimon)
+void cargarSonidos(int cantidad,Sonido* mSimon[][8])
 {
 
     if(cantidad==3)
     {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/mi.mp3");
-        vSimon[2]=sonido_carga("snd/sol.mp3");
+        mSimon[0][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/C4-Arpa.wav");
+
+
+        mSimon[0][1]=sonido_carga("snd/mi.mp3");
+        mSimon[1][1]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/mi.mp3");
+
+
+        mSimon[0][2]=sonido_carga("snd/sol.mp3");
+        mSimon[1][2]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/sol.mp3");
+
+
     }
 
     if(cantidad==4)
     {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/mi.mp3");
-        vSimon[2]=sonido_carga("snd/sol.mp3");
-        vSimon[3]=sonido_carga("snd/la.mp3");
+
+        mSimon[0][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/C4-Arpa.wav");
+
+
+        mSimon[0][1]=sonido_carga("snd/mi.mp3");
+        mSimon[1][1]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/mi.mp3");
+
+
+        mSimon[0][2]=sonido_carga("snd/sol.mp3");
+        mSimon[1][2]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/sol.mp3");
+
+        mSimon[0][3]=sonido_carga("snd/la.mp3");
+        mSimon[1][3]=sonido_carga("snd/A4.mp3");
+       // mSimon[2][3]=sonido_carga("snd/la.mp3");
+
     }
 
     if(cantidad==5)
     {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/sol.mp3");
-        vSimon[4]=sonido_carga("snd/la.mp3");
+
+        mSimon[0][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
+
+
+        mSimon[0][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
+
+
+        mSimon[0][2]=sonido_carga("snd/mi.mp3");
+        mSimon[1][2]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
+
+
+        mSimon[0][3]=sonido_carga("snd/sol.mp3");
+        mSimon[1][3]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/sol.mp3");
+
+        mSimon[0][4]=sonido_carga("snd/la.mp3");
+        mSimon[1][4]=sonido_carga("snd/A4.mp3");
+        //mSimon[2][4]=sonido_carga("snd/la.mp3");
+
     }
 
     if(cantidad==6)
     {
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/sol.mp3"); //CAMBIAR
-        vSimon[4]=sonido_carga("snd/la.mp3");  //CAMBIAR
-        vSimon[5]=sonido_carga("snd/la.mp3");
+
+        mSimon[0][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
+
+
+        mSimon[0][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
+
+
+        mSimon[0][2]=sonido_carga("snd/mi.mp3");
+        mSimon[1][2]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
+
+        //cambiar los ultimos tres
+        mSimon[0][3]=sonido_carga("snd/FA#.mp3");
+        mSimon[1][3]=sonido_carga("snd/F#4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/sol.mp3");
+
+        mSimon[0][4]=sonido_carga("snd/SOL#.mp3");
+        mSimon[1][4]=sonido_carga("snd/G#4.mp3");
+        //mSimon[2][4]=sonido_carga("snd/la.mp3");
+
+        mSimon[0][5]=sonido_carga("snd/LA#.mp3");
+        mSimon[1][5]=sonido_carga("snd/A#4.mp3");
+        //mSimon[2][5]=sonido_carga("snd/la.mp3");
 
     }
 
     if(cantidad==7)
     {
 
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/sol.mp3"); //CAMBIAR
-        vSimon[4]=sonido_carga("snd/la.mp3");  //CAMBIAR
-        vSimon[5]=sonido_carga("snd/la.mp3");
-        vSimon[6]=sonido_carga("snd/do.mp3");
+        mSimon[0][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
+
+
+        mSimon[0][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
+
+
+        mSimon[0][2]=sonido_carga("snd/Mib.mp3");
+        mSimon[1][2]=sonido_carga("snd/Eb4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
+
+        //cambiar los ultimos tres
+        mSimon[0][3]=sonido_carga("snd/fa.mp3");
+        mSimon[1][3]=sonido_carga("snd/F4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/sol.mp3");
+
+        mSimon[0][4]=sonido_carga("snd/sol.mp3");
+        mSimon[1][4]=sonido_carga("snd/G4.mp3");
+       // mSimon[2][4]=sonido_carga("snd/la.mp3");
+
+        mSimon[0][5]=sonido_carga("snd/lab.mp3");
+        mSimon[1][5]=sonido_carga("snd/Ab4.mp3");
+        //mSimon[2][5]=sonido_carga("snd/la.mp3");
+
+        mSimon[0][6]=sonido_carga("snd/si.mp3");
+        mSimon[1][6]=sonido_carga("snd/B4.mp3");
+        //mSimon[2][6]=sonido_carga("snd/do.mp3");
 
     }
 
     if(cantidad==8)
     {
 
-        vSimon[0]=sonido_carga("snd/do.mp3");
-        vSimon[1]=sonido_carga("snd/re.mp3");
-        vSimon[2]=sonido_carga("snd/mi.mp3");
-        vSimon[3]=sonido_carga("snd/fa.mp3");
-        vSimon[4]=sonido_carga("snd/sol.mp3");
-        vSimon[5]=sonido_carga("snd/la.mp3");
-        vSimon[6]=sonido_carga("snd/si.mp3");
-        vSimon[7]=sonido_carga("snd/do_2.mp3");
+        mSimon[0][0]=sonido_carga("snd/do.mp3");
+        mSimon[1][0]=sonido_carga("snd/C4.mp3");
+        //mSimon[2][0]=sonido_carga("snd/do.mp3");
+
+
+        mSimon[0][1]=sonido_carga("snd/re.mp3");
+        mSimon[1][1]=sonido_carga("snd/D4.mp3");
+        //mSimon[2][1]=sonido_carga("snd/re.mp3");
+
+
+        mSimon[0][2]=sonido_carga("snd/mi.mp3");
+        mSimon[1][2]=sonido_carga("snd/E4.mp3");
+        //mSimon[2][2]=sonido_carga("snd/mi.mp3");
+
+        //cambiar los ultimos tres
+        mSimon[0][3]=sonido_carga("snd/fa.mp3");
+        mSimon[1][3]=sonido_carga("snd/F4.mp3");
+        //mSimon[2][3]=sonido_carga("snd/fa.mp3");
+
+        mSimon[0][4]=sonido_carga("snd/sol.mp3");
+        mSimon[1][4]=sonido_carga("snd/G4.mp3");
+        //mSimon[2][4]=sonido_carga("snd/sol.mp3");
+
+        mSimon[0][5]=sonido_carga("snd/la.mp3");
+        mSimon[1][5]=sonido_carga("snd/A4.mp3");
+        //mSimon[2][5]=sonido_carga("snd/la.mp3");
+
+        mSimon[0][6]=sonido_carga("snd/si.mp3");
+        mSimon[1][6]=sonido_carga("snd/B4.mp3");
+        //mSimon[2][6]=sonido_carga("snd/si.mp3");
+
+        mSimon[0][7]=sonido_carga("snd/do_2.mp3");
+        mSimon[1][7]=sonido_carga("snd/C5.mp3");
+        //mSimon[2][7]=sonido_carga("snd/do_2.mp3");
+
     }
 }
 
