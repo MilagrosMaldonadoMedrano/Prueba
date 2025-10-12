@@ -16,7 +16,6 @@
 #include "sonido.h"
 #include "Dibujo.h"
 #include "Vector.h"
-#include "Funciones.h"
 
 #define PATH_FNT_ARIAL "fnt/arial.ttf"
 #define TAM_FNT_MENU 22
