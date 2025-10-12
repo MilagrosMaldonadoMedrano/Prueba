@@ -902,7 +902,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
         printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
 
 
-    guardarEstadistica(jugador);
+
     vectorDestruir(&juego->secuencia);
 
     for (int i = 0; i < 2; i++)
