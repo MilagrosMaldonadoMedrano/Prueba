@@ -354,6 +354,8 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
         mostrarTexto(renderer, fuente, "No hay registros guardados.", 540, 130, blanco);
         SDL_RenderPresent(renderer);
         SDL_Delay(1500);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderClear(renderer);
         return;
     }
 
