@@ -1,3 +1,18 @@
+/*
+Apellido: Robles, Kevin
+DNI: 41261195
+Entrega: Sí
+
+Apellido: Bottarini, Matias Nicolas
+DNI: 45237992
+Entrega: Sí
+
+Apellido: Maldonado Medrano, Milagros
+DNI: 44182217
+Entrega: Sí
+*/
+
+
 #include<time.h>
 #include "Dibujo.h"
 #include "Simon.h"
@@ -35,11 +50,11 @@ int main(int argc, char* argv[])
     // Cargar fuente
     TTF_Font* fuente = TTF_OpenFont("fnt/arial.ttf", 24);
 
-    SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+    Log_in(&usuario, renderer, fuente);
+
+    SDL_SetRenderDrawColor(renderer,0,0,0, 255);
     SDL_RenderClear(renderer);
     SDL_RenderPresent(renderer);
-
-    Log_in(&usuario, renderer, fuente);
 
     botones_menu(menu_botones, 4, SCREEN_W, SCREEN_H);//cargo los botones
 
