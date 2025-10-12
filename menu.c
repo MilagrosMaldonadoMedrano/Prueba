@@ -170,7 +170,8 @@ void Log_in(Configuracion *usuario, SDL_Renderer *renderer, TTF_Font* fuente, TT
 
 bool CorroborarUsuario(char* usu, Configuracion *usuario)
 {
-    FILE *pf = fopen("Usuarios.bin", "r+b");
+    FILE *pf = fopen("Usuarios.bin", "a+b");
+    rewind(pf);
     Configuracion lect;
     if(!pf)
     {
@@ -373,7 +374,7 @@ void pantallaEstadisticas(SDL_Renderer* renderer, TTF_Font* fuente)
 
     int y = 200;
     char buffer[128];
-    const char* modos[] = {"Mozart", "Schonberg", "Cheat"};
+    const char* modos[] = {"Schonberg","Mozart", "Cheat"};
 
     // mostrar hasta los 10 mejores
     for (int i = 0; i < cantidad && i < 10; i++) {
