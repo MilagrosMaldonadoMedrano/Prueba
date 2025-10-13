@@ -1,7 +1,7 @@
 #include<time.h>
 #include<stdlib.h>
 #include<stdio.h>
-#include "funciones.h"
+#include "Dibujo.h"
 
 const SDL_Color colores[] =
 {

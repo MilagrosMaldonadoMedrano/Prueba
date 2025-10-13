@@ -20,7 +20,6 @@ Entrega: Sí
 #include "menu.h"
 #include "string.h"
 #include "texto.h"
-#include "funciones.h"
 
 #define SCREEN_W 1366
 #define SCREEN_H 768
