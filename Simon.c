@@ -387,10 +387,7 @@ int simon8Colores[ORDEN][ORDEN]={
     {T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T}
 };
 
-
-
-
-
+int pantallaDeReintentar(SDL_Renderer* renderer);
 
 
 
@@ -405,6 +402,9 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
     Sonido* notas[3][8];
     cargarSonidos(jugador->colores,notas);//array to pointer decay
     int duracion=jugador->velocidad;
+    //Boton b;
+    //boton_carga(&b, 1156, 10, 200, 50,"Retroceder",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+
 
     Simon* juego = simonCrear(jugador->colores,"Schomberg");
     if(jugador->cheat==true)
@@ -455,6 +455,8 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
             mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,duracion,tiempoDelay);
         }
 
+
+
         juego->indiceJugador = 0;
 
         int rondaCompletada = 0;
@@ -468,6 +470,7 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
                     rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,jugador->colores,duracion);
             }
 
+
         }
 
         if(juego->enJuego)
@@ -478,9 +481,22 @@ void simon(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador)
             vectorInsertarAlFinal(&juego->secuencia, rand () % jugador->colores);
             juego->tam++;
         }
-        else
+        else //juego->enJuego==0
         {
-            opcion=pantallaResultado(renderer,fuente,jugador,"PERDIDO");
+
+            if(pantallaDeReintentar(renderer)==1)
+            {
+                //fprintf(pArch, "%d;", *(juego->secuencia.vec+i));
+                if( (juego->secuencia.ce)>0)
+                {
+                    //juego->secuencia.ce--;
+                    juego->enJuego=1;
+                    SDL_Delay(150);
+                }
+
+            }
+            else
+                opcion=pantallaResultado(renderer,fuente,jugador,"PERDIDO");
 
 
         }
@@ -767,8 +783,6 @@ void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer)
     }
 }
 
-
-
 void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,const char* nombreArchivo)
 {
     if (!sonido_ini())
@@ -951,7 +965,7 @@ int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX
 
 void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador, const char* nombreArch)
 {
-    FILE* pArch = fopen(nombreArch, "wt");
+    FILE* pArch = fopen(nombreArch, "w+t");
     if (!pArch)
     {
         printf("Error en la apertura del archivo %s.\n", nombreArch);
@@ -972,8 +986,10 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
     int inicioX = (SCREEN_W / 2) - (ORDEN * TAM_PIXEL / 2);
     int inicioY = (SCREEN_H / 2) - (ORDEN * TAM_PIXEL / 2);
 
-    Boton b;
+    Boton b,c;
     boton_carga(&b, 1156, 10, 200, 50,"Finalizar",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+    boton_carga(&c, 1156, 80, 200, 50,"Retroceder",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+
 
     SDL_Event evento;
     int deteccion;
@@ -986,11 +1002,20 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
             deteccion = validarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas, jugador->colores, jugador->velocidad);
             if (deteccion >= 0 && deteccion < jugador->colores)
             {
-                fprintf(pArch, "%d;", deteccion);
+                //cant++;
+                vectorInsertarAlFinal(&juego->secuencia,deteccion);
+                //fprintf(pArch, "%d;", deteccion);
             }
             if (boton_manejo_evento(&b, &evento))
             {
                 juego->enJuego = 0;
+            }
+            if(boton_manejo_evento(&c, &evento))
+            {
+                if(juego->secuencia.ce>0)
+                    juego->secuencia.ce--;
+                printf("Se ha presionado el boton retroceder.\n");
+
             }
 
         }
@@ -999,6 +1024,7 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
         SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255);
         SDL_RenderClear(renderer);
         boton_render(renderer, &b, fuente);
+        boton_render(renderer, &c, fuente);
         dibujar(renderer, simon, ORDEN, ORDEN, inicioX, inicioY);
         SDL_RenderPresent(renderer);
     }
@@ -1006,6 +1032,11 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
     printf("Ha terminado!\n");
 
     guardarEstadistica(jugador);
+
+
+    for(int i=0;i<juego->secuencia.ce;i++)
+        fprintf(pArch, "%d;", *(juego->secuencia.vec+i));
+
 
 
     fclose(pArch);
@@ -1026,6 +1057,49 @@ void desafio(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,
     SDL_RenderPresent(renderer);
 
 }
+int pantallaDeReintentar(SDL_Renderer* renderer)
+{
+    Boton terminar,PasoAtras;
 
+    boton_carga(&terminar,  SCREEN_W/2 - 275, SCREEN_H/2 + 200, 200, 50,"Terminar",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+    boton_carga(&PasoAtras, SCREEN_W/2 +75, SCREEN_H/2 + 200, 200, 50,"Paso atras",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+
+
+
+    SDL_Event evento;
+
+    textIni();
+    TTF_Font* fuente = cargarFnt(PATH_FNT_ARIAL, TAM_FNT_MENU);
+
+    int ejecutando=1,devolver;
+
+    while(ejecutando)
+    {
+        while(SDL_PollEvent(&evento))
+        {
+            if (boton_manejo_evento(&terminar, &evento))
+            {
+                ejecutando=0;
+                devolver=0;
+            }
+            if(boton_manejo_evento(&PasoAtras, &evento))
+            {
+
+                ejecutando=0;
+                devolver=1;
+
+            }
+        }
+
+        SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255);
+        SDL_RenderClear(renderer);
+        boton_render(renderer, &terminar, fuente);
+        boton_render(renderer, &PasoAtras, fuente);
+        SDL_RenderPresent(renderer);
+    }
+
+    return devolver;
+
+}
 
 
