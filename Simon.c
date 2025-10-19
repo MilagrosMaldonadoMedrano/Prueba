@@ -721,10 +721,13 @@ void DeterminarJuego(Jugador * jug, SDL_Renderer *renderer)
     char* secuencia="SecuenciaNotas";
     char* modo="ModoDesafio";
     char nombreArchivo[30];
+    TTF_Font* fuenteTitulo = TTF_OpenFont("fnt/Simon.ttf", 100);
 
     char* baseNombre = (jug->archivo) ? secuencia : modo;
     sprintf(nombreArchivo, "Secuencias/%s%d.txt", baseNombre, jug->colores);
 
+
+    cuentaRegresiva(renderer,fuenteTitulo);
     switch(jug->colores)
     {
         case 3:
@@ -941,6 +944,7 @@ void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,c
     SDL_RenderPresent(renderer);
 }
 
+
 int validarEntrada(Simon* juego, SDL_Event* e, const int simon[][ORDEN],int iniX, int iniY, SDL_Renderer* renderer,Sonido* notas[][8], int cantidad, float duracion)
 {
     if (e->type == SDL_MOUSEBUTTONDOWN && e->button.button == SDL_BUTTON_LEFT)
@@ -1102,4 +1106,206 @@ int pantallaDeReintentar(SDL_Renderer* renderer)
 
 }
 
+/*
 
+
+void mozart(SDL_Renderer* renderer, const int simon[][ORDEN], Jugador* jugador,const char* nombreArchivo)
+{
+    if (!sonido_ini())
+        return;
+
+    Sonido* notas[3][8];
+    cargarSonidos(jugador->colores,notas);//array to pointer decay
+
+    Simon* juego = simonCrear(jugador->colores,"Mozart");
+    int simonAux[ORDEN][ORDEN];
+    int simonRotable[ORDEN][ORDEN];
+
+
+    Boton pasoAtras,terminar;
+    boton_carga(&pasoAtras, 1156, 10, 200, 50,"Deshacer Mov",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+    boton_carga(&terminar, 1156, 80, 200, 50,"Terminar",(SDL_Color){50,150,50,255},(SDL_Color){80,200,80,255},(SDL_Color){30,100,30,255});
+
+    int opcion;
+
+    if(jugador->cheat==true)
+    {
+        cargarSimon(simon,simonRotable);
+    }
+
+    FILE* pArch=fopen(nombreArchivo,"rt");
+
+    if(!pArch)
+    {
+        printf("Error en la apertura del archivo %s\n",nombreArchivo);
+        exit(1);
+    }
+
+    //para posicionar la matriz en el centro de la ventana
+    int inicioX=(SCREEN_W/2)-(ORDEN*TAM_PIXEL/2);
+    int inicioY=(SCREEN_H/2)-(ORDEN*TAM_PIXEL/2);
+
+    SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255); //color turquesa
+    SDL_RenderClear(renderer);    // limpia toda la pantalla con ese color
+    SDL_RenderPresent(renderer); //actualiza la ventana
+
+
+    dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
+    SDL_Delay(300);
+    srand(time(0));
+
+
+    textIni();
+    TTF_Font* fuente = cargarFnt(PATH_FNT_ARIAL, TAM_FNT_MENU);
+
+    SDL_Event evento;
+
+    float duracion=jugador->velocidad;
+    int tiempoDelay=300;
+
+
+    int patron;
+
+    fscanf(pArch,"%d;",&patron);
+
+    //Simon* aux;
+    //Vector aux;
+    //int contador=0;
+    while(!feof(pArch))
+    {
+        vectorInsertarAlFinal(&juego->secuencia,patron);
+        //vectorInsertarAlFinal(&aux,patron);
+        fscanf(pArch,"%d;",&patron);
+
+    }
+
+    fclose(pArch);
+
+    while(juego->enJuego && juego->tam<=vectorDevolverCantidad(&juego->secuencia))
+    {
+        SDL_Delay(300);
+        SDL_SetRenderDrawColor(renderer, 138, 149, 151, 255); //color turquesa
+        SDL_RenderClear(renderer);    // limpia toda la pantalla con ese color
+        if(jugador->cheat==true)
+        {
+            dibujar(renderer,simonRotable,ORDEN,ORDEN,inicioX,inicioY);
+            mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
+            boton_render(renderer, &pasoAtras, fuente);
+            boton_render(renderer, &terminar, fuente);
+            SDL_RenderPresent(renderer);
+            mostrarSecuencia(juego, renderer, simonRotable, inicioX, inicioY, notas,duracion,tiempoDelay);
+        }
+        else
+        {
+            boton_render(renderer, &pasoAtras, fuente);
+            boton_render(renderer, &terminar, fuente);
+            dibujar(renderer,simon,ORDEN,ORDEN,inicioX,inicioY);
+            mostrarEstadisticaSimon(renderer, fuente, jugador, juego->tam);
+            SDL_RenderPresent(renderer);
+            mostrarSecuencia(juego, renderer, simon, inicioX, inicioY, notas,duracion,tiempoDelay);
+        }
+
+        juego->indiceJugador = 0;
+
+        int rondaCompletada = 0;
+        while(juego->enJuego && !rondaCompletada)
+        {
+            while(SDL_PollEvent(&evento))
+            {
+                if(jugador->cheat==true)
+                    rondaCompletada = procesarEntrada(juego, &evento, simonRotable, inicioX, inicioY, renderer, notas,jugador->colores,duracion);
+                else
+                    rondaCompletada = procesarEntrada(juego, &evento, simon, inicioX, inicioY, renderer, notas,jugador->colores,duracion);
+
+                if(boton_manejo_evento(&terminar, &evento))
+                {
+                    opcion=pantallaResultado(renderer,fuente,jugador,"PERDIDO");
+                    juego->enJuego=0;
+                }
+                if (boton_manejo_evento(&pasoAtras, &evento))
+                {
+                    if(juego->secuencia.ce>0)
+                        juego->tam--;
+                    printf("Se ha presionado el boton retroceder.\n");
+                }
+                boton_render(renderer, &pasoAtras, fuente);
+                boton_render(renderer, &terminar, fuente);
+            }
+
+        }
+
+        if(juego->enJuego)
+        {
+
+            jugador->nivel++;
+            jugador->puntaje += 10 * jugador->nivel; // sistema de puntuacion
+            juego->tam++;
+        }
+        else
+        {
+            while(SDL_PollEvent(&evento))
+            {
+                if (boton_manejo_evento(&pasoAtras, &evento))
+                {
+                    if(juego->secuencia.ce>0)
+                        juego->secuencia.ce--;
+                    printf("Se ha presionado el boton retroceder.\n");
+                }
+                if(boton_manejo_evento(&terminar, &evento))
+                {
+                    opcion=pantallaResultado(renderer,fuente,jugador,"PERDIDO");
+                }
+                boton_render(renderer, &pasoAtras, fuente);
+                boton_render(renderer, &terminar, fuente);
+            }
+
+        }
+
+        duracion=(duracion -(duracion*3)/100);
+        tiempoDelay=(tiempoDelay-(tiempoDelay*3)/100);
+        if(jugador->cheat==true)
+        {
+            cargarSimon(simonRotable,simonAux);
+            rotarSimon(simonAux,simonRotable);
+        }
+
+    }
+    if(juego->tam-1==vectorDevolverCantidad(&juego->secuencia))
+    {
+        printf("Ha ganado! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
+
+        opcion=pantallaResultado(renderer,fuente,jugador,"GANADO");
+        juego->enJuego=0;
+    }
+
+    else
+        printf("Ha perdido! Nivel alcanzado %d | Puntaje: %d\n", jugador->nivel, jugador->puntaje);
+
+
+
+    vectorDestruir(&juego->secuencia);
+
+    for (int i = 0; i < 2; i++)
+    {
+        for(int j=0;j<jugador->colores;j++)
+            sound_free(notas[i][j]);
+    }
+    free(juego);
+
+    if (opcion == 1)
+    {
+        jugador->nivel = 1;
+        jugador->puntaje = 0;
+        SDL_PumpEvents();
+        SDL_FlushEvents(SDL_FIRSTEVENT, SDL_LASTEVENT);
+
+        DeterminarJuego(jugador, renderer);
+    }
+
+    SDL_SetRenderDrawColor(renderer, 36, 9, 66, 255);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+}
+
+
+*/

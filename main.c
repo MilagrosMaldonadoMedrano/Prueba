@@ -51,6 +51,7 @@ int main(int argc, char* argv[])
     TTF_Font* fuenteTitulo = TTF_OpenFont("fnt/Simon.ttf", 100);
     TTF_Font* fuenteSubtitulo = TTF_OpenFont("fnt/Simon.ttf", 40);
     mostrarTituloSimon(renderer, fuenteTitulo, fuenteSubtitulo);
+
     TTF_CloseFont(fuenteSubtitulo);
 
     Log_in(&usuario, renderer, fuente, fuenteTitulo);

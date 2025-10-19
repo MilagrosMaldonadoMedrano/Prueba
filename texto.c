@@ -121,6 +121,74 @@ void ingresarNombre(SDL_Renderer* renderer, TTF_Font* fnt, Jugador* jugador)
 }
 
 
+
+void cuentaRegresiva(SDL_Renderer* renderer, TTF_Font* fuente)
+{
+    int limite=3;
+    float tiempo=0.0f;
+
+    //char* numero[2];
+    char numero[2];
+    int texW,texH;
+
+    for(int i=1;i<=limite;i++)
+    {
+        SDL_SetRenderDrawColor(renderer, 20, 20, 40, 255);
+        SDL_RenderClear(renderer);
+
+        Uint8 r = (Uint8)(128 +127*sin(tiempo));
+        Uint8 g = (Uint8)(255 * fabs(sin(tiempo / 2)));
+        Uint8 b = 255;
+
+        SDL_Color colorCuenta = {r, g, b, 255};
+
+
+
+        if(i==1)
+        {
+            //strcpy(&numero,"1\0");
+            numero[0]='1';
+            numero[1]='\0';
+        }
+
+        if(i==2)
+        {
+            numero[0]='2';
+            numero[1]='\0';
+        }
+            //strcpy(&numero,"2");
+            //numero='2';
+        if(i==3)
+        {
+            numero[0]='3';
+            numero[1]='\0';
+        }
+            //strcpy(&numero,"3");
+            //numero='3';
+        //fflush(stdin);
+        //numero= i+0;
+
+        SDL_Surface* surfCuenta= TTF_RenderText_Blended(fuente,numero,colorCuenta);
+        SDL_Texture* textCuenta= SDL_CreateTextureFromSurface(renderer,surfCuenta);
+
+
+        SDL_QueryTexture(textCuenta, NULL, NULL, &texW, &texH);
+        SDL_Rect dstTitulo = { (1366 - texW)/2, 250, texW*2, texH*2 };
+
+        SDL_RenderCopy(renderer, textCuenta, NULL, &dstTitulo);
+        SDL_FreeSurface(surfCuenta);
+        SDL_DestroyTexture(textCuenta);
+
+        SDL_RenderPresent(renderer);
+        SDL_Delay(700);
+        tiempo += 0.05f;
+
+    }
+
+
+}
+
+
 void mostrarTituloSimon(SDL_Renderer* renderer, TTF_Font* fuente, TTF_Font* fuente2)
 {
     int ejecutando = 1;
